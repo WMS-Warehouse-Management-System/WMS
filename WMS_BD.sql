@@ -1,10 +1,8 @@
 CREATE DATABASE WMS
 GO
  
- USE master
-
+ USE wms
  GO 
- drop database WMS
 -- Tabela: DIM_USUARIO
 CREATE TABLE DimUsuario (
     EMAIL NVARCHAR(255) PRIMARY KEY,
@@ -64,6 +62,11 @@ CREATE TABLE DimProduto (
 CREATE TABLE FactCategoria (
     ID BIGINT PRIMARY KEY IDENTITY(1,1),
     CODIGO BIGINT NOT NULL,
+    ID_CATEGORIA BIGINT NOT NULL
+);
+
+CREATE TABLE DimCategoria (
+    ID_CATEGORIA BIGINT PRIMARY KEY IDENTITY(1,1),
     CATEGORIA NVARCHAR(255) NOT NULL
 );
 
@@ -75,12 +78,51 @@ CREATE TABLE FactRecebimento (
     CODIGO BIGINT NOT NULL
 );
 
+go 
 
 ALTER TABLE FactAdicionar
 ADD CONSTRAINT FK_Adicionar_Usuario FOREIGN KEY (SN)
 REFERENCES DimProfessor(SN);
-
+go 
 
 ALTER TABLE FactAdicionar
 ADD CONSTRAINT FK2_Adicionar_Usuario FOREIGN KEY (EMAIL)
 REFERENCES DimUsuario(EMAIL);
+go 
+--professor e prod
+ALTER TABLE FactProfessorProduto
+ADD CONSTRAINT FK_Professor_Produto FOREIGN KEY (SN)
+REFERENCES DimProfessor(SN);
+go 
+ALTER TABLE FactProfessorProduto
+ADD CONSTRAINT FK2_Professor_Produto FOREIGN KEY (CODIGO)
+REFERENCES DimProduto(CODIGO);
+go 
+
+--Usuario e prod
+ALTER TABLE FactUsuarioProduto
+ADD CONSTRAINT FK_Usuario_Produto FOREIGN KEY (EMAIL)
+REFERENCES  DimUsuario(EMAIL);
+go 
+ALTER TABLE FactUsuarioProduto
+ADD CONSTRAINT FK2_Usuario_Produto  FOREIGN KEY (CODIGO)
+REFERENCES DimProduto(CODIGO);
+go 
+-----PRODUTO E SUA CATEGORIA
+
+
+
+ALTER TABLE FactCategoria
+ADD CONSTRAINT FK_Categoria_Produto  FOREIGN KEY (CODIGO)
+REFERENCES DimProduto(CODIGO);
+go 
+ALTER TABLE FactCategoria
+ADD CONSTRAINT FK2_Categoria_Produto  FOREIGN KEY (ID_CATEGORIA)
+REFERENCES DimCategoria(ID_CATEGORIA);
+go
+
+--Recebimento de prod
+
+ALTER TABLE FactRecebimento
+ADD CONSTRAINT FK_Recebimento_Produto  FOREIGN KEY (CODIGO)
+REFERENCES DimProduto(CODIGO);
