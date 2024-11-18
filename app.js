@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 const dbConfig = {
-    user: 'carlos',
+    user: 'CarlosBD',
     password: '1234',
     server: '127.0.0.1',
     database: 'WMS',
@@ -26,7 +26,7 @@ app.post('/adicionar-usuario', async (req, res) => {
         await sql.connect(dbConfig);
         
         
-        // --------------------------------------------------------------
+        // --------------------------------------------------------------adicionar
         
         
         const query = `
@@ -48,9 +48,80 @@ app.post('/adicionar-usuario', async (req, res) => {
 
         res.send('Usuario adicionado com sucesso!');
     } catch (error) {
-        res.status(500).send('Erro ao adicionar Usuario: ' + error.message);
+        res.status(500).send('Erro ao adicionar Usuario: ' + 'ta duplicano ai meu bom');
     }
 });
+
+
+// ------------------------------------------------------------------------------------deletar
+
+app.post('/deletar-Usuario', async (req, res) => {
+    const { email} = req.body;
+
+    try {
+        await sql.connect(dbConfig);
+        
+        
+        // --------------------------------------------------------------
+        
+        
+        const query = `
+            delete dimUsuario where
+            email= @email
+        `;
+        const request = new sql.Request();
+        request.input('email', sql.NVarChar, email);
+    
+
+
+        // ---------------------------------------------------------------
+
+
+        await request.query(query);
+
+        res.send('Usuario deletado com sucesso!');
+    } catch (error) {
+        res.status(500).send('Erro ao deletar Usuario: ' + error.message);
+    }
+});
+
+
+
+// ----------------------------------------------consultar
+
+
+
+app.get('/listar-usuarios', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `SELECT email, nome, dataNasc, dataEntrada FROM dimUsuario`;
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset); 
+    } catch (error) {
+        res.status(500).send('Erro ao obter usuários: ' + error.message);
+    }
+});
+
+
+// ----------------------------------------------consultar view
+
+
+
+app.get('/listar-usuarios', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `SELECT email, nome, dataNasc, dataEntrada FROM dimUsuario`;
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset); 
+    } catch (error) {
+        res.status(500).send('Erro ao obter usuários: ' + error.message);
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>deletar usuario</title>
+</head>
+<body>
+
+    <form id="usuarioForm">
+        <label>email para deletar:
+            <input type="text" id="email" required>
+        </label><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+    <script>
+        document.getElementById('usuarioForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const usuario = {
+
+                email: document.getElementById('email').value
+    
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/deletar-Usuario', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(usuario)
+                });
+                const message = await response.text();
+                alert(message);
+            } catch (error) {
+                alert('Erro ao enviar dados: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
