@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exibir Gráfico</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+    <div id="chart" style="width: 50%; height: 350px;"></div> 
+    <input type="checkbox" id="mudar" onclick="trocarGrafico()"> Alternar Gráfico
+</body>
+<script>
+    var chart; // Variável para armazenar a instância do gráfico
+
+    // Definir cores para o gráfico de barras
+    var colors = ['#FF4560', '#008FFB', '#00E396', '#FEB019', '#775DD0', '#546E7A', '#26A69A', '#D10CE8'];
+
+    // Opções do gráfico 1
+    var options1 = {
+        series: [{
+            name: 'series1',
+            data: [31, 40, 28, 51, 42, 109, 100]
+        }, {
+            name: 'series2',
+            data: [11, 32, 45, 32, 34, 52, 41]
+        }],
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: [
+                "2018-09-19T00:00:00.000Z",
+                "2018-09-19T01:30:00.000Z",
+                "2018-09-19T02:30:00.000Z",
+                "2018-09-19T03:30:00.000Z",
+                "2018-09-19T04:30:00.000Z",
+                "2018-09-19T05:30:00.000Z",
+                "2018-09-19T06:30:00.000Z"
+            ]
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            }
+        }
+    };
+
+    // Opções do gráfico 2
+    var options = {
+        series: [{
+            data: [21, 22, 10, 28, 16, 21, 13,38]
+        }],
+        chart: {
+            height: 350,
+            type: 'bar'
+        },
+        colors: colors,
+        plotOptions: {
+            bar: {
+                columnWidth: '45%',
+                distributed: true,
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        legend: {
+            show: false
+        },
+        xaxis: {
+            categories: [
+                ['John', 'Doe'],
+                ['Joe', 'Smith'],
+                ['Jake', 'Williams'],
+                'Amber',
+                ['Peter', 'Brown'],
+                ['Mary', 'Evans'],
+                ['David', 'Wilson'],
+                ['Lily', 'Roberts'], 
+            ],
+            labels: {
+                style: {
+                    colors: colors,
+                    fontSize: '12px'
+                }
+            }
+        }
+    };
+
+    function trocarGrafico() {
+        if (chart) chart.destroy();
+
+        var checkbox = document.getElementById('mudar');
+        if (checkbox.checked) {
+            chart = new ApexCharts(document.querySelector("#chart"), options);
+        } else {
+            chart = new ApexCharts(document.querySelector("#chart"), options1);
+        }
+        chart.render(); 
+    }
+
+
+    trocarGrafico();
+</script>
+</html>

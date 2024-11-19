@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
@@ -109,18 +111,49 @@ app.get('/listar-usuarios', async (req, res) => {
 
 
 
-app.get('/listar-usuarios', async (req, res) => {
+app.get('/listar-usuarios-view', async (req, res) => {
     try {
         await sql.connect(dbConfig);
 
-        const query = `SELECT email, nome, dataNasc, dataEntrada FROM dimUsuario`;
+        const query = `SELECT  nome,senha FROM vw_Usuario`;
         const result = await new sql.Request().query(query);
 
-        res.json(result.recordset); 
+        res.json(result.recordset);     
     } catch (error) {
         res.status(500).send('Erro ao obter usuários: ' + error.message);
     }
 });
+
+// -----------------------------------------------------adicionar Produto
+app.post('/adicionar-usuario', async (req, res) => {
+    const { email,nome,senha,dataNasc,dataEntrada } = req.body;
+
+    try {
+        await sql.connect(dbConfig);
+        
+        
+        const query = `
+            INSERT INTO dimUsuario (email, nome, senha, dataNasc,dataEntrada)
+            VALUES (@email, @nome,@senha, @dataNasc,@dataEntrada)
+        `;
+        const request = new sql.Request();
+        request.input('email', sql.NVarChar, email);
+        request.input('nome', sql.NVarChar, nome);
+        request.input('senha', sql.NVarChar, senha);
+        request.input('dataNasc', sql.Date, dataNasc);
+        request.input('dataEntrada', sql.Date, dataEntrada);
+
+
+
+        await request.query(query);
+
+        res.send('Usuario adicionado com sucesso!');
+    } catch (error) {
+        res.status(500).send('Erro ao adicionar Usuario: ' + 'ta duplicano ai meu bom');
+    }
+});
+
+
 
 
 app.listen(port, () => {
