@@ -1,3 +1,8 @@
+use master
+go
+drop database wms
+go
+
 CREATE DATABASE WMS
 GO
  
@@ -5,7 +10,8 @@ GO
  GO 
 -- Tabela: DIM_USUARIO
 CREATE TABLE DimUsuario (
-    EMAIL NVARCHAR(255) PRIMARY KEY,
+	IDUsuario int primary key identity,
+    EMAIL NVARCHAR(255) not null,
     NOME NVARCHAR(255) NOT NULL,
     SENHA NVARCHAR(255) NOT NULL,
     DATANASC DATE,
@@ -14,8 +20,8 @@ CREATE TABLE DimUsuario (
 
 -- Tabela: FACT_ADICIONAR
 CREATE TABLE FactAdicionar (
-    ID BIGINT PRIMARY KEY IDENTITY(1,1),
-    EMAIL NVARCHAR(255) NOT NULL,
+    IDAdicionar BIGINT PRIMARY KEY IDENTITY(1,1),
+    IDUsuario int NOT NULL,
     SN BIGINT NOT NULL
 );
 
@@ -26,19 +32,7 @@ CREATE TABLE DimProfessor (
     SENHA NVARCHAR(255) NOT NULL
 );
 
--- Tabela: FACT_PROFESSOR_PRODUTO
-CREATE TABLE FactProfessorProduto (
-    ID BIGINT PRIMARY KEY IDENTITY(1,1),
-    SN BIGINT NOT NULL,
-    CODIGO BIGINT NOT NULL
-);
 
--- Tabela: FACT_USUARIO_PRODUTO
-CREATE TABLE FactUsuarioProduto (
-    ID BIGINT PRIMARY KEY IDENTITY(1,1),
-    EMAIL NVARCHAR(255) NOT NULL,
-    CODIGO BIGINT NOT NULL
-);
 
 -- Tabela: DIM_PRODUTO
 CREATE TABLE DimProduto (
@@ -55,30 +49,38 @@ CREATE TABLE DimProduto (
     IMAGEM VARBINARY(MAX),
     UNIDADE NVARCHAR(50),
     PRECO_DE_VENDA DECIMAL(10, 2),
-    FRAGILIDADE BIT
+    FRAGILIDADE BIT,
+	inserido_por nvarchar(255) not null
 );
 
 -- Tabela: FACT_CATEGORIA
 CREATE TABLE FactCategoria (
-    ID BIGINT PRIMARY KEY IDENTITY(1,1),
+    IDCategoriaProduto BIGINT PRIMARY KEY IDENTITY(1,1),
     CODIGO BIGINT NOT NULL,
-    ID_CATEGORIA BIGINT NOT NULL
+    IDCategoria BIGINT NOT NULL
 );
 
 CREATE TABLE DimCategoria (
-    ID_CATEGORIA BIGINT PRIMARY KEY IDENTITY(1,1),
+    IDCategoria BIGINT PRIMARY KEY IDENTITY(1,1),
     CATEGORIA NVARCHAR(255) NOT NULL
 );
 
 -- Tabela: RECEBIMENTO
 CREATE TABLE FactRecebimento (
-    ID BIGINT PRIMARY KEY IDENTITY(1,1),
+    IDRecebimento BIGINT PRIMARY KEY IDENTITY(1,1),
     DATA_RECEB DATE NOT NULL,
-    QUANT INT NOT NULL,
+    QUANT BIGINT NOT NULL,
     CODIGO BIGINT NOT NULL
 );
 
 go 
+CREATE TABLE LoginsAtivos (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    usuarioEmail NVARCHAR(255) NOT NULL,
+    loginTimestamp DATETIME NOT NULL DEFAULT GETDATE(),
+    logoutTimestamp DATETIME NULL
+);
+go
 
 ALTER TABLE FactAdicionar
 ADD CONSTRAINT FK_Adicionar_Usuario FOREIGN KEY (SN)
@@ -86,28 +88,10 @@ REFERENCES DimProfessor(SN);
 go 
 
 ALTER TABLE FactAdicionar
-ADD CONSTRAINT FK2_Adicionar_Usuario FOREIGN KEY (EMAIL)
-REFERENCES DimUsuario(EMAIL);
-go 
---professor e prod
-ALTER TABLE FactProfessorProduto
-ADD CONSTRAINT FK_Professor_Produto FOREIGN KEY (SN)
-REFERENCES DimProfessor(SN);
-go 
-ALTER TABLE FactProfessorProduto
-ADD CONSTRAINT FK2_Professor_Produto FOREIGN KEY (CODIGO)
-REFERENCES DimProduto(CODIGO);
+ADD CONSTRAINT FK2_Adicionar_Usuario FOREIGN KEY (IDUsuario)
+REFERENCES DimUsuario(IDUsuario);
 go 
 
---Usuario e prod
-ALTER TABLE FactUsuarioProduto
-ADD CONSTRAINT FK_Usuario_Produto FOREIGN KEY (EMAIL)
-REFERENCES  DimUsuario(EMAIL);
-go 
-ALTER TABLE FactUsuarioProduto
-ADD CONSTRAINT FK2_Usuario_Produto  FOREIGN KEY (CODIGO)
-REFERENCES DimProduto(CODIGO);
-go 
 -----PRODUTO E SUA CATEGORIA
 
 
@@ -117,8 +101,8 @@ ADD CONSTRAINT FK_Categoria_Produto  FOREIGN KEY (CODIGO)
 REFERENCES DimProduto(CODIGO);
 go 
 ALTER TABLE FactCategoria
-ADD CONSTRAINT FK2_Categoria_Produto  FOREIGN KEY (ID_CATEGORIA)
-REFERENCES DimCategoria(ID_CATEGORIA);
+ADD CONSTRAINT FK2_Categoria_Produto  FOREIGN KEY (IDCategoria)
+REFERENCES DimCategoria(IDCategoria);
 go
 
 --Recebimento de prod
@@ -126,3 +110,8 @@ go
 ALTER TABLE FactRecebimento
 ADD CONSTRAINT FK_Recebimento_Produto  FOREIGN KEY (CODIGO)
 REFERENCES DimProduto(CODIGO);
+
+select * from DimProduto
+
+
+select * from LoginsAtivos
