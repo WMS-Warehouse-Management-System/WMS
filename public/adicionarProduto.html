@@ -114,19 +114,30 @@
                 inseridoPor: JSON.parse(localStorage.getItem('usuarioLogado')).email // Captura o usuário logado
             };
 
-            try {
-                // Enviar dados para o servidor
-                const response = await fetch('http://localhost:3000/adicionar-produto', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(produto)
-                });
-
-                const result = await response.text();
-                alert(result);
-            } catch (error) {
-                console.error('Erro ao adicionar produto:', error);
-                alert('Erro ao adicionar produto!');
+            async function adicionarProduto(produto) {
+                const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+                const SNProfessor = localStorage.getItem('SNProfessor');
+            
+                try {
+                    const response = await fetch('http://localhost:3000/adicionar-produto', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            ...produto,
+                            inseridoPor: usuarioLogado.email,
+                            SNProfessor: usuarioLogado.tipo === 'professor' ? SNProfessor : null,
+                        }),
+                    });
+            
+                    if (response.ok) {
+                        alert('Produto adicionado com sucesso!');
+                    } else {
+                        const errorMessage = await response.text();
+                        alert('Erro: ' + errorMessage);
+                    }
+                } catch (error) {
+                    alert('Erro ao adicionar produto: ' + error.message);
+                }
             }
         });
     </script>

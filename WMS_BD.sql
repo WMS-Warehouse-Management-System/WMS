@@ -111,7 +111,12 @@ ALTER TABLE FactRecebimento
 ADD CONSTRAINT FK_Recebimento_Produto  FOREIGN KEY (CODIGO)
 REFERENCES DimProduto(CODIGO);
 
-select * from DimProduto
+go
 
+ALTER TABLE DimProduto
+DROP COLUMN VALIDADE;
 
-select * from LoginsAtivos
+go
+-- Ajuste na tabela de recebimento
+ALTER TABLE FactRecebimento
+ADD VALIDADE DATE NOT NULL;

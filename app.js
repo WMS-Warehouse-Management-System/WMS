@@ -161,30 +161,42 @@ app.post('/login', async (req, res) => {
     try {
         await sql.connect(dbConfig);
 
-        // Consulta para verificar email e senha
-        const query = `
-            SELECT email, nome 
-            FROM dimUsuario 
-            WHERE email = @Email AND senha = @Senha
-        `;
+        let query;
+        if (email.includes('@professor.com')) {
+            // Consulta para professores
+            query = `
+                SELECT email, nome, senha, SN 
+                FROM DimProfessor 
+                WHERE email = @Email AND senha = @Senha
+            `;
+        } else {
+            // Consulta para usuários comuns
+            query = `
+                SELECT email, nome, senha 
+                FROM DimUsuario 
+                WHERE email = @Email AND senha = @Senha
+            `;
+        }
+
         const request = new sql.Request();
         request.input('Email', sql.NVarChar, email);
         request.input('Senha', sql.NVarChar, senha);
 
         const result = await request.query(query);
 
-        // Verifica se o usuário foi encontrado
         if (result.recordset.length === 0) {
             return res.status(401).send('Email ou senha inválidos.');
         }
 
-        // Retorna os dados do usuário
+        const usuario = result.recordset[0];
         res.send({
             mensagem: 'Login realizado com sucesso!',
             usuario: {
-                email: result.recordset[0].email,
-                nome: result.recordset[0].nome,
-            }
+                email: usuario.email,
+                nome: usuario.nome,
+                tipo: email.includes('@professor.com') ? 'professor' : 'usuario',
+                SN: usuario.SN || null,
+            },
         });
     } catch (error) {
         res.status(500).send('Erro ao fazer login: ' + error.message);
@@ -216,7 +228,6 @@ app.post('/logout', async (req, res) => {
     }
 });
 // --------------------------------------------------adicionar produto
-
 app.post('/adicionar-produto', async (req, res) => {
     const {
         codigo,
@@ -233,7 +244,8 @@ app.post('/adicionar-produto', async (req, res) => {
         unidade,
         precoDeVenda,
         fragilidade,
-        inseridoPor
+        inseridoPor,
+        SNProfessor, // Novo campo
     } = req.body;
 
     try {
@@ -251,6 +263,7 @@ app.post('/adicionar-produto', async (req, res) => {
                 @imagem, @unidade, @precoDeVenda, @fragilidade, @inseridoPor
             )
         `;
+
         const request = new sql.Request();
         request.input('codigo', sql.BigInt, codigo);
         request.input('nomeBasico', sql.NVarChar, nomeBasico);
@@ -270,11 +283,16 @@ app.post('/adicionar-produto', async (req, res) => {
 
         await request.query(query);
 
+        if (SNProfessor) {
+            // Lógica adicional se for professor
+        }
+
         res.send('Produto adicionado com sucesso!');
     } catch (error) {
         res.status(500).send('Erro ao adicionar produto: ' + error.message);
     }
 });
+
 
 
 app.listen(port, () => {

@@ -39,11 +39,13 @@
                     const data = await response.json();
                     alert('Login bem-sucedido! Bem-vindo, ' + data.usuario.nome);
         
-                    // Armazenar usuário no localStorage
+                    // Armazenar informações no localStorage
                     localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
         
-                    // Redirecionar para outra página, se necessário
-                    // window.location.href = '/pagina_inicial.html';
+                    // Verifica o tipo de usuário
+                    if (data.usuario.tipo === 'professor') {
+                        localStorage.setItem('SNProfessor', data.usuario.SN);
+                    }
                 } else {
                     const errorMessage = await response.text();
                     alert('Erro: ' + errorMessage);
