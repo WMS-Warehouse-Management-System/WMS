@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Categorias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        select {
+            width: 300px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecione uma Categoria</h1>
+    <label for="categorias">Categorias:</label>
+    <select id="categorias">
+        <option value="">Carregando...</option>
+    </select>
+
+    <script>
+        // Função para carregar categorias do servidor
+        async function carregarCategorias() {
+            try {
+                const response = await fetch('http://localhost:3000/listar-categorias');
+                if (response.ok) {
+                    const categorias = await response.json();
+
+                    // Preenche o <select> com as categorias
+                    const select = document.getElementById('categorias');
+                    select.innerHTML = ''; // Limpa as opções antes de adicionar novas
+
+                    // Adiciona uma opção inicial
+                    const optionInicial = document.createElement('option');
+                    optionInicial.value = '';
+                    optionInicial.textContent = 'Selecione uma categoria';
+                    select.appendChild(optionInicial);
+
+                    // Adiciona as categorias no <select>
+                    categorias.forEach(categoria => {
+                        const option = document.createElement('option');
+                        option.value = categoria.IDCategoria;
+                        option.textContent = categoria.CATEGORIA;
+                        select.appendChild(option);
+                    });
+                } else {
+                    alert('Erro ao buscar categorias.');
+                }
+            } catch (error) {
+                alert('Erro ao carregar categorias: ' + error.message);
+            }
+        }
+
+        // Chamar a função ao carregar a página
+        carregarCategorias();
+    </script>
+</body>
+</html>

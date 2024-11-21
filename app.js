@@ -284,6 +284,20 @@ app.post('/adicionar-produto', async (req, res) => {
     }
 });
 
+// ------------------------------------------------categoria
+// Rota para listar todas as categorias
+app.get('/listar-categorias', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `SELECT IDCategoria, CATEGORIA FROM DimCategoria`;
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset); // Retorna as categorias como JSON
+    } catch (error) {
+        res.status(500).send('Erro ao obter categorias: ' + error.message);
+    }
+});
 
 
 
