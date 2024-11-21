@@ -120,3 +120,24 @@ go
 -- Ajuste na tabela de recebimento
 ALTER TABLE FactRecebimento
 ADD VALIDADE DATE NOT NULL;
+
+ALTER TABLE DimProduto
+DROP COLUMN PRECO_DE_AQUISICAO;
+
+go
+-- Ajuste na tabela de recebimento
+ALTER TABLE FactRecebimento
+ADD PRECO_DE_AQUISICAO DECIMAL(10, 2) not null;
+go
+
+ALTER TABLE FactRecebimento
+ADD LOTE Nvarchar(30) not null;
+go
+ALTER TABLE DimProfessor
+ADD EMAIL nvarchar(255) not null;
+go
+insert into DimProfessor(SN,NOME,SENHA,EMAIL)
+values(222,'carlos','1234','carlos@professor.com')
+go 
+
+select * from DimProduto

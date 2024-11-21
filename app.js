@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 const dbConfig = {
-    user:'carlos',
+    user:'carlosBD',
     password: '1234',
     server: '127.0.0.1',
     database: 'WMS',
@@ -234,18 +234,15 @@ app.post('/adicionar-produto', async (req, res) => {
         nomeBasico,
         nomeModificador,
         descricaoTecnica,
-        precoDeAquisicao,
         fabricante,
         fornecedor,
         enderecamento,
-        validade,
         observacoesAdicional,
         imagem,
         unidade,
         precoDeVenda,
         fragilidade,
-        inseridoPor,
-        SNProfessor, // Novo campo
+        inseridoPor, // Recebe o valor definido no front-end
     } = req.body;
 
     try {
@@ -253,13 +250,13 @@ app.post('/adicionar-produto', async (req, res) => {
 
         const query = `
             INSERT INTO DimProduto (
-                CODIGO, NOME_BASICO, NOME_MODIFICADOR, DESCRICAO_TECNICA, PRECO_DE_AQUISICAO,
-                FABRICANTE, FORNECEDOR, ENDERECAMENTO, VALIDADE, OBSERVACOES_ADICIONAL,
-                IMAGEM, UNIDADE, PRECO_DE_VENDA, FRAGILIDADE, inserido_por
+                CODIGO, NOME_BASICO, NOME_MODIFICADOR, DESCRICAO_TECNICA,
+                FABRICANTE, FORNECEDOR, ENDERECAMENTO, OBSERVACOES_ADICIONAL,
+                IMAGEM, UNIDADE, PRECO_DE_VENDA, FRAGILIDADE, INSERIDO_POR
             )
             VALUES (
-                @codigo, @nomeBasico, @nomeModificador, @descricaoTecnica, @precoDeAquisicao,
-                @fabricante, @fornecedor, @enderecamento, @validade, @observacoesAdicional,
+                @codigo, @nomeBasico, @nomeModificador, @descricaoTecnica,
+                @fabricante, @fornecedor, @enderecamento, @observacoesAdicional,
                 @imagem, @unidade, @precoDeVenda, @fragilidade, @inseridoPor
             )
         `;
@@ -269,29 +266,24 @@ app.post('/adicionar-produto', async (req, res) => {
         request.input('nomeBasico', sql.NVarChar, nomeBasico);
         request.input('nomeModificador', sql.NVarChar, nomeModificador || null);
         request.input('descricaoTecnica', sql.NVarChar, descricaoTecnica || null);
-        request.input('precoDeAquisicao', sql.Decimal, precoDeAquisicao);
         request.input('fabricante', sql.NVarChar, fabricante || null);
         request.input('fornecedor', sql.NVarChar, fornecedor || null);
         request.input('enderecamento', sql.NVarChar, enderecamento || null);
-        request.input('validade', sql.Date, validade || null);
         request.input('observacoesAdicional', sql.NVarChar, observacoesAdicional || null);
         request.input('imagem', sql.VarBinary, imagem || null);
         request.input('unidade', sql.NVarChar, unidade || null);
         request.input('precoDeVenda', sql.Decimal, precoDeVenda);
         request.input('fragilidade', sql.Bit, fragilidade || 0);
-        request.input('inseridoPor', sql.NVarChar, inseridoPor);
+        request.input('inseridoPor', sql.NVarChar, inseridoPor); // Inserido por pode ser SN ou email do usuário
 
         await request.query(query);
-
-        if (SNProfessor) {
-            // Lógica adicional se for professor
-        }
 
         res.send('Produto adicionado com sucesso!');
     } catch (error) {
         res.status(500).send('Erro ao adicionar produto: ' + error.message);
     }
 });
+
 
 
 
