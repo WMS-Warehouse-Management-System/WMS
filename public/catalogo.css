@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'inter';
+}
+
+body{
+    background-color: #F0F0F0;
+}
+
+#barradebusca{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+}
+#filtrar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
+    width: 8vw;
+    background-color: #ffff;
+    border-radius: 1vh;
+    box-shadow: 0.1em 0.1em ;
+    margin-right: 2%;
+    font-weight: 300;
+}
+#entrada{
+    width: 50vw;
+    height: 4vh;
+    border-radius: 1vh;
+    border-color: transparent;
+    box-shadow: 0.1em 0.1em;
+    font-size: larger;
+
+}
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
+
+#pesquisar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
+    width: 8vw;
+    background-color: #ffff;
+    border-radius: 1vh;
+    box-shadow: 0.1em 0.1em ;
+    margin-left: 2%;
+}
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-table{
+    margin-top: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    height: 61.111vh;
+    width: 81.51vw;
+}
+
+.tabela-estoque{
+    width: 81.51vw;
+}
+
+.tabela-estoque th{
+    background-color: #4E97D1;
+    height: 4.074vh;
+    color: #fff;
+}
+.tabela-estoque tr, td{
+    background-color: #FFFFFF;
+    height: 4.074vh;
+    padding: 0.12vh 0.4vh 0.12vh 0.4vh;
+}
