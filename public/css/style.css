@@ -2,15 +2,81 @@
    padding: 0;
    margin: 0; 
 }
+body{
+    background-color: #F0F0F0;
+}
 .container-grafico{
 width: 60vw;
 height: 50vh;
-background-color: aquamarine;
+background-color: rgb(255, 255, 255);
 padding-top: 2%;
+margin-left: 20%;
+margin-top: 5%;
 }
 
 #chart{
     width: 90%;
     height: 90%;
     margin-top: 5%;
+    padding-left: 4%;
 }
+.buttons{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-top: 7%;
+}
+#Financeiro,#Cadastro,#Edicao,#Estoque {
+   text-decoration: none;
+   padding-inline: 6vw;
+   padding-block: 6vh;
+   background-color: beige;
+}
+.button-container {
+    display: flex;
+
+    width: 80%;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-top: 5%;
+  }
+
+  .button {
+    width: 17vw;
+    height: 14vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .button .texto{
+ flex-direction: column;
+ margin-left: 6%;
+  }
+  .button:hover {
+    transform: scale(1.05);
+  }
+
+  .green { 
+    background: linear-gradient(-90deg, rgba(10,124,17,1) 0%, rgba(89,218,97,1) 100%);
+    box-shadow: 2px 2px 5px #0f411b;
+}
+  .red {
+    background: linear-gradient(-90deg, rgba(71,5,5,1) 0%, rgba(206,10,10,1) 100%);    
+     box-shadow: 2px 2px 5px #4d0b0b;
+}
+  .blue { 
+    background: linear-gradient(-90deg, rgba(0,93,150,1) 0%, rgba(91,193,255,1) 100%);  
+      box-shadow: 2px 2px 5px #002246;
+}
+  .yellow { background: rgb(134,96,0);
+    background: linear-gradient(-90deg, rgba(210,153,5,1) 0%,  rgba(255,211,51,1) 100%);     
+    box-shadow: 2px 2px 5px #806003;
+ }

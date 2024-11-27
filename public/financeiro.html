@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Lateral</title>
-    <link rel="stylesheet" href="/public/css/financeiro.css">
+    <link rel="stylesheet" href="css/financeiro.css">
 </head>
 <body>
     <div id="sidebar" class="sidebar">
         <button id="close-btn" class="close-btn">&times;</button>
-        <img src="Mask group.svg" alt="">
+        <img src="imagens/Mask group.svg " alt="">
         <h3>Menu</h3>
         <ul>
-            <li class="home"><a href="#" id="home"><div class="home"></div><span>Home</span></a></li>
+            <li class="home"><a href="index.html" id="home"><div class="home"></div><span>Home</span></a></li>
             <li class="cadastrar"><a href="#" id="cadas"><div class="box-of-good-good"></div><span>Cadastrar</span></a></li>
             <li class="edicao"><a href="#" id="edicao"><div class="pencil"></div><span>Edição</span></a></li>
             <li class="estoque"><a href="#" id="esto"><div class="boxes-of-good-good"></div><span>Estoque</span></a></li>
@@ -26,7 +26,31 @@
     <div class="content">
         <button id="menu-btn" class="menu-btn">&#9776;</button>
     </div>
+    <button id="showFormButton">Recebimento</button>
 
-    <script src="app.js"></script>
+    <div id="formContainer">
+        <h2>Novo Recebimento</h2>
+        <form id="registrationForm">
+            
+            <div class="input-container">
+                <input type="text" id="productName" placeholder=" " required>
+                <label for="productName">Nome do produto</label>
+            </div>
+
+            <div class="input-container">
+                <input type="date" id="receivingDate" placeholder=" " required>
+                <label for="receivingDate">Data de recebimento</label>
+            </div>
+
+            <div class="input-container">
+                <input type="number" id="quantityReceived" placeholder=" " required>
+                <label for="quantityReceived">Quantidade recebida</label>
+            </div>
+
+            <button type="submit" id="submitButton">Cadastrar</button>
+        </form>
+    </div>
+
+    <script src="financeiro.js"></script>
 </body>
 </html>

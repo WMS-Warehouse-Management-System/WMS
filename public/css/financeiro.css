@@ -224,3 +224,104 @@ body {
         font-size: 18px;
     }
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+#showFormButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FFCC00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#showFormButton:hover {
+    background-color: #45a049;
+}
+
+/* Estilos do formulário (inicialmente oculto) */
+#formContainer {
+    display: none;
+    justify-self: center;
+    align-self: center;
+    margin-top: 20px;
+    padding: 20px;
+    font-family: 'poppins', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    align-self: center;
+    justify-self: center;
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Estilos do campo de input */
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input {
+    display: flex;
+    justify-self: center;
+    align-content: center;
+    margin-left: 1vw;
+    width: 80%;
+    padding: 12px;
+    font-size: 16px;
+    font-family: 'poppins', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    outline: none;
+}
+
+input:focus {
+    border-color: #FFCC00;
+}
+
+/* Estilos das labels */
+label {
+    position: absolute;
+    top: 50%;
+    left: 2.5vw;
+    transform: translateY(-50%);
+    font-family: 'poppins', sans-serif;
+    font-size: 16px;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 12px;
+    color: #FFCC00;
+    font-family: 'poppins', sans-serif;
+}
+
+input::placeholder {
+    visibility: hidden;
+}
+
+/* Estilo do botão de envio */
+#submitButton {
+    display: flex;
+    justify-self: center;
+    align-content: center;
+    text-align: center;
+    background-color: #FFCC00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 50%;
+}
+
+#submitButton:hover {
+    background-color: #45a049;
+}
