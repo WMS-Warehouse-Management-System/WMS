@@ -1,0 +1,16 @@
+*{
+   padding: 0;
+   margin: 0; 
+}
+.container-grafico{
+width: 60vw;
+height: 50vh;
+background-color: aquamarine;
+padding-top: 2%;
+}
+
+#chart{
+    width: 90%;
+    height: 90%;
+    margin-top: 5%;
+}
