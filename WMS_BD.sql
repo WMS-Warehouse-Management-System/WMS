@@ -147,7 +147,7 @@
 	go
 
 	-- Ajustando a Tabela dos Produtos
-	SELECT * FROM DimProduto
+ 
 	ALTER TABLE DimProduto
 	DROP COLUMN ENDERECAMENTO
 	GO
@@ -156,29 +156,43 @@
 	ADD RUA INT, COLUNA INT, ANDAR INT, ALTURA FLOAT, LARGURA FLOAT, PROFUNDIDADE FLOAT, PESO FLOAT
 	GO
 
-	INSERT INTO DimProduto(
-    CODIGO,
-    NOME_BASICO,
-    NOME_MODIFICADOR,
-    DESCRICAO_TECNICA,
-    FABRICANTE,
-    FORNECEDOR,
-    OBSERVACOES_ADICIONAL,
-    IMAGEM,
-    UNIDADE,
-    PRECO_DE_VENDA,
-    FRAGILIDADE,
-    inserido_por,
-    RUA,
-    COLUNA,
-    ANDAR,
-    ALTURA,
-    LARGURA,
-    PROFUNDIDADE,
-	PESO
-) VALUES
-('001', 'Produto A', 'Modificador X', 'Descrição técnica 1', 'Fabricante 1', 'Fornecedor 1', 'Observação 1', NULL, 'Unidade A', 10.50, 1, 'Usuario1', 1, 1, 1, 10.0, 20.0, 15.0, 10.5),
-('002', 'Produto B', 'Modificador Y', 'Descrição técnica 2', 'Fabricante 2', 'Fornecedor 2', 'Observação 2', NULL, 'Unidade B', 20.99, 0, 'Usuario2', 2, 2, 2, 15.0, 25.0, 10.0, 2.4),
-('003', 'Produto C', 'Modificador Z', 'Descrição técnica 3', 'Fabricante 3', 'Fornecedor 3', 'Observação 3', NULL, 'Unidade C', 30.00, 1, 'Usuario3', 3, 3, 3, 20.0, 30.0, 20.0, 0.3),
-('004', 'Produto D', 'Modificador W', 'Descrição técnica 4', 'Fabricante 4', 'Fornecedor 4', 'Observação 4', NULL, 'Unidade D', 40.50, 1, 'Usuario4', 4, 2, 4, 25.0, 35.0, 25.0, 0.8),
-('005', 'Produto E', 'Modificador V', 'Descrição técnica 5', 'Fabricante 5', 'Fornecedor 5', 'Observação 5', NULL, 'Unidade E', 50.99, 0, 'Usuario5', 1, 1, 5, 30.0, 40.0, 30.0, 20.0);
+	-- Trocando a coluna fornecedor de DimProduto para 
+
+	ALTER TABLE DimProduto
+	DROP COLUMN FORNECEDOR
+	GO
+
+	ALTER TABLE FactRecebimento
+	ADD FORNECEDOR VARCHAR(255)
+	GO
+
+	--Inserindo dados a tabela DimProduto
+
+	INSERT INTO DimProduto (
+    CODIGO, 
+    NOME_BASICO, 
+    NOME_MODIFICADOR, 
+    DESCRICAO_TECNICA, 
+    FABRICANTE, 
+    OBSERVACOES_ADICIONAL, 
+    IMAGEM, 
+    UNIDADE, 
+    PRECO_DE_VENDA, 
+    FRAGILIDADE, 
+    inserido_por, 
+    RUA, 
+    COLUNA, 
+    ANDAR, 
+    ALTURA, 
+    LARGURA, 
+    PROFUNDIDADE, 
+    PESO
+)
+VALUES
+(1, 'Produto A', 'Modificador X', 'DescriÃ§Ã£o TÃ©cnica 1', 'Fabricante 1', 'ObservaÃ§Ã£o 1', NULL, 'Unidade A', 10.50, 1, 'Usuario1', 1, 1, 1, 10, 20, 15, 10.5),
+(2, 'Produto B', 'Modificador Y', 'DescriÃ§Ã£o TÃ©cnica 2', 'Fabricante 2', 'ObservaÃ§Ã£o 2', NULL, 'Unidade B', 20.99, 0, 'Usuario2', 2, 2, 2, 15, 25, 10, 2.4),
+(3, 'Produto C', 'Modificador Z', 'DescriÃ§Ã£o TÃ©cnica 3', 'Fabricante 3', 'ObservaÃ§Ã£o 3', NULL, 'Unidade C', 30.00, 1, 'Usuario3', 3, 3, 3, 20, 30, 20, 0.3),
+(4, 'Produto D', 'Modificador W', 'DescriÃ§Ã£o TÃ©cnica 4', 'Fabricante 4', 'ObservaÃ§Ã£o 4', NULL, 'Unidade D', 40.50, 1, 'Usuario4', 4, 4, 2, 25, 35, 25, 0.8),
+(5, 'Produto E', 'Modificador V', 'DescriÃ§Ã£o TÃ©cnica 5', 'Fabricante 5', 'ObservaÃ§Ã£o 5', NULL, 'Unidade E', 50.99, 0, 'Usuario5', 1, 1, 5, 30, 40, 30, 20);
+
+GO
