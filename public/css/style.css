@@ -35,7 +35,7 @@ margin-top: 5%;
 }
 .button-container {
     display: flex;
-    gap: 10%;
+
     width: 80%;
     justify-content: space-between;
     margin-left: 10%;
@@ -43,7 +43,7 @@ margin-top: 5%;
   }
 
   .button {
-    width: 15vw;
+    width: 17vw;
     height: 14vh;
     color: white;
     font-family: Arial, sans-serif;
