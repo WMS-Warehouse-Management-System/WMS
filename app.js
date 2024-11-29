@@ -124,6 +124,45 @@ app.get('/listar-usuarios-view', async (req, res) => {
     }
 });
 
+
+
+// ------------------------------------------------ver produtos
+
+app.get('/ver-catalogo', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `SELECT 
+        CODIGO
+      ,NOME_BASICO
+      ,NOME_MODIFICADOR
+      ,DESCRICAO_TECNICA
+      ,FABRICANTE
+      ,OBSERVACOES_ADICIONAL
+      ,IMAGEM
+      ,UNIDADE
+      ,PRECO_DE_VENDA
+      ,FRAGILIDADE
+      ,inserido_por
+      ,RUA
+      ,COLUNA
+      ,ANDAR
+      ,ALTURA
+      ,LARGURA
+      ,PROFUNDIDADE
+      ,PESO 
+      FROM DimProduto`;
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset); 
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+
+
 // -----------------------------------------------------adicionar-usuario
 app.post('/adicionar-usuario', async (req, res) => {
     const { email,nome,senha,dataNasc,dataEntrada } = req.body;

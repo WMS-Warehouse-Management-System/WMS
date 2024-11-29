@@ -28,7 +28,7 @@
       <small>Editar/Excluir Itens</small>
     </div>
     </div>
-    <div class="button blue">
+    <div class="button blue" onclick="redirecionarEstoque()">
         <img src="imagens/vaadin_storage.svg" alt="">
         <div class="texto">
       <p>Estoque</p>
@@ -42,6 +42,7 @@
       <small>Movimentações</small>
     </div>
     </div>
+    
   </div>
 
 
@@ -104,6 +105,9 @@
     // Redireciona para respectiva tela 
     function redirecionarFinanceiro() {
             window.location.href = "financeiro.html"; 
+        }
+    function redirecionarEstoque() {
+            window.location.href = "catalogo.html"; 
         }
 
 

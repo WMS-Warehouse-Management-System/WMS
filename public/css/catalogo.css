@@ -70,17 +70,33 @@ textarea:focus, input:focus, select:focus {
     width: 81.51vw;
 }
 
-.tabela-estoque{
+#tabela-estoque{
     width: 81.51vw;
 }
 
-.tabela-estoque th{
+#tabela-estoque th{
     background-color: #4E97D1;
     height: 4.074vh;
     color: #fff;
 }
-.tabela-estoque tr, td{
+#tabela-estoque tr, td{
     background-color: #FFFFFF;
     height: 4.074vh;
     padding: 0.12vh 0.4vh 0.12vh 0.4vh;
+}
+
+#coluna-mais, #celula-mais{
+    background-color: #F0F0F0;
+}
+
+#btn-mais{
+    height: 30px;
+    width: 30px;
+    background-color: #fff;  
+    border: none;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
 }
