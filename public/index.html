@@ -1,161 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exibir Gráfico</title>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <div class="container-grafico">
-    <div id="chart" ></div> 
-    <input type="checkbox" id="mudar" onclick="trocarGrafico()"> Alternar Gráfico
-</div>
-<div class="button-container">
-   <div class="button green">
-    <img src="imagens/Vector (1).svg" alt="">
-    <div class="texto">
-      <p>Cadastro</p>
-      <small>Cadastrar Novo Item</small>
-    </div>
-    </div>
-    <div class="button red">
-        <img src="imagens/Vector.svg" alt="">
-        <div class="texto">
-      <p>Edição</p>
-      <small>Editar/Excluir Itens</small>
-    </div>
-    </div>
-    <div class="button blue">
-        <img src="imagens/vaadin_storage.svg" alt="">
-        <div class="texto">
-      <p>Estoque</p>
-      <small>WMS</small>
-    </div>
-    </div>
-    <div class="button yellow">
-        <img src="imagens/ic_outline-attach-money.svg" alt="">
-        <div class="texto">
-      <p>Financeiro</p>
-      <small>Movimentações</small>
-    </div>
-    </div>
-  </div>
 
+    <img id="bolinhacima" src="imglogineusuario/" alt="">
+    <img id="bolinhadireita" src="imglogineusuario/bolinhas.svg" alt="">
+    <img id="bolinhaesquerda" src="imglogineusuario/bolinhas.svg" alt="">
+    <img id="cima" src="imglogineusuario/caixascima.svg" alt="">
+    <img id="direita" src="imglogineusuario/caixasdireita.svg" alt="">
+    <img id="esquerda" src="imglogineusuario/caixasesquerda.svg" alt="">
+    <img id="logo" src="imglogineusuario/logosga.svg" alt="">
+    <img id="senai" src="imglogineusuario/senaibranco.svg" alt="">
+    <img id="grupo" src="imglogineusuario/logogrupo.svg" alt="">
 
-    <!-- <li><a href="/adicionarUsuario.html">Adicionar Usuário</a></li>
-    <li><a href="/deletarUsuario.html">Deletar Usuario</a></li>
-    <li><a href="/verUsuarios.html">Ver Usuarios</a></li>
-    <li><a href="/verUsuariosView.html">Ver Usuarios com view</a></li>
-    <li><a href="/grafico.html">Grafico</a></li>
-    <li><a href="/login.html">Login</a></li>
-    <li><a href="/adicionarProduto.html">adicionar produto</a></li>
-<<<<<<< HEAD
-    <li><a href="/categoria.html"> categoria</a></li>
-    <li><a href="financeiro.html">financeiro</a></li>
-=======
-    <li><a href="/categoria.html"> categoria</a></li> -->
-</body>
-<script>
-    var chart; // Variável para armazenar a instância do gráfico
+    <div class="traco"></div>
+    <p id="mor">Morvan Figueiredo</p>
+    <p id="nome">©DEVS-SENAI-SP - 2024</p>
 
-    // Definir cores para o gráfico de barras
-    var colors = ['#FF4560', '#008FFB', '#00E396', '#FEB019', '#775DD0', '#546E7A', '#26A69A', '#D10CE8'];
+    <div class="fundo">
+        <h1>Login</h1>
+        <h2>Bem-vindo ao sistema WMS!</h2>
+        <form id="loginForm">
+            <label id="usu" for="email">Usuário:</label>
+            <input type="email" id="email" required />
+            <br />
+            <label id="sen" for="senha">Senha:</label>
+            <input type="password" id="senha" required />
+            <br />
+            <button id="entrar" type="submit">
+                <p>Entrar</p>
+            </button>
+        </form>
 
-    // Opções do gráfico 1
-    var options1 = {
-        series: [{
-            name: 'series1',
-            data: [31, 40, 28, 51, 42, 109, 100]
-        }, {
-            name: 'series2',
-            data: [11, 32, 45, 32, 34, 52, 41]
-        }],
-        chart: {
-            height: 350,
-            type: 'area'
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: {
-            type: 'datetime',
-            categories: [
-                "2018-09-19T00:00:00.000Z",
-                "2018-09-19T01:30:00.000Z",
-                "2018-09-19T02:30:00.000Z",
-                "2018-09-19T03:30:00.000Z",
-                "2018-09-19T04:30:00.000Z",
-                "2018-09-19T05:30:00.000Z",
-                "2018-09-19T06:30:00.000Z"
-            ]
-        },
-        tooltip: {
-            x: {
-                format: 'dd/MM/yy HH:mm'
-            }
-        }
-    };
+    </div>
 
-    // Opções do gráfico 2
-    var options = {
-        series: [{
-            data: [21, 22, 10, 28, 16, 21, 13,38]
-        }],
-        chart: {
-            height: 350,
-            type: 'bar'
-        },
-        colors: colors,
-        plotOptions: {
-            bar: {
-                columnWidth: '45%',
-                distributed: true,
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        legend: {
-            show: false
-        },
-        xaxis: {
-            categories: [
-                ['John', 'Doe'],
-                ['Joe', 'Smith'],
-                ['Jake', 'Williams'],
-                'Amber',
-                ['Peter', 'Brown'],
-                ['Mary', 'Evans'],
-                ['David', 'Wilson'],
-                ['Lily', 'Roberts'], 
-            ],
-            labels: {
-                style: {
-                    colors: colors,
-                    fontSize: '12px'
-                }
-            }
-        }
-    };
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-    function trocarGrafico() {
-        if (chart) chart.destroy();
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
 
-        var checkbox = document.getElementById('mudar');
-        if (checkbox.checked) {
-            chart = new ApexCharts(document.querySelector("#chart"), options);
-        } else {
-            chart = new ApexCharts(document.querySelector("#chart"), options1);
-        }
-        chart.render(); 
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha }),
+                });
+
+                if (response.ok) {
+    const data = await response.json();
+    alert('Login bem-sucedido! Bem-vindo, ' + data.usuario.nome);
+
+    // Armazenar informações no localStorage
+    localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
+
+    // Verifica o tipo de usuário
+    if (data.usuario.tipo === 'professor') {
+        localStorage.setItem('SNProfessor', data.usuario.SN);
+        window.location.href = "telaInical-Professor.html"; 
+    } else {
+        window.location.href = "telaInicial.html";
     }
+} else {
+    const errorMessage = await response.text();
+    alert('Erro: ' + errorMessage);
+}
+
+            } catch (error) {
+                alert('Erro ao fazer login: ' + error.message);
+            }
+        });
 
 
-    trocarGrafico();
-</script>
+
+
+    </script>
+</body>
+
 </html>
