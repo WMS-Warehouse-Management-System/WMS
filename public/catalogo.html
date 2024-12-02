@@ -19,7 +19,7 @@
 <table id="tabela-estoque">
 
     <thead>
-        <tr>
+        <tr id="cabecalho-table">
             <th>Código de Barras</th>
             <th>Item</th>
             <th>Descrição</th>
@@ -66,7 +66,14 @@ const row = `
         <td>${produtos.QUANTIDADE}</td>
         <td>${produtos.CATEGORIA}</td>
         <td>${produtos.FABRICANTE}</td>
-    </tr>`;
+        <td id="colunaAbrirDetalhes"><button onclick="teste()" id="btn-detalhes">+</button></td>
+    </tr>
+    <tr id="linhaDetalhe">
+        <td colspan="6">
+            
+        </td>
+    </tr>
+    `;
 tbody.innerHTML += row;
 });
             } catch (error) {
@@ -78,6 +85,8 @@ tbody.innerHTML += row;
 </script>
 
 <script src="../app.js"></script>
+<script src="js/catalogo.js"></script>
+
 
 </body>
 </html>

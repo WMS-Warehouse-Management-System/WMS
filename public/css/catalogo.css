@@ -83,20 +83,29 @@ textarea:focus, input:focus, select:focus {
     background-color: #FFFFFF;
     height: 4.074vh;
     padding: 0.12vh 0.4vh 0.12vh 0.4vh;
+    
 }
 
-#coluna-mais, #celula-mais{
+#cabecalho-table{
+    position: sticky;
+    top: 0;
+}
+
+#colunaAbrirDetalhes{
     background-color: #F0F0F0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+#colunaAbrirDetalhes button{
+    border: none;
+    font-size: 20px;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
 }
 
-#btn-mais{
-    height: 30px;
-    width: 30px;
-    background-color: #fff;  
-    border: none;
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
+#linhaDetalhe{
+    display: table-row;
 }
