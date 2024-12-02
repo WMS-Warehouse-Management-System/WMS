@@ -1,82 +1,196 @@
-*{
-   padding: 0;
-   margin: 0; 
-}
-body{
-    background-color: #F0F0F0;
-}
-.container-grafico{
-width: 60vw;
-height: 50vh;
-background-color: rgb(255, 255, 255);
-padding-top: 2%;
-margin-left: 20%;
-margin-top: 5%;
+/* *{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+} */
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to top right, #0E0E0E 25%, #747474);
+    overflow: hidden;
 }
 
-#chart{
-    width: 90%;
-    height: 90%;
-    margin-top: 5%;
-    padding-left: 4%;
+#senai {
+    position: absolute;
+    width: 9.27vw;
+    margin-top: 1.45%;
+    margin-left: 2.5%;
 }
-.buttons{
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    margin-left: 5%;
-    margin-top: 7%;
-}
-#Financeiro,#Cadastro,#Edicao,#Estoque {
-   text-decoration: none;
-   padding-inline: 6vw;
-   padding-block: 6vh;
-   background-color: beige;
-}
-.button-container {
-    display: flex;
 
-    width: 80%;
-    justify-content: space-between;
-    margin-left: 10%;
-    margin-top: 5%;
-  }
+.traco {
+    position: absolute;
+    width: 0.01vw;
+    height: 6.2vh;
+    background-color: white;
+    margin-top: 1.75%;
+    margin-left: 12.25%;
+}
 
-  .button {
-    width: 17vw;
-    height: 14vh;
+#mor {
+    position: absolute;
     color: white;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .button .texto{
- flex-direction: column;
- margin-left: 6%;
-  }
-  .button:hover {
-    transform: scale(1.05);
-  }
+    font-family: "Inter", sans-serif;
+    font-weight: 250;
+    font-size: 2.1vh;
+    margin-top: 2.1%;
+    margin-right: 79%;
+    margin-left: 13.2%;
+}
 
-  .green { 
-    background: linear-gradient(-90deg, rgba(10,124,17,1) 0%, rgba(89,218,97,1) 100%);
-    box-shadow: 2px 2px 5px #0f411b;
+#logo {
+    position: absolute;
+    width: 5.47vw;
+    margin-left: 4.375%;
+    margin-top: 5.3%;
 }
-  .red {
-    background: linear-gradient(-90deg, rgba(71,5,5,1) 0%, rgba(206,10,10,1) 100%);    
-     box-shadow: 2px 2px 5px #4d0b0b;
+
+#bolinhacima {
+    position: absolute;
+    width: 5.2vw;
+    margin-left: 47%;
+    margin-top: -5.4%;
+    transform: rotate(-90deg);
 }
-  .blue { 
-    background: linear-gradient(-90deg, rgba(0,93,150,1) 0%, rgba(91,193,255,1) 100%);  
-      box-shadow: 2px 2px 5px #002246;
+
+#cima {
+    position: absolute;
+    width: 6.71vw;
+    margin-left: 81%;
+    margin-top: 2.3%;
 }
-  .yellow { background: rgb(134,96,0);
-    background: linear-gradient(-90deg, rgba(210,153,5,1) 0%,  rgba(255,211,51,1) 100%);     
-    box-shadow: 2px 2px 5px #806003;
- }
+
+#bolinhadireita {
+    position: absolute;
+    width: 5.2vw;
+    margin-left: 94.8%;
+    margin-top: 18%;
+}
+
+#bolinhaesquerda {
+    position: absolute;
+    width: 5.2vw;
+    margin-top: 14%;
+    transform: rotate(-90deg);
+}
+
+#esquerda {
+    position: absolute;
+    width: 22.8vw;
+    margin-top: 26.35%;
+}
+
+#direita {
+    position: absolute;
+    width: 23vw;
+    margin-top: 33.25%;
+    margin-left: 76.95%;
+}
+
+#grupo {
+    position: absolute;
+    width: 4.4vw;
+    margin-top: 47%;
+    margin-left: 43%;
+}
+
+#nome {
+    position: absolute;
+    margin-top: 47.7%;
+    margin-left: 48%;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 250;
+    font-size: 1.6vh;
+}
+
+.fundo {
+    position: absolute;
+    width: 26.61vw;
+    height: 44vh;
+    background: #1c1c1cb0;
+    border-radius: 5%;
+    margin-top: 15%;
+    margin-left: 37%;
+}
+
+h1 {
+    position: absolute;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 4vh;
+    margin-left: 10%;
+}
+
+h2 {
+    position: absolute;
+    color: #D0D0D0;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 2vh;
+    margin-left: 10%;
+    margin-top: 15%;
+}
+
+#email {
+    position: absolute;
+    width: 21.2vw;
+    height: 4.72vh;
+    background: #FFFFFF;
+    border-radius: 0.4vw;
+    margin-top: 31%;
+    margin-left: 10%;
+    border: 0;
+}
+
+#usu {
+    position: absolute;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 2.5vh;
+    margin-left: 10%;
+    margin-top: 25%;
+}
+
+#senha {
+    position: absolute;
+    width: 21.2vw;
+    height: 4.72vh;
+    background: #FFFFFF;
+    border-radius: 0.4vw;
+    margin-top: 48%;
+    margin-left: 10%;
+    border: 0;
+}
+
+#sen {
+    position: absolute;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 2.5vh;
+    margin-left: 10%;
+    margin-top: 42%;
+}
+
+#entrar {
+    position: absolute;
+    width: 21.37vw;
+    height: 5vh;
+    background: #D61717;
+    border-radius: 0.4vw;
+    margin-top: 60%;
+    margin-left: 10%;
+    border: 0;
+}
+
+#entrar p {
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 2.5vh;
+    margin-top: 2.3%;
+}
