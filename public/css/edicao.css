@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    background-color: #F0F0F0;
+}
+
+.cabeca {
+/* ----------------------------------------- */
+    height: 8.8vh;
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+/* ----------------------------------------- */
+    background-color: white;
+    color: #B50000;
+    font-size: clamp(4vh,2.5vw,6vh); 
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* --------------------Mecanismo_Pesquisa--------------------- */
+
+.div_pesquisa {
+/* ----------------------------------------- */
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 2%;
+
+}
+
+/* --------------------Input_Pesquisar--------------------- */
+
+#pesquisa {
+/* ----------------------------------------- */
+    height: 5.4vh;
+    width: 55.10vw;
+/* ----------------------------------------- */
+
+    padding-left: 0.5%;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2.25vh,1.5vw,3.25vh); 
+/* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+
+}
+
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
+
+/* --------------------Pesquisar--------------------- */
+
+#pesquisar {
+/* ----------------------------------------- */
+    height: 5.5vh;
+    width: 10.7vw;
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+/* ----------------------------------------- */
+    padding-left: 0.5%; 
+    margin-left: 1%;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2vh,1.25vw,3vh); 
+/* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#pes {
+/* ----------------------------------------- */
+    height: 50%;
+/* ----------------------------------------- */
+    background-color: white;
+}
+
+#pesquisar:hover {
+    transform: scale(1.1); 
+}
+
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
+
+/* --------------------Filtro--------------------- */
+
+#filtrar {
+/* ----------------------------------------- */
+    height: 5.5vh;
+    width: 8.2vw;
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+/* ----------------------------------------- */
+    padding-left: 0.5%; 
+    margin-right: 1%;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2vh,1.25vw,3vh); 
+/* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#fil {
+/* ----------------------------------------- */
+    height: 70%;
+/* ----------------------------------------- */
+    background-color: white;
+}
+
+#filtrar:hover {
+    transform: scale(1.1); 
+}
+
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
+
+/* --------------------Tabela--------------------- */
+
+.container{
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-table{
+/* ----------------------------------------- */
+    height: 61.111vh;
+    width: 81.51vw;
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+/* ----------------------------------------- */
+    margin-top: 8vh;
+}
+
+#tabela-estoque{
+/* ----------------------------------------- */
+    width: 81.51vw;
+}
+
+#tabela-estoque th{
+/* ----------------------------------------- */
+    height: 4.074vh;
+/* ----------------------------------------- */
+    background-color: #C3002C;
+    color: #fff;
+}
+#tabela-estoque tr, td{
+/* ----------------------------------------- */
+    height: 4.074vh;
+/* ----------------------------------------- */
+    background-color: #FFFFFF;
+    padding: 0.12vh 0.4vh 0.12vh 0.4vh;
+}
+
+#coluna-mais, #celula-mais{
+/* ----------------------------------------- */
+    background-color: #F0F0F0;
+}
+
+#btn-mais{
+/* ----------------------------------------- */
+    height: 30px;
+    width: 30px;
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/* ----------------------------------------- */
+    font-size: 30px;
+/* ----------------------------------------- */
+    background-color: #fff;  
+    border: none;
+    border-radius: 3px;
+}
+
+/* --------------------Final--------------------- */
+
+.final {
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 5vh;
+}
