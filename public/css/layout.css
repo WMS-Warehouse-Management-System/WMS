@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+        {
+        font-family: "Inter", serif;
+    }
+}
+
+body {
+    background-color: #F0F0F0;
+    height: 100vh;
+}
