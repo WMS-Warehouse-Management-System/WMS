@@ -1,32 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu Lateral</title>
-    <link rel="stylesheet" href="css/financeiro.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/financeiro.css" />
+  </head>
+  <body>
+
+    <!---------------NAVBAR-------------------------------------------------->
+    <div class="navbar-caixa">
+      <div class="conteudo-nav">
+        <div class="texto-nav">Movimentação</div>
+
+        <button id="menu-btn" class="menu-btn">&#9776;</button>
+      </div>
+
+      <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
     <div id="sidebar" class="sidebar">
         <button id="close-btn" class="close-btn">&times;</button>
-        <img src="imagens/Mask group.svg " alt="">
+        <img src="imagens/senai-logo.svg" alt="" />
         <h3>Menu</h3>
         <ul>
-            <li class="home"><a href="index.html" id="home"><div class="home"></div><span>Home</span></a></li>
-            <li class="cadastrar"><a href="#" id="cadas"><div class="box-of-good-good"></div><span>Cadastrar</span></a></li>
-            <li class="edicao"><a href="#" id="edicao"><div class="pencil"></div><span>Edição</span></a></li>
-            <li class="estoque"><a href="#" id="esto"><div class="boxes-of-good-good"></div><span>Estoque</span></a></li>
-            <li class="financeiro"><a href="#" id="finan"><div class="financial"></div><span>Financeiro</span></a></li>
+          
+          
+            <li class="home">
+            <a href="#" id="home"
+              ><div class="home"></div>
+              <span>Home</span></a
+            >
+          </li>
+          
+          
+          <li class="cadastrar">
+            <a href="#" id="cadas"
+              ><div class="box-of-good-good"></div>
+              <span>Cadastrar</span></a
+            >
+          </li>
+          
+          
+          <li class="edicao">
+            <a href="#" id="edicao"
+              ><div class="pencil"></div>
+              <span>Edição</span></a
+            >
+          </li>
+
+
+          <li class="estoque">
+            <a href="#" id="esto"
+              ><div class="boxes-of-good-good"></div>
+              <span>Estoque</span></a
+            >
+          </li>
+
+
+          <li class="financeiro">
+            <a href="#" id="finan"
+              ><div class="financial"></div>
+              <span>Financeiro</span></a
+            >
+          </li>
         </ul>
-        <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
-        <!-- <div class="logos"><img src="logo-soft.svg" alt=""><img src="logo-emp.svg" alt=""></div> -->
 
+        <div class="container-logos">
+          <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+          <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img
+            src="imagens/logo-soft.svg"
+            id="logo-cubo"
+          />
+        </div>
+      </div>
     </div>
+    <!-------------------------------------------------------------------------------------------------------------------------------->
 
-    <div class="content">
-        <button id="menu-btn" class="menu-btn">&#9776;</button>
-    </div>
-    <button id="showFormButton">Recebimento</button>
+ <div class="conteudo_pag">
+    
+    <button id="caixa-recebimento">Recebimento</button>
 
     <div id="formContainer">
         <h2>Novo Recebimento</h2>
@@ -49,8 +100,11 @@
 
             <button type="submit" id="submitButton">Cadastrar</button>
         </form>
-    </div>
+     </div>
+
+   </div>
+    <!----------------------------------------------------------------------------------------------------------------------------------------->
 
     <script src="financeiro.js"></script>
-</body>
+  </body>
 </html>

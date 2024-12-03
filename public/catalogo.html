@@ -70,7 +70,37 @@ const row = `
     </tr>
     <tr id="linhaDetalhe">
         <td colspan="6">
-            
+            <div class="containerLinhaOculta">
+            <div class="containerLinhaDetalhes">
+                <div class="imagemProduto">
+                    
+                </div>
+                <div class="endereco-obs">
+                    <table>
+                        <thead>
+                            <th  colspan="3">Endereçamento</th>
+                        </thead>
+                        <tbody id="tableDetalhes">
+                            <tr>
+                                <td>Rua</td>
+                                <td>${produtos.RUA}</td>
+                            </tr>
+                            <tr>
+                                <td>Coluna</td>
+                                <td>${produtos.COLUNA}</td>
+                            </tr>
+                            <tr>
+                                <td>Andar</td>
+                                <td>${produtos.ANDAR}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="caractProd">
+
+                </div>
+            </div>
+            </div>
         </td>
     </tr>
     `;
@@ -90,3 +120,5 @@ tbody.innerHTML += row;
 
 </body>
 </html>
+
+

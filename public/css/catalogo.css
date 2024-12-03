@@ -105,7 +105,28 @@ textarea:focus, input:focus, select:focus {
     width: 30px;
     height: 30px;
 }
-
+/*LINHA DETALHE*/
 #linhaDetalhe{
     display: table-row;
+}
+
+/*-----LINHA DETALHES DA TABELA------*/
+
+.containerLinhaOculta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.containerLinhaDetalhes{
+    width: 75vw;
+    height: 40vh;
+    background-color: #bcbdbe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imagemLinhaDetalhe{
+
 }
