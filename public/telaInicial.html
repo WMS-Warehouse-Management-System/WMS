@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exibir Gráfico</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Adicionando SweetAlert -->
     <link rel="stylesheet" href="css/telaInicial.css">
 </head>
 <body>
-    <button id="logoutButton" style="display:none;" >Sair</button>
+    <div class="navbar">  
+        <img src="imagens/SENAI_logo.png" alt="Logo do senai" id="logo_senai">
+        <img src="imagens/icon_sair.png" alt="icone de sair" id="logoutButton">
+    </div>
+<section>
     <div class="container-grafico">
     <div id="chart" ></div> 
     <input type="checkbox" id="mudar" onclick="trocarGrafico()"> 
@@ -44,74 +49,72 @@
       <small>Movimentações</small>
     </div>
     </div>
-    
   </div>
+</section>
 
-
-    <!-- <li><a href="/adicionarUsuario.html">Adicionar Usuário</a></li>
-    <li><a href="/deletarUsuario.html">Deletar Usuario</a></li>
-    <li><a href="/verUsuarios.html">Ver Usuarios</a></li>
-    <li><a href="/verUsuariosView.html">Ver Usuarios com view</a></li>
-    <li><a href="/grafico.html">Grafico</a></li>
-    <li><a href="/login.html">Login</a></li>
-    <li><a href="/adicionarProduto.html">adicionar produto</a></li>
-<<<<<<< HEAD
-    <li><a href="/categoria.html"> categoria</a></li>
-    <li><a href="financeiro.html">financeiro</a></li>
-=======
-    <li><a href="/categoria.html"> categoria</a></li> -->
 </body>
 <script>
 
-            // ---------------------------------------------logout
+    // ---------------------------------------------logout
 
-            document.getElementById('logoutButton').addEventListener('click', async () => {
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+    document.getElementById('logoutButton').addEventListener('click', async () => {
+        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
-            if (!usuarioLogado) {
-                alert('Nenhum usuário está logado!');
-                return;
-            }
-
-            try {
-                const response = await fetch('http://localhost:3000/logout', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: usuarioLogado.email }),
-                });
-
-                if (response.ok) {
-                    alert('Logout realizado com sucesso!');
-                    localStorage.removeItem('usuarioLogado');
-                    document.getElementById('logoutButton').style.display = 'none';
-                    window.location.href = "index.html"; 
-                } else {
-                    const errorMessage = await response.text();
-                    alert('Erro ao fazer logout: ' + errorMessage);
-                }
-            } catch (error) {
-                alert('Erro ao fazer logout: ' + error.message);
-            }
-        });
-
-        // Atualiza o botão de logout após o login
-        function toggleLogoutButton() {
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            document.getElementById('logoutButton').style.display = usuarioLogado ? 'block' : 'none';
+        if (!usuarioLogado) {
+            alert('Nenhum usuário está logado!');
+            return;
         }
 
-        // Chamando a função para garantir consistência ao carregar a página
-        toggleLogoutButton();
+        try {
+            const response = await fetch('http://localhost:3000/logout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: usuarioLogado.email }),
+            });
 
+            Swal.fire({
+                title: "Sair",
+                text: "Você tem certeza que deseja sair?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim, sair!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (response.ok) {
+                        Swal.fire('Logout realizado com sucesso!', '', 'success');
+                        localStorage.removeItem('usuarioLogado');
+                        document.getElementById('logoutButton').style.display = 'none';
+                        window.location.href = "index.html"; 
+                    } else {
+                        const errorMessage = response.statusText || "Erro ao fazer logout.";
+                        Swal.fire('Erro', errorMessage, 'error');
+                    }
+                }
+            });
+
+        } catch (error) {
+            Swal.fire('Erro', 'Erro ao fazer logout: ' + error.message, 'error');
+        }
+    });
+
+    // Atualiza o botão de logout após o login
+    function toggleLogoutButton() {
+        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+        document.getElementById('logoutButton').style.display = usuarioLogado ? 'block' : 'none';
+    }
+
+    // Chamando a função para garantir consistência ao carregar a página
+    toggleLogoutButton();
 
     // Redireciona para respectiva tela 
     function redirecionarFinanceiro() {
-            window.location.href = "financeiro.html"; 
-        }
+        window.location.href = "financeiro.html"; 
+    }
     function redirecionarEstoque() {
-            window.location.href = "catalogo.html"; 
-        }
-
+        window.location.href = "catalogo.html"; 
+    }
 
     var chart; // Variável para armazenar a instância do gráfico
 
@@ -210,7 +213,7 @@
         chart.render(); 
     }
 
-
     trocarGrafico();
+
 </script>
 </html>

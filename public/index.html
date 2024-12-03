@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Adicionando SweetAlert -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
@@ -61,32 +62,48 @@
                 });
 
                 if (response.ok) {
-    const data = await response.json();
-    alert('Login bem-sucedido! Bem-vindo, ' + data.usuario.nome);
+                    const data = await response.json();
 
-    // Armazenar informações no localStorage
-    localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
+                    // Exibindo SweetAlert para login bem-sucedido
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    
+                    Toast.fire({
+                        icon: "success",
+                        title: 'Login bem-sucedido! Bem-vindo, ' + data.usuario.nome
+                    }).then(() => {
+                        // Armazenar informações no localStorage
+                        localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
 
-    // Verifica o tipo de usuário
-    if (data.usuario.tipo === 'professor') {
-        localStorage.setItem('SNProfessor', data.usuario.SN);
-        window.location.href = "telaInical-Professor.html"; 
-    } else {
-        window.location.href = "telaInicial.html";
-    }
-} else {
-    const errorMessage = await response.text();
-    alert('Erro: ' + errorMessage);
-}
+                        // Verifica o tipo de usuário e redireciona após o alerta
+                        if (data.usuario.tipo === 'professor') {
+                            localStorage.setItem('SNProfessor', data.usuario.SN);
+                            window.location.href = "telaInical-Professor.html"; 
+                        } else {
+                            window.location.href = "telaInicial.html";
+                        }
+                    });
+
+                } else {
+                    const errorMessage = await response.text();
+                    // Exibindo SweetAlert em caso de erro
+                    Swal.fire('Erro', errorMessage, 'error');
+                }
 
             } catch (error) {
-                alert('Erro ao fazer login: ' + error.message);
+                // Exibindo SweetAlert para erro de comunicação com o servidor
+                Swal.fire('Erro', 'Erro ao fazer login: ' + error.message, 'error');
             }
         });
-
-
-
-
     </script>
 </body>
 
