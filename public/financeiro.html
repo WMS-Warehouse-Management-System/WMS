@@ -65,6 +65,37 @@
       </div>
     </div>
     <!-------------------------------------------------------------------------------------------------------------------------------->
+    <div class="container">
+      <h2>Selecione as seções para exibir:</h2>
+  
+      <!-- Checkboxes para selecionar as seções -->
+      <div class="checkbox-group">
+        <input type="radio" id="checkbox1" onclick="toggleSection('section1')">Recebimentos
+        <label for="checkbox1">Seção 1</label>
+        
+        <input type="radio" id="checkbox2" onclick="toggleSection('section2')">Saida
+        <label for="checkbox2">Seção 2</label>
+        
+        <input type="radio" id="checkbox3" onclick="toggleSection('section3')">Saldo
+        <label for="checkbox3">Seção 3</label>
+      </div>
+  
+      <!-- Seções de conteúdo que serão mostradas ou escondidas -->
+      <div id="section1" class="section">
+        <h3>Conteúdo da Seção 1</h3>
+        <p>Este é o conteúdo da primeira seção. Pode conter informações, textos ou imagens.</p>
+      </div>
+  
+      <div id="section2" class="section">
+        <h3>Conteúdo da Seção 2</h3>
+        <p>Este é o conteúdo da segunda seção. Aqui você pode incluir qualquer tipo de conteúdo relacionado.</p>
+      </div>
+  
+      <div id="section3" class="section">
+        <h3>Conteúdo da Seção 3</h3>
+        <p>Este é o conteúdo da terceira seção. A seção é controlada pelo checkbox correspondente.</p>
+      </div>
+    </div>
 
     <div class="conteudo_pag">
       <button id="caixa-recebimento" onclick="toggleForm()">Recebimento</button>
