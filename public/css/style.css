@@ -165,6 +165,9 @@ h2 {
     margin-left: 10%;
     border: 0;
 }
+input{
+    font-size: 1vw;
+}
 
 #sen {
     position: absolute;
@@ -185,6 +188,11 @@ h2 {
     margin-top: 60%;
     margin-left: 10%;
     border: 0;
+    transition: all ease;
+    cursor: pointer;
+}
+#entrar:hover {
+transform: scale(1.03);
 }
 
 #entrar p {
