@@ -91,14 +91,14 @@ textarea:focus, input:focus, select:focus {
     top: 0;
 }
 
-#colunaAbrirDetalhes{
+.colunaAbrirDetalhes{
     background-color: #F0F0F0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     
 }
-#colunaAbrirDetalhes button{
+.colunaAbrirDetalhes button{
     border: none;
     font-size: 20px;
     background-color: #fff;
@@ -109,7 +109,7 @@ textarea:focus, input:focus, select:focus {
 
 /*LINHA DETALHE*/
 #linhaDetalhe{
-    display: table-row;
+    display: none;
 }
 
 /*-----LINHA DETALHES DA TABELA------*/

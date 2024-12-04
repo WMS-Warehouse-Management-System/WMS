@@ -66,7 +66,7 @@ const row = `
     <td>${produtos.QUANTIDADE}</td>
     <td>${produtos.CATEGORIA}</td>
     <td>${produtos.FABRICANTE}</td>
-    <td id="colunaAbrirDetalhes"><button id="btnAbrirLinha">+</button></td>
+    <td class="colunaAbrirDetalhes" id="${produtos.CODIGO}"><button onclick=abrirLinha() class="btnAbrirLinha" id="${produtos.CODIGO}">+</button></td>
 </tr>
 <tr id="linhaDetalhe">
     <td colspan="6">
@@ -78,7 +78,7 @@ const row = `
             <div class="endereco-obs">
                 <table>
                     <thead>
-                        <th  colspan="2">Endereçamento</th>
+                        <th colspan="2">Endereçamento</th>
                     </thead>
                     <tbody id="tableEnderecamento">
                         <tr>
@@ -164,7 +164,7 @@ tbody.innerHTML += row;
     });
 </script>
 
-<!-- <script src="../app.js"></script> -->
+<script src="../app.js"></script>
 <script src="js/catalogo.js"></script>
 
 
