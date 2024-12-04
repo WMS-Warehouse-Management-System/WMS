@@ -4,125 +4,120 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu Lateral</title>
-    <link rel="stylesheet" href="css/financeiro.css" />
+    <link rel="stylesheet" href="financeiro.css" />
   </head>
   <body>
-
     <!---------------NAVBAR-------------------------------------------------->
     <div class="navbar-caixa">
       <div class="conteudo-nav">
         <div class="texto-nav">Movimentação</div>
-
         <button id="menu-btn" class="menu-btn">&#9776;</button>
       </div>
 
       <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
-    <div id="sidebar" class="sidebar">
+      <div id="sidebar" class="sidebar">
         <button id="close-btn" class="close-btn">&times;</button>
         <img src="imagens/senai-logo.svg" alt="" />
         <h3>Menu</h3>
         <ul>
-          
-          
-            <li class="home">
-            <a href="#" id="home"
-              ><div class="home"></div>
-              <span>Home</span></a
-            >
-          </li>
-          
-          
-          <li class="cadastrar">
-            <a href="#" id="cadas"
-              ><div class="box-of-good-good"></div>
-              <span>Cadastrar</span></a
-            >
-          </li>
-          
-          
-          <li class="edicao">
-            <a href="#" id="edicao"
-              ><div class="pencil"></div>
-              <span>Edição</span></a
-            >
+          <li class="home">
+            <a href="#" id="home">
+              <div class="home"></div>
+              <span>Home</span>
+            </a>
           </li>
 
+          <li class="cadastrar">
+            <a href="#" id="cadas">
+              <div class="box-of-good-good"></div>
+              <span>Cadastrar</span>
+            </a>
+          </li>
+
+          <li class="edicao">
+            <a href="#" id="edicao">
+              <div class="pencil"></div>
+              <span>Edição</span>
+            </a>
+          </li>
 
           <li class="estoque">
-            <a href="#" id="esto"
-              ><div class="boxes-of-good-good"></div>
-              <span>Estoque</span></a
-            >
+            <a href="#" id="esto">
+              <div class="boxes-of-good-good"></div>
+              <span>Estoque</span>
+            </a>
           </li>
 
-
           <li class="financeiro">
-            <a href="#" id="finan"
-              ><div class="financial"></div>
-              <span>Financeiro</span></a
-            >
+            <a href="#" id="finan">
+              <div class="financial"></div>
+              <span>Financeiro</span>
+            </a>
           </li>
         </ul>
 
         <div class="container-logos">
           <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
-          <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img
-            src="imagens/logo-soft.svg"
-            id="logo-cubo"
-          />
+          <img src="imagens/logo-emp.svg" id="logo-gato" alt="" />
+          <img src="imagens/logo-soft.svg" id="logo-cubo" />
         </div>
       </div>
     </div>
     <!-------------------------------------------------------------------------------------------------------------------------------->
 
- <div class="conteudo_pag">
-    
-    <button id="caixa-recebimento">Recebimento</button>
+    <div class="conteudo_pag">
+      <button id="caixa-recebimento" onclick="toggleForm()">Recebimento</button>
 
-    <div id="formContainer">
+      <div id="formContainer">
         <h2>Novo Recebimento</h2>
+        <button id="close-btn" class="close-btn">&times;</button>
         <form id="registrationForm">
-            
-            <div class="input-container">
-                <input type="text" id="productName" placeholder=" " required>
-                <label for="productName">Nome do produto</label>
-            </div>
-
-            <div class="input-container">
-                <input type="text" id="productFont" placeholder=" " required>
-                <label for="productFont">Nome do fornecedor</label>
-            </div>
-
-            <div class="input-container">
-              <input type="number" id="productCode" min="0" max="9999999999999" placeholder=" " required>
-              <label for="productCode">Código do produto</label>
+          <div class="input-container">
+            <input type="text" id="productName" placeholder=" " required />
+            <label for="productName">Nome do produto</label>
           </div>
 
           <div class="input-container">
-            <input type="number" id="quantityReceived" placeholder=" " required>
-            <label for="quantityReceived">Quantidade recebida</label>
-        </div>
-
-        <div class="input-container">
-          <input type="number" id="numbLote" placeholder=" " required>
-          <label for="numbLote">N° do Lote</label>
-      </div>
-
-            <div class="input-container">
-                <input type="date" id="receivingDate" placeholder=" " required>
-                <label for="receivingDate">Data de recebimento</label>
-            </div>
-
-            <div class="input-container">
-              <input type="date" id="productValidade" placeholder=" " required>
-              <label for="productValidade">Data de Validade</label>
+            <input type="text" id="productFont" placeholder=" " required />
+            <label for="productFont">Nome do fornecedor</label>
           </div>
 
-            <button type="submit" id="submitButton">Cadastrar</button>
-        </form>
-     </div>
+          <div class="input-container">
+            <input
+              type="number"
+              id="productCode"
+              min="0"
+              max="9999999999999"
+              placeholder=" "
+              required
+            />
+            <label for="productCode">Código do produto</label>
+          </div>
 
-   </div>
+          <div class="input-container">
+            <input type="number" id="quantityReceived" placeholder=" " required />
+            <label for="quantityReceived">Quantidade recebida</label>
+          </div>
+
+          <div class="input-container">
+            <input type="number" id="numbLote" placeholder=" " required />
+            <label for="numbLote">N° do Lote</label>
+          </div>
+
+          <div class="input-container">
+            <input type="date" id="receivingDate" placeholder=" " required />
+            <label for="receivingDate">Data de recebimento</label>
+          </div>
+
+          <div class="input-container">
+            <input type="date" id="productValidade" placeholder=" " required />
+            <label for="productValidade">Data de Validade</label>
+          </div>
+
+          <button type="submit" id="submitButton"><h3>Cadastrar</h3></button>
+        </form>
+      </div>
+    </div>
     <!----------------------------------------------------------------------------------------------------------------------------------------->
 
     <script src="financeiro.js"></script>

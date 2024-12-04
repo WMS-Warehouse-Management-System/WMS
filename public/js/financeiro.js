@@ -1,50 +1,90 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const sidebar = document.getElementById("sidebar");
-    const menuBtn = document.getElementById("menu-btn");
-    const closeBtn = document.getElementById("close-btn");
-
-    // Abrir o menu
-    menuBtn.addEventListener("click", () => {
-        sidebar.style.left = "0";
-    });
-
-    // Fechar o menu
-    closeBtn.addEventListener("click", () => {
-        sidebar.style.left = "-350px";
-    });
+// Abrir/Fechar Sidebar
+document.getElementById('menu-btn').addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.style.left = '0';
+  });
+  
+  document.getElementById('close-btn').addEventListener('click', function() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.style.left = '-350px'; // Esconde a sidebar
+  });
+  
+  // Fechar sidebar quando clicar fora dela
+  document.addEventListener('click', function(event) {
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menu-btn');
+    if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+      sidebar.style.left = '-350px'; // Esconde a sidebar
+    }
+  });
+  
+  // Alternar exibição do formulário de recebimento
+  function toggleForm() {
+    const formContainer = document.getElementById('formContainer');
+    if (formContainer.style.display === 'block') {
+      formContainer.style.display = 'none';
+    } else {
+      formContainer.style.display = 'block';
+    }
+  }
+  document.getElementById('formContainer').addEventListener('click', (event) => {
+  const formContent = document.getElementById('formContent');
+  if (!formContent.contains(event.target)) {
+    document.getElementById('formContainer').style.display = 'none';
+  }
 });
 
 
 
-document.getElementById('showFormButton').addEventListener('click', function() {
-    document.getElementById('formContainer').style.display = 'block';
-});
 
-// Função para processar o envio do recebimento(apenas para demonstração)
-document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita o envio do recebimento
-    alert('Formulário enviado com sucesso!');
-});
 
-document.getElementById('formContainer').addEventListener('submit', async (event) => {
-    event.preventDefault();
+  function submitForm() {
+    const productName = document.getElementById('productName').value;
+    const productFont = document.getElementById('productFont').value;
+    const productCode = document.getElementById('productCode').value;
+    const quantityReceived = document.getElementById('quantityReceived').value;
+    const numbLote = document.getElementById('numbLote').value;
+    const receivingDate = document.getElementById('receivingDate').value;
+    const productValidade = document.getElementById('productValidade').value;
 
-    const produto = {
-        nome: document.getElementById('nome').value,
-        descricao: document.getElementById('descricao').value,
-        preco: parseFloat(document.getElementById('preco').value),
-        categoria: document.getElementById('categoria').value
+    // Validar os dados
+    if (!productName || !productFont || !productCode || !quantityReceived || !numbLote || !receivingDate || !productValidade) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    // Enviar os dados para o back-end
+    const formData = {
+        productName: productName,
+        productFont: productFont,
+        productCode: productCode,
+        quantityReceived: quantityReceived,
+        numbLote: numbLote,
+        receivingDate: receivingDate,
+        productValidade: productValidade
     };
 
-    try {
-        const response = await fetch('http://localhost:3000/adicionar-produto', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(produto)
-        });
-        const message = await response.text();
-        alert(message);
-    } catch (error) {
-        alert('Erro ao enviar dados: ' + error.message);
-    }
-});
+    // Usar Fetch API para enviar os dados
+    fetch('http://localhost:3000/financeiro', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Cadastro realizado com sucesso!');
+            document.getElementById('registrationForm').reset(); // Limpar formulário
+        } else {
+            alert('Erro ao cadastrar. Tente novamente.');
+        }
+    })
+    .catch(error => {
+        alert('Erro de conexão. Tente novamente.');
+        console.error('Erro:', error);
+    });
+}
+
+
