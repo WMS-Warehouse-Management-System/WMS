@@ -105,6 +105,8 @@ textarea:focus, input:focus, select:focus {
     width: 30px;
     height: 30px;
 }
+
+
 /*LINHA DETALHE*/
 #linhaDetalhe{
     display: table-row;
@@ -121,8 +123,50 @@ textarea:focus, input:focus, select:focus {
 .containerLinhaDetalhes{
     width: 75vw;
     height: 40vh;
-    background-color: #bcbdbe;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5vh;
+}
+.imagemProduto{
+    background-color: beige;
+    height: 30vh;
+    width: 18vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imagemLinhaDetalhe{
+    height: 100%;
+    width: 100%;
+}
+
+.endereco-obs{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#colunaTopico{
+    background-color: #D9D9D9;
+}
+
+.celulaDetalhe{
+    background-color: #F6F5F5;
+    height: 4vh;
+    width: 13vw;
+    padding: 0.4vh;
+}
+
+#tableObservacoes{
+    height: 5vh;
+    width: 26.85vw;
+    padding: 0.4vh;
+    background-color: #F6F5F5;
+}
+
+#celulaObservacoes{
+    background-color: #F6F5F5;
 }

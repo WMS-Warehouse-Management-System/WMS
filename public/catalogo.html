@@ -29,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-
+        
     </tbody>
 
 
@@ -59,50 +59,87 @@
             produtos.forEach(produtos => {
 
 const row = `
-    <tr>
-        <td>${produtos.CODIGO}</td>
-        <td>${produtos.NOME_BASICO}</td>
-        <td>${produtos.DESCRICAO_TECNICA}</td>
-        <td>${produtos.QUANTIDADE}</td>
-        <td>${produtos.CATEGORIA}</td>
-        <td>${produtos.FABRICANTE}</td>
-        <td id="colunaAbrirDetalhes"><button onclick="teste()" id="btn-detalhes">+</button></td>
-    </tr>
-    <tr id="linhaDetalhe">
-        <td colspan="6">
-            <div class="containerLinhaOculta">
-            <div class="containerLinhaDetalhes">
-                <div class="imagemProduto">
-                    
-                </div>
-                <div class="endereco-obs">
-                    <table>
-                        <thead>
-                            <th  colspan="3">Endereçamento</th>
-                        </thead>
-                        <tbody id="tableDetalhes">
-                            <tr>
-                                <td>Rua</td>
-                                <td>${produtos.RUA}</td>
-                            </tr>
-                            <tr>
-                                <td>Coluna</td>
-                                <td>${produtos.COLUNA}</td>
-                            </tr>
-                            <tr>
-                                <td>Andar</td>
-                                <td>${produtos.ANDAR}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="caractProd">
+<tr>
+    <td>${produtos.CODIGO}</td>
+    <td>${produtos.NOME_BASICO}</td>
+    <td>${produtos.DESCRICAO_TECNICA}</td>
+    <td>${produtos.QUANTIDADE}</td>
+    <td>${produtos.CATEGORIA}</td>
+    <td>${produtos.FABRICANTE}</td>
+    <td id="colunaAbrirDetalhes"><button id="btnAbrirLinha">+</button></td>
+</tr>
+<tr id="linhaDetalhe">
+    <td colspan="6">
+        <div class="containerLinhaOculta">
+        <div class="containerLinhaDetalhes">
+            <div class="imagemProduto">
+                <img src="https://img.kalunga.com.br/fotosdeprodutos/124209d.jpg" alt="" id="imagemLinhaDetalhe">
+            </div>
+            <div class="endereco-obs">
+                <table>
+                    <thead>
+                        <th  colspan="2">Endereçamento</th>
+                    </thead>
+                    <tbody id="tableEnderecamento">
+                        <tr>
+                            <td id="colunaTopico" class="celulaDetalhe">Rua</td>
+                            <td class="celulaDetalhe">${produtos.RUA}</td>
+                        </tr>
+                        <tr>
+                            <td id="colunaTopico" class="celulaDetalhe">Coluna</td>
+                            <td class="celulaDetalhe">${produtos.COLUNA}</td>
+                        </tr>
+                        <tr>
+                            <td id="colunaTopico" class="celulaDetalhe">Andar</td>
+                            <td class="celulaDetalhe">${produtos.ANDAR}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                     <thead>
+                        <th  id="tableObservacoes">Observações</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="celulaObservacoes">${produtos.OBSERVACOES_ADICIONAL}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="caractProd">
 
-                </div>
+                <table>
+                <thead>
+                    <th  colspan="2">Características</th>
+                </thead>
+                <tbody id="tableCaracter">
+                    <tr>
+                        <td id="colunaTopico">Largura</td>
+                        <td class="celulaDetalhe">${produtos.LARGURA} cm</td>
+                    </tr>
+                    <tr>
+                        <td id="colunaTopico">Altura</td>
+                        <td class="celulaDetalhe">${produtos.ALTURA} cm</td>
+                    </tr>
+                    <tr>
+                        <td id="colunaTopico">Profundidade</td>
+                        <td class="celulaDetalhe">${produtos.PROFUNDIDADE} cm</td>
+                    <tr>
+                        <td id="colunaTopico">Peso</td>
+                        <td class="celulaDetalhe">${produtos.PESO} Kg</td>
+                    </tr>
+                    <tr>
+                        <td id="colunaTopico">Frágil</td>
+                        <td class="celulaDetalhe">${produtos.FRAGIL}</td>
+                    </tr>
+                    
+                </tbody>
+                </table>
             </div>
-            </div>
-        </td>
-    </tr>
+        </div>
+        </div>
+    </td>
+</tr>
     `;
 tbody.innerHTML += row;
 });
@@ -114,11 +151,22 @@ tbody.innerHTML += row;
     window.onload = fetchProdutosCatalogo;
 </script>
 
-<script src="../app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('click', (event) => {
+            if (event.target && event.target.classList.contains('btnAbrirLinha')) {
+                const linhaDetalhe = event.target.closest('tr').nextElementSibling;
+                if (linhaDetalhe) {
+                    linhaDetalhe.style.display = linhaDetalhe.style.display === 'none' ? 'table-row' : 'none';
+                }
+            }
+        });
+    });
+</script>
+
+<!-- <script src="../app.js"></script> -->
 <script src="js/catalogo.js"></script>
 
 
 </body>
 </html>
-
-
