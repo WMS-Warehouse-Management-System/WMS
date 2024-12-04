@@ -14,33 +14,13 @@ body {
 }
 
 /* CABEÇALHO */
-/* .navbar {
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-header {
-    padding: 20px 0;
-    background-color: #FDFDFD;
-    box-shadow: 0 2px 5px #c4c4c4;
-}
-
-header>.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navbar h1{
-    font-family: "Inter", serif;
+.texto-nav{
     color: #0B6300;
-    font-weight: 500;
-    font-size: 35px;
-} */
+}
 
 /* CADASTRO */
 section.cadastro {
-    padding: 1vh 4%;
+    padding: 0vh 4%;
 }
 
 .flex {
@@ -261,6 +241,7 @@ section.cadastro .flex .parte-bolinhas .container {
 .footer{
     display: flex;
     justify-content: center;
+    margin-top: -20px;
 }
 
 .footer img{
