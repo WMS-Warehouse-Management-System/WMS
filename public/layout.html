@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <title>SGA - Layout do Estoque</title>
+    <link rel="stylesheet" href="css/layout.css">
 </head>
+
 <body>
-    
+    <!---------------NAVBAR-------------------------------------------------->
+    <div class="navbar-caixa">
+        <div class="conteudo-nav">
+            <div class="texto-nav">Layout do Estoque</div>
+
+            <button id="menu-btn" class="menu-btn">&#9776;</button>
+        </div>
+
+        <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
+        <div id="sidebar" class="sidebar">
+            <button id="close-btn" class="close-btn">&times;</button>
+            <img src="imglogineusuario/senaibranco.svg" alt="" />
+            <h3>Menu</h3>
+            <ul>
+
+
+                <li class="home">
+                    <a href="#" id="home">
+                        <div class="home"></div>
+                        <span>Home</span>
+                    </a>
+                </li>
+
+
+                <li class="cadastrar">
+                    <a href="#" id="cadas">
+                        <div class="box-of-good-good"></div>
+                        <span>Cadastrar</span>
+                    </a>
+                </li>
+
+
+                <li class="edicao">
+                    <a href="#" id="edicao">
+                        <div class="pencil"></div>
+                        <span>Edição</span>
+                    </a>
+                </li>
+
+
+                <li class="estoque">
+                    <a href="#" id="esto">
+                        <div class="boxes-of-good-good"></div>
+                        <span>Estoque</span>
+                    </a>
+                </li>
+
+
+                <li class="financeiro">
+                    <a href="#" id="finan">
+                        <div class="financial"></div>
+                        <span>Financeiro</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="container-logos">
+                <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+                <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img src="imagens/logo-soft.svg"
+                    id="logo-cubo" />
+            </div>
+        </div>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------------------------->
+
+    <div class="layout">
+        <img src="imagens/LayoutEstoque.svg" alt="">
+    </div>
+
+    <div class="footer">
+        <img src="imgCADASTRO/gatinhoRodapé.svg" alt="">
+    </div>
 </body>
+<script src="js/financeiro.js"></script>
 </html>
