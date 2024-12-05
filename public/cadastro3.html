@@ -154,6 +154,41 @@
         </div>
         </div>
     </section>
+    <!-- SCRIPT -->
+    <script>
+        document.getElementById('formAdicionarProduto').addEventListener('submit', async function (event) {
+     event.preventDefault();
+ 
+     const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+     const SNProfessor = localStorage.getItem('SNProfessor');
+ 
+     const produto = {
+         categoria: document.getElementById('categoria').value,
+         enderecamento: document.getElementById('rua').value,
+         enderecamento: document.getElementById('coluna').value,
+         enderecamento: document.getElementById('andar').value,
+         inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
+     };
+ 
+     try {
+         const response = await fetch('http://localhost:3000/adicionar-produto', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify(produto),
+         });
+ 
+         if (response.ok) {
+             alert('Produto cadastrado com sucesso!');
+         } else {
+             const errorMessage = await response.text();
+             alert('Erro: ' + errorMessage);
+         }
+     } catch (error) {
+         alert('Erro ao cadastrar produto: ' + error.message);
+     }
+ });
+ 
+     </script>
 
     <script src="js/navbar.js"></script>
 </body>
