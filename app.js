@@ -1,5 +1,4 @@
 
-
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
@@ -324,23 +323,71 @@ app.post('/adicionar-produto', async (req, res) => {
     }
 });
 
-// ------------------------------------------------categoria
-// Rota para listar todas as categorias
-app.get('/listar-categorias', async (req, res) => {
+
+
+//------------------------------------------- vizualizar os recebimentos
+app.get("/Recebimento", async (req, res) => {
     try {
-        await sql.connect(dbConfig);
+      // Estabelecendo a conexão com o banco de dados
+      let pool = await sql.connect(config);
+      
+      // Sua query SQL
+      const query = `
+        SELECT 
+          FactRecebimento.DATA_RECEB,
+          DimProduto.CODIGO,
+          DimProduto.NOME_BASICO,
+          DimProduto.FABRICANTE,
+          FactRecebimento.Fornecedor,
+          FactRecebimento.PRECO_DE_AQUISICAO,
+          DimProduto.IMAGEM,
+          FactRecebimento.QUANT,
+          DimProduto.PRECO_DE_VENDA,
+          DimProduto.FRAGILIDADE
+        FROM FactRecebimento 
+        INNER JOIN DimProduto ON FactRecebimento.CODIGO = DimProduto.CODIGO;
+      `;
+  
+      // Executando a query
+      const result = await pool.request().query(query);
+  
+      // Retorna os dados como JSON
+      res.json(result.recordset);
+    } catch (err) {
+      console.error("Erro ao buscar dados:", err);
+      res.status(500).send("Erro ao buscar dados.");
+    }
+  });
+  
 
-        const query = `SELECT IDCategoria, CATEGORIA FROM DimCategoria`;
-        const result = await new sql.Request().query(query);
 
-        res.json(result.recordset); // Retorna as categorias como JSON
-    } catch (error) {
-        res.status(500).send('Erro ao obter categorias: ' + error.message);
+  //---------------------------------------------------------INserir dados no formulario recebimento
+
+// Rota para receber os dados do formulário
+app.post('/add-product', async (req, res) => {
+    const { productName, productFont, productCode, quantityReceived, numbLote, receivingDate, productValidade } = req.body;
+
+    try {
+        // Conecta ao banco de dados usando a configuração definida em dbConfig
+        let pool = await sql.connect(dbConfig);
+    // Criar a consulta SQL para inserir os dados
+    await pool.request()
+    .input('Nome', sql.NVarChar, Nome)          // Define o parâmetro 'Nome' como NVarchar
+    .input('Preco', sql.Decimal(10, 2), Preco)  // Define o parâmetro 'Preco' como Decimal com precisão
+    .input('Quantidade', sql.Int, Quantidade)   // Define o parâmetro 'Quantidade' como Inteiro
+    .input('Categoria', sql.NVarChar, Categoria) // Define o parâmetro 'Categoria' como NVarchar
+    .query('INSERT INTO Produtos (Nome, Preco, Quantidade, Categoria) VALUES (@Nome, @Preco, @Quantidade, @Categoria)');
+
+        // Retorna uma resposta de sucesso para o cliente
+        res.status(200).send('Produto adicionado com sucesso!');
+    } catch (err) {
+        // Em caso de erro, loga o erro e retorna uma resposta de erro
+        console.error('Erro ao adicionar produto:', err);
+        res.status(500).send('Erro ao adicionar produto');
     }
 });
-
-
-
+// Inicia o servidor na porta definida e exibe uma mensagem no console
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
+  

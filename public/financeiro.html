@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu Lateral</title>
     <link rel="stylesheet" href="css/financeiro.css" />
-    <link rel="stylesheet" href="css/navbar.css">
   </head>
   <body>
     <!---------------NAVBAR-------------------------------------------------->
@@ -59,42 +58,19 @@
 
         <div class="container-logos">
           <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+          <div class="container-img">
           <img src="imagens/logo-emp.svg" id="logo-gato" alt="" />
           <img src="imagens/logo-soft.svg" id="logo-cubo" />
+        </div>
         </div>
       </div>
     </div>
     <!-------------------------------------------------------------------------------------------------------------------------------->
     <div class="container">
-      <h2>Selecione as seções para exibir:</h2>
-  
-      <!-- Checkboxes para selecionar as seções -->
-      <div class="checkbox-group">
-        <input type="radio" id="checkbox1" onclick="toggleSection('section1')">Recebimentos
-        <label for="checkbox1">Seção 1</label>
-        
-        <input type="radio" id="checkbox2" onclick="toggleSection('section2')">Saida
-        <label for="checkbox2">Seção 2</label>
-        
-        <input type="radio" id="checkbox3" onclick="toggleSection('section3')">Saldo
-        <label for="checkbox3">Seção 3</label>
-      </div>
-  
-      <!-- Seções de conteúdo que serão mostradas ou escondidas -->
-      <div id="section1" class="section">
-        <h3>Conteúdo da Seção 1</h3>
-        <p>Este é o conteúdo da primeira seção. Pode conter informações, textos ou imagens.</p>
-      </div>
-  
-      <div id="section2" class="section">
-        <h3>Conteúdo da Seção 2</h3>
-        <p>Este é o conteúdo da segunda seção. Aqui você pode incluir qualquer tipo de conteúdo relacionado.</p>
-      </div>
-  
-      <div id="section3" class="section">
-        <h3>Conteúdo da Seção 3</h3>
-        <p>Este é o conteúdo da terceira seção. A seção é controlada pelo checkbox correspondente.</p>
-      </div>
+      <button id="btn-recebim">Recebimentos</button>
+      <button id="btn-saida">Saídas</button>
+      <button id="btn-saldo">Saldo</button>
+
     </div>
 
     <div class="conteudo_pag">
@@ -151,6 +127,48 @@
       </div>
     </div>
     <!----------------------------------------------------------------------------------------------------------------------------------------->
+    <button id="toggle-filter">Filtrar Recebimentos &#9660;</button>
+
+    <div class="filter-overlay" id="filter-overlay">
+       
+          <div class="filter-section">
+            <label for="fornecedor">Fornecedor:</label>
+            <select id="fornecedor">
+                <option value="">Todos</option>
+                <!-- Opções serão carregadas dinamicamente -->
+            </select>
+        
+            <label for="fabricante">Fabricante:</label>
+            <select id="fabricante">
+                <option value="">Todos</option>
+                <!-- Opções serão carregadas dinamicamente -->
+            </select>
+        
+            <label for="tipo">Tipo de Produto:</label>
+            <select id="tipo">
+                <option value="">Todos</option>
+                <!-- Opções serão carregadas dinamicamente -->
+            </select>
+        
+            <label for="nome">Nome do Produto:</label>
+            <select id="nome">
+                <option value="">Todos</option>
+                <!-- Opções serão carregadas dinamicamente -->
+            </select>
+        
+            <label for="ordenacao">Ordenar por:</label>
+            <select id="ordenacao">
+                <option value="nome">Nome (A-Z)</option>
+                <option value="data_validade">Data de Validade</option>
+            </select>
+
+            <button id="filtrar">Aplicar Filtros</button>
+        </div>
+
+    <div class="products-list" id="products-list"></div>
+    <div class="table-container" id="table-container"></div>
+
+
 
     <script src="js/financeiro.js"></script>
     <script src="js/navbar.js"></script>
