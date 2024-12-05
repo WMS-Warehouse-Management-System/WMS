@@ -151,7 +151,8 @@ app.get('/ver-catalogo', async (req, res) => {
       ,LARGURA
       ,PROFUNDIDADE
       ,PESO 
-      FROM DimProduto`;
+      FROM DimProduto
+      ORDER BY NOME_BASICO ASC`;
         const result = await new sql.Request().query(query);
 
         res.json(result.recordset); 

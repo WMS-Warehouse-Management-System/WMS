@@ -78,7 +78,10 @@ textarea:focus, input:focus, select:focus {
     background-color: #4E97D1;
     height: 4.074vh;
     color: #fff;
+    border-collapse: collapse;
+    padding: 1vh;
 }
+
 #tabela-estoque tr, td{
     background-color: #FFFFFF;
     height: 4.074vh;
@@ -89,6 +92,13 @@ textarea:focus, input:focus, select:focus {
 #cabecalho-table{
     position: sticky;
     top: 0;
+}
+
+.colunaAbrirDetalhes{
+    background-color: #40ff00;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .colunaAbrirDetalhes{
@@ -106,12 +116,7 @@ textarea:focus, input:focus, select:focus {
     height: 30px;
 }
 
-
-/*LINHA DETALHE*/
-#linhaDetalhe{
-    display: none;
-}
-
+*/
 /*-----LINHA DETALHES DA TABELA------*/
 
 .containerLinhaOculta{
