@@ -196,3 +196,20 @@ VALUES
 (5, 'Produto E', 'Modificador V', 'Descrição Técnica 5', 'Fabricante 5', 'Observação 5', NULL, 'Unidade E', 50.99, 0, 'Usuario5', 1, 1, 5, 30, 40, 30, 20);
 
 GO
+
+INSERT INTO FactRecebimento (DATA_RECEB, QUANT, CODIGO, VALIDADE, PRECO_DE_AQUISICAO, LOTE, FORNECEDOR)
+VALUES 
+(GETDATE(), 20, 1, DATEADD(YEAR, 1, GETDATE()), 5.00, 'Lote001', 'Fornecedor A'),
+(GETDATE(), 20, 2, DATEADD(YEAR, 1, GETDATE()), 10.00, 'Lote002', 'Fornecedor B'),
+(GETDATE(), 20, 3, DATEADD(YEAR, 1, GETDATE()), 15.00, 'Lote003', 'Fornecedor C'),
+(GETDATE(), 20, 4, DATEADD(YEAR, 1, GETDATE()), 20.00, 'Lote004', 'Fornecedor D'),
+(GETDATE(), 20, 5, DATEADD(YEAR, 1, GETDATE()), 25.00, 'Lote005', 'Fornecedor E');
+
+-- Verificar a soma das quantidades de cada produto
+SELECT 
+    dp.NOME_BASICO AS Produto, 
+    SUM(fr.QUANT) AS Quantidade
+FROM DimProduto dp
+JOIN FactRecebimento fr ON dp.CODIGO = fr.CODIGO
+GROUP BY dp.NOME_BASICO
+ORDER BY dp.NOME_BASICO;
