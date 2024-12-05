@@ -16,7 +16,13 @@ body{
     align-items: center;
     margin-top: 5vh;
 }
-#filtrar{
+/* mudanças filtro */
+#filtrarcontainer {
+    position: relative;
+    display: inline-block;
+}
+
+#filtrar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,10 +30,121 @@ body{
     width: 8vw;
     background-color: #ffff;
     border-radius: 1vh;
-    box-shadow: 0.1em 0.1em ;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
     margin-right: 2%;
     font-weight: 300;
+    cursor: pointer;
 }
+
+#caixote {
+    display: none;
+    position: absolute;
+    width: 20vw;
+    height: 44vh;
+    margin-top: 10%;
+    background-color: hsl(0, 0%, 100%);
+    z-index: 1;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+#caixote.active {
+    display: block;
+}
+#ajeitar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+#subajeitada{
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+#textinho{
+    color: #4E97D1;
+}
+#dropdown {
+    display: none;
+    position: relative;
+    margin-top: 5%;
+    width: 10vw;
+    background-color: transparent;
+    border-radius: 0.5vh;
+    
+    z-index: 1;
+}
+
+.itemdropdown {
+    background-color: #4E97D1;
+    position: relative;
+    padding: 0.9vh 0.9vw;
+    border-radius: 0.5vh;
+    margin-bottom: 5%;
+
+    font-size: 14px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.itemdropdown:hover {
+    background-color: #f0f0f0;
+    color: #4E97D1;
+}
+
+#caixote.active #dropdown {
+    display: block;
+}
+
+.subdropdown {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 150px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 0.5vh;
+    box-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.itemsubdropdown {
+    padding: 1vh;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.itemsubdropdown:hover {
+    background-color: #eaeaea;
+}
+
+.itemdropdown:hover .subdropdown {
+    display: block;
+}
+
+#imputdata{
+    display: flex;
+    justify-content: center;
+    
+ 
+}
+.datasize{
+    width: 6vw;
+    height: 4vh;
+    appearance: none;
+    border-color: transparent;
+    background-color: #f4f4f4;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 1vh;
+}
+
+#ordernaritem{
+    margin-top: 5%;
+}
+/* acabou mudanças */
 #entrada{
     width: 50vw;
     height: 4vh;
