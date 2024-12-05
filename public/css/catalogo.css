@@ -40,7 +40,7 @@ body{
     display: none;
     position: absolute;
     width: 20vw;
-    height: 44vh;
+    height: 39vh;
     margin-top: 10%;
     background-color: hsl(0, 0%, 100%);
     z-index: 1;
@@ -52,14 +52,12 @@ body{
 }
 #ajeitar{
     display: flex;
-    align-items: center;
     flex-direction: column;
-    
 }
 #subajeitada{
     display: flex;
     justify-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 5%;
 }
 #textinho{
@@ -69,71 +67,62 @@ body{
     display: none;
     position: relative;
     margin-top: 5%;
-    width: 10vw;
+    width: 5vw;
     background-color: transparent;
     border-radius: 0.5vh;
-    
+    all: unset;
     z-index: 1;
-}
-
-.itemdropdown {
-    background-color: #4E97D1;
-    position: relative;
-    padding: 0.9vh 0.9vw;
-    border-radius: 0.5vh;
-    margin-bottom: 5%;
-
-    font-size: 14px;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-.itemdropdown:hover {
-    background-color: #f0f0f0;
-    color: #4E97D1;
 }
 
 #caixote.active #dropdown {
     display: block;
 }
 
-.subdropdown {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 150px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 0.5vh;
-    box-shadow: 0.1em 0.1em 0.5em rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-
-.itemsubdropdown {
-    padding: 1vh;
+/* estilizando os selects */
+select {
+    width: 10vw;
+    margin-top: 4%;
+    margin-left: 10%;
+    padding: 0.9vh 0.9vw;
     font-size: 14px;
-    color: #333;
+    color: #fff;
+    background-color: #4E97D1;
+    border-color: transparent;
+    border-radius: 0.5vh;
+    appearance: none; /* remove a seta padrao do select */
     cursor: pointer;
 }
 
-.itemsubdropdown:hover {
+/* estilo quando o select e focado */
+select:focus {
+    outline: none;
+    border-color: #4E97D1;
+}
+
+/* estilizando as opçoes do select */
+option {
+    font-size: 14px;
+    padding: 1vh;
+    color: #ffffff;
+}
+
+/* Estilo quando o select é hovered */
+select:hover {
+    border-color: #4E97D1;
+}
+
+select:hover option:hover {
     background-color: #eaeaea;
 }
 
-.itemdropdown:hover .subdropdown {
-    display: block;
-}
-
-#imputdata{
-    display: flex;
-    justify-content: center;
-    
- 
+#inputdata{
+    margin-top: 5%;
+    margin-left: 10%;
 }
 .datasize{
     width: 6vw;
     height: 4vh;
+    margin-right: 2%;
     appearance: none;
     border-color: transparent;
     background-color: #f4f4f4;
@@ -143,7 +132,9 @@ body{
 
 #ordernaritem{
     margin-top: 5%;
+    margin-left: 10%;
 }
+
 /* acabou mudanças */
 #entrada{
     width: 50vw;

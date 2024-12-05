@@ -18,41 +18,37 @@
                 Filtros
                 <div id="textinho">
                    Limpar Filtros
-                </div>
+                </div> 
                 </div>
                 <div id="dropdown" class="dentrodropdown">
-                    <div class="itemdropdown">Categoria
-                     <div class="subdropdown">
-                        <div class="itemsubdropdown">Papelaria</div>
-                        <div class="itemsubdropdown">Escritório</div>
-                        <div class="itemsubdropdown">Eletrônicos</div>
-                        <div class="itemsubdropdown">Armazenagem</div>
-                     </div>
-                    </div>
+                        <select id="categoria">
+                            <option value="Categoria">Categoria</option>
+                            <option value="papelaria">Papelaria</option>
+                            <option value="escritorio">Escritório</option>
+                            <option value="eletronicos">Eletrônicos</option>
+                            <option value="armazenagem">Armazenagem</option>
+                        </select>
+                        <select id="fornecedor">
+                            <option value="">Fornecedor</option>
+                            <option value="papelDistrib">Papel Distrib.</option>
+                            <option value="lapisCo">Lápis&Co</option>
+                            <option value="bicDistrib">Bic Distrib</option>
+                            <option value="escolarLTDA">Escolar LTDA</option>
+                            <option value="kalunga">Kalunga</option>
+                            <option value="embalagensBrasil">Embalagens Brasil</option>
+                        </select>
+                        <select id="fabricante">
+                            <option value="">Fabricante</option>
+                            <option value="tilibra">Tilibra</option>
+                            <option value="faberCastell">Faber-Castell</option>
+                            <option value="leoLeo">Leo&Leo</option>
+                            <option value="bic">Bic</option>
+                            <option value="sony">Sony</option>
+                            <option value="duracell">Duracell</option>
+                            <option value="hp">HP</option>
+                            <option value="vacuPack">VacuPack</option>
+                        </select>
                     
-                <div class="itemdropdown">Fornecedor
-                    <div class="subdropdown">
-                        <div class="itemsubdropdown">Papel Distrib.</div>
-                        <div class="itemsubdropdown">Lápis&Co</div>
-                        <div class="itemsubdropdown">Bic Distrib</div>
-                        <div class="itemsubdropdown">Escolar LTDA</div>
-                        <div class="itemsubdropdown">Kalunga</div>
-                        <div class="itemsubdropdown">Embalagens Brasil</div>
-                    </div>
-                </div>
-                
-                <div class="itemdropdown">Fabricante
-                    <div class="subdropdown">
-                        <div class="itemsubdropdown">Tilibra</div>
-                        <div class="itemsubdropdown">Faber-Castell</div>
-                        <div class="itemsubdropdown">Leo&Leo</div>
-                        <div class="itemsubdropdown">Bic</div>
-                        <div class="itemsubdropdown">Sony</div>
-                        <div class="itemsubdropdown">Duracell</div>
-                        <div class="itemsubdropdown">HP</div>
-                        <div class="itemsubdropdown">VacuPack</div>
-                        </div>
-                    </div>
                 </div>
                 
                 <div id="inputdata">Data
@@ -63,7 +59,7 @@
                     </div>
                 </div>
                 <div id="ordernaritem">Ordenar Item
-                    <div>
+                    <div id="botoes">
                         <button>A a Z</button>
                         <button>Z a A</button>
                     </div>
