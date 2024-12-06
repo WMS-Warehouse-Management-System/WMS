@@ -1,132 +1,187 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'inter';
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'inter';
 }
 
-body{
-    background-color: #F0F0F0;
-}
-.container-grafico{
-width: 60vw;
-height: 50vh;
-background-color: rgb(255, 255, 255);
-padding-top: 2%;
-margin-left: 20%;
-margin-top: 5%;
+body {
+  background-color: #F0F0F0;
 }
 
-#chart{
-    width: 90%;
-    height: 90%;
-    margin-top: 5%;
-    padding-left: 4%;
+.container-grafico {
+  width: 60vw;
+  height: 50vh;
+  background-color: rgb(255, 255, 255);
+  padding-top: 2%;
+  margin-left: 20%;
+  margin-top: 5%;
 }
-.buttons{
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    margin-left: 5%;
-    margin-top: 7%;
+
+#chart {
+  width: 90%;
+  height: 90%;
+  margin-top: 5%;
+  padding-left: 4%;
 }
-#Financeiro,#Cadastro,#Edicao,#Estoque {
-   text-decoration: none;
-   padding-inline: 6vw;
-   padding-block: 6vh;
-   background-color: beige;
+
+.buttons {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-top: 7%;
 }
+
+#Financeiro,
+#Cadastro,
+#Edicao,
+#Estoque {
+  text-decoration: none;
+  padding-inline: 6vw;
+  padding-block: 6vh;
+  background-color: beige;
+}
+
 .button-container {
-    display: flex;
+  display: flex;
 
-    width: 80%;
-    justify-content: space-between;
-    margin-left: 10%;
-    margin-top: 5%;
-  }
+  width: 80%;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-top: 5%;
+}
 
-  .button {
-    width: 17vw;
-    height: 14vh;
-    color: white;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .button .texto{
- flex-direction: column;
- margin-left: 6%;
-  }
-  .button:hover {
-    transform: scale(1.05);
-  }
+.button {
+  width: 17vw;
+  height: 14vh;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-  .green { 
-    background: linear-gradient(-90deg, rgba(10,124,17,1) 0%, rgba(89,218,97,1) 100%);
-    box-shadow: 2px 2px 5px #0f411b;
+.button .texto {
+  flex-direction: column;
+  margin-left: 6%;
 }
-  .red {
-    background: linear-gradient(-90deg, rgba(71,5,5,1) 0%, rgba(206,10,10,1) 100%);    
-     box-shadow: 2px 2px 5px #4d0b0b;
+
+.button:hover {
+  transform: scale(1.05);
 }
-  .blue { 
-    background: linear-gradient(-90deg, rgba(0,93,150,1) 0%, rgba(91,193,255,1) 100%);  
-      box-shadow: 2px 2px 5px #002246;
+
+.green {
+  background: linear-gradient(-90deg, rgba(10, 124, 17, 1) 0%, rgba(89, 218, 97, 1) 100%);
+  box-shadow: 2px 2px 5px #0f411b;
 }
-  .yellow { background: rgb(134,96,0);
-    background: linear-gradient(-90deg, rgba(210,153,5,1) 0%,  rgba(255,211,51,1) 100%);     
-    box-shadow: 2px 2px 5px #806003;
- }
- #mudar {
-  display: none; /* Esconde o checkbox */
+
+.red {
+  background: linear-gradient(-90deg, rgba(71, 5, 5, 1) 0%, rgba(206, 10, 10, 1) 100%);
+  box-shadow: 2px 2px 5px #4d0b0b;
 }
+
+.blue {
+  background: linear-gradient(-90deg, rgba(0, 93, 150, 1) 0%, rgba(91, 193, 255, 1) 100%);
+  box-shadow: 2px 2px 5px #002246;
+}
+
+.yellow {
+  background: rgb(134, 96, 0);
+  background: linear-gradient(-90deg, rgba(210, 153, 5, 1) 0%, rgba(255, 211, 51, 1) 100%);
+  box-shadow: 2px 2px 5px #806003;
+}
+
+#mudar {
+  display: none;
+  /* Esconde o checkbox */
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+/* Estilos para o dropdown */
+.dropdown-content {
+  display: none; /* Inicialmente oculto */
+  position: absolute;
+  background-color: #ffffff;
+  /* min-width: 160px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; /* Para ficar acima de outros elementos */
+  width: 17vw;
+  height: 14.2vh;
+}
+
+.dropdown-content a {
+  color: #004671;
+  padding: 10px 30px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Adicione esta classe ao botão para estilizar como dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.show { /* Para exibir o dropdown quando clicado */
+  display: block !important;
+}
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* Estilo inicial do label */
 #Alternar {
   position: absolute;
   padding-inline: 1vw;
   padding-block: 1vh;
-  background-color: #006fe7; 
+  background-color: #006fe7;
   border: 1px solid rgb(255, 255, 255);
   color: aliceblue;
   border-radius: 1vh;
-  cursor: pointer; 
-  transition: all 0.3s ease; 
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 /* Quando o checkbox estiver marcado (checked), a label muda de estilo */
-#mudar:checked + label#Alternar {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #006fe7; 
-    color: #006fe7; 
+#mudar:checked+label#Alternar {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #006fe7;
+  color: #006fe7;
 }
 
-.navbar{
+.navbar {
 
-width: 100%;
-height: 10vh;
-background-color: #FDFDFD;
-box-shadow: 1vh 0 3vh #a0a0a0;
+  width: 100%;
+  height: 10vh;
+  background-color: #FDFDFD;
+  box-shadow: 1vh 0 3vh #a0a0a0;
 
 
 }
-section{
+
+section {
   margin-top: -7vh;
 }
-#logo_senai{
-width: 10vw;
-margin-top: 1.2%;
-margin-left: 8vw;
+
+#logo_senai {
+  width: 10vw;
+  margin-top: 1.2%;
+  margin-left: 8vw;
 }
-#logoutButton{
+
+#logoutButton {
   width: 2vw;
   margin-left: 90vw;
-margin-top: -5.5vh;
+  margin-top: -5.5vh;
 }

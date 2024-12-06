@@ -21,35 +21,42 @@
     
 </div>
 <div class="button-container">
-   <div class="button green">
-    <img src="imagens/Vector (1).svg" alt="">
-    <div class="texto">
-      <p>Cadastro</p>
-      <small>Cadastrar Novo Item</small>
-    </div>
+    <div class="button green" id="botaoCadastro" onclick="redirecionarCadastro()">
+        <img src="imagens/Vector (1).svg" alt="">
+        <div class="texto">
+            <p>Cadastro</p>
+            <small>Cadastrar Novo Item</small>
+        </div>
     </div>
     <div class="button red">
         <img src="imagens/Vector.svg" alt="">
         <div class="texto">
-      <p>Edição</p>
-      <small>Editar/Excluir Itens</small>
+            <p>Edição</p>
+            <small>Editar/Excluir Itens</small>
+        </div>
     </div>
-    </div>
-    <div class="button blue" onclick="redirecionarEstoque()">
+
+    <div class="button blue" id="botaoEstoque" onclick="redirecionarEstoque()">
         <img src="imagens/vaadin_storage.svg" alt="">
         <div class="texto">
-      <p>Estoque</p>
-      <small>WMS</small>
+            <p>Estoque</p>
+            <small>WMS</small>
+        </div>
     </div>
+    <div class="dropdown-content" id="estoqueDropdown" style="display: none;">
+        <a href="catalogo.html">• Catálogo</a>
+        <a href="estoque_real.html">• Estoque Real e Inventário</a>
+        <a href="layout_estoque.html">• Layout do Estoque</a>
     </div>
+
     <div class="button yellow" onclick="redirecionarFinanceiro()">
         <img src="imagens/ic_outline-attach-money.svg" alt="">
         <div class="texto">
-      <p>Financeiro</p>
-      <small>Movimentações</small>
+            <p>Financeiro</p>
+            <small>Movimentações</small>
+        </div>
     </div>
-    </div>
-  </div>
+</div>
 </section>
 
 </body>
@@ -112,9 +119,73 @@
     function redirecionarFinanceiro() {
         window.location.href = "financeiro.html"; 
     }
-    function redirecionarEstoque() {
-        window.location.href = "catalogo.html"; 
+    function redirecionarCadastro() {
+        window.location.href = "cadastro1.html";
     }
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // Seleciona o botão e o dropdown
+    const botaoEstoque = document.getElementById("botaoEstoque");
+    const dropdown = document.getElementById("estoqueDropdown");
+
+    // Adiciona um event listener para o clique FORA do dropdown (apenas uma vez)
+    window.addEventListener('click', function (event) {
+        if (!event.target.matches('#botaoEstoque') && dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+            botaoEstoque.querySelector('img').style.display = 'block'; // Restaura o ícone
+            botaoEstoque.querySelector('.texto').style.display = 'block'; // Restaura o texto
+            botaoEstoque.onclick = redirecionarEstoque; // Restaura o clique no botão
+            botaoEstoque.style.display = 'block';
+            botaoEstoque.style.background = "linear-gradient(-90deg, rgba(0, 93, 150, 1) 0%, rgba(91, 193, 255, 1) 100%)";
+            botaoEstoque.style.boxShadow = "2px 2px 5px #002246";
+            botaoEstoque.style.width = "17vw";
+            botaoEstoque.style.height = "14vh";
+            botaoEstoque.style.color = "white";
+            botaoEstoque.style.fontFamily = "Arial, sans-serif";
+            botaoEstoque.style.fontWeight = "bold";
+            botaoEstoque.style.display = "flex";
+            botaoEstoque.style.flexDirection = "row";
+            botaoEstoque.style.justifyContent = "center";
+            botaoEstoque.style.alignItems = "center";
+            botaoEstoque.style.textAlign = "center";
+            botaoEstoque.style.cursor = "pointer";
+        }
+    });
+
+    // Função que controla o dropdown
+    function redirecionarEstoque() {
+        botaoEstoque.querySelector('img').style.display = 'none';
+        botaoEstoque.querySelector('.texto').style.display = 'block'; // Corrigido: exibe o texto "Estoque - WMS"
+        dropdown.style.display = 'block';
+        botaoEstoque.style.display = 'none'; // Esconde o botão original
+
+        // Cria os links do dropdown apenas uma vez
+        if (!dropdown.hasChildNodes()) {
+            const links = [
+                { text: "Catálogo", href: "catalogo.html" },
+                { text: "Estoque Real e Inventário", href: "estoque_real.html" },
+                { text: "Layout do Estoque", href: "layout.html" }
+            ];
+
+            links.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.text;
+                dropdown.appendChild(a);
+            });
+        }
+
+        dropdown.style.position = "static";
+        dropdown.style.minWidth = "inherit";
+
+        botaoEstoque.onclick = null; // Remove o event listener do botão (opcional)
+    }
+
+    // Estilização do botão Estoque
+    estoqueDropdown.style.boxShadow = "5px 5px 2px #156DB4";
+    estoqueDropdown.style.fontFamily = "Inter, serif;";
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         let chart; // Variável global para armazenar o gráfico
         const colors = ['#FF4560', '#008FFB', '#00E396', '#FEB019', '#775DD0', '#546E7A', '#26A69A', '#D10CE8'];
