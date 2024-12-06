@@ -590,13 +590,14 @@ input::placeholder {
 
 
 /* ------------------------Recebimentos------------------- */
-#tabela-recebimentos{
-    width: 81.51vw;
+.tabela-recebimentos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+
 .table-container {
-    width: 100%;
-    max-width: 800px;
     margin-top: auto;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -605,6 +606,14 @@ input::placeholder {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.linhaPrincipal{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.7vh;
+    gap: 2vh;
+}
+/* 
 .row {
     display: flex;
     justify-content: space-between;
@@ -637,15 +646,8 @@ input::placeholder {
     font-weight: bold;
 }
 
-.details-row {
-    display: none;
-    flex-direction: row;
-    padding: 15px 20px;
-    background-color: #fff7e6;
-    border-top: 3px solid #ffcc00;
-}
 
-.details-left {
+.detailsRow {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -654,7 +656,7 @@ input::placeholder {
     padding-right: 20px;
 }
 
-.details-left .image-placeholder {
+.detailsRow .image-placeholder {
     width: 100px;
     height: 100px;
     border: 2px dashed #ffcc00;
@@ -663,12 +665,12 @@ input::placeholder {
     align-items: center;
 }
 
-.details-left .image-placeholder img {
+.detailsRow .image-placeholder img {
     width: 50px;
     height: 50px;
 }
 
-.details-right {
+.detailsRow {
     flex: 2;
     padding-left: 20px;
 }
@@ -685,4 +687,4 @@ input::placeholder {
 
 .detail-item span {
     color: #888;
-}
+} */

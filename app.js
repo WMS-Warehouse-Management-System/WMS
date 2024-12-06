@@ -141,7 +141,10 @@ app.get('/ver-catalogo', async (req, res) => {
       ,IMAGEM
       ,UNIDADE
       ,PRECO_DE_VENDA
-      ,FRAGILIDADE
+      , CASE
+        WHEN FRAGILIDADE = 0 THEN 'NÃO'
+        WHEN FRAGILIDADE = 1 THEN 'SIM'
+        END AS FRAGILIDADE
       ,inserido_por
       ,RUA
       ,COLUNA
