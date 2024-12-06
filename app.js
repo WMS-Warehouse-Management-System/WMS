@@ -163,6 +163,52 @@ app.get('/ver-catalogo', async (req, res) => {
     }
 });
 
+// ----------------------------------FILTRO DE PESQUISA DO INPUT CATALOGO
+
+
+app.get('/input-pesquisa', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+        let pesquisaCatalogo = document.getElementById('pesquisa').value;
+
+        const query = 
+        `
+    
+        SELECT 
+        CODIGO
+      ,NOME_BASICO
+      ,NOME_MODIFICADOR
+      ,DESCRICAO_TECNICA
+      ,FABRICANTE
+      ,OBSERVACOES_ADICIONAL
+      ,IMAGEM
+      ,UNIDADE
+      ,PRECO_DE_VENDA
+      , CASE
+        WHEN FRAGILIDADE = 0 THEN 'NÃO'
+        WHEN FRAGILIDADE = 1 THEN 'SIM'
+        END AS FRAGILIDADE
+      ,inserido_por
+      ,RUA
+      ,COLUNA
+      ,ANDAR
+      ,ALTURA
+      ,LARGURA
+      ,PROFUNDIDADE
+      ,PESO 
+      FROM DimProduto
+	  WHERE CODIGO = '${pesquisaCatalogo}'
+      ORDER BY NOME_BASICO ASC
+        `;
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset); 
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
 
 
 
