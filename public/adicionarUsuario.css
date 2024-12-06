@@ -1,0 +1,230 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to top right, #0E0E0E 25%, #747474);
+    overflow: hidden;
+}
+
+#senai {
+    position: absolute;
+    width: 9.27vw;
+    margin-top: 1.45%;
+    margin-left: 2.5%;
+}
+
+.traco {
+    position: absolute;
+    width: 0.01vw;
+    height: 6.2vh;
+    background-color: white;
+    margin-top: 1.75%;
+    margin-left: 12.25%;
+}
+
+#mor {
+    position: absolute;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 250;
+    font-size: 2.1vh;
+    margin-top: 2.1%;
+    margin-right: 79%;
+    margin-left: 13.2%;
+}
+
+#logo {
+    position: absolute;
+    width: 5.47vw;
+    margin-left: 4.375%;
+    margin-top: 5.3%;
+}
+
+#bolinhacima {
+    position: absolute;
+    width: 5.2vw;
+    margin-left: 47%;
+    margin-top: -5.4%;
+    transform: rotate(-90deg);
+}
+
+#cima {
+    position: absolute;
+    width: 6.71vw;
+    margin-left: 81%;
+    margin-top: 2.3%;
+}
+
+#bolinhadireita {
+    position: absolute;
+    width: 5.2vw;
+    margin-left: 94.8%;
+    margin-top: 18%;
+}
+
+#bolinhaesquerda {
+    position: absolute;
+    width: 5.2vw;
+    margin-top: 14%;
+    transform: rotate(-90deg);
+}
+
+#esquerda {
+    position: absolute;
+    width: 22.8vw;
+    margin-top: 26.35%;
+}
+
+#direita {
+    position: absolute;
+    width: 23vw;
+    margin-top: 33.25%;
+    margin-left: 76.95%;
+}
+
+#grupo {
+    position: absolute;
+    width: 4.4vw;
+    margin-top: 47%;
+    margin-left: 43%;
+}
+
+#nomee {
+    position: absolute;
+    margin-top: 47.7%;
+    margin-left: 48%;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 250;
+    font-size: 1.6vh;
+}
+
+#usuarioForm {
+    position: absolute;
+    width: 30vw;
+    height: 66vh;
+    background: #1c1c1cb0;
+    border-radius: 5%;
+    margin-top: 9.8%;
+    margin-left: 35.7%;
+}
+
+.input-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 10%;
+}
+
+.input-icon {
+    position: absolute;
+    width: 3.5vw;
+    height: 3.5vh;
+    transform: translateY(32%);
+    z-index: 1;
+}
+
+.custom-input {
+    position: absolute;
+    padding-left: 3vw;
+    padding-top: 0.4vh;
+    font-size: 2.5vh;
+    height: 5vh;
+    width: 21.2vw;
+    border-radius: 0.6vh;
+    border: 0;
+}
+
+
+#dataEntrada, #dataNasc {
+    display: none;
+}
+
+h1 {
+    position: absolute;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 4.5vh;
+    margin-left: 16%;
+}
+
+#conjunome {
+    margin-top: 22%;
+}
+
+#conjuemail, #conjusenha, #conjudatanasc {
+    margin-top: 13%;
+}
+
+.custom-text {
+    position: absolute;
+    padding-left: 2.4vw;
+    padding-top: 0.5vh;
+    font-size: 2.1vh;
+    height: 5.2vh;
+    width: 10vw;
+    border-radius: 0.6vh;
+    border: 0;
+}
+
+.custom-text2 {
+    position: absolute;
+    padding-left: 2.4vw;
+    padding-top: 0.5vh;
+    font-size: 2.1vh;
+    height: 5.2vh;
+    width: 8vw;
+    border-radius: 0.6vh;
+    border: 0;
+}
+
+.nascimage, .entraimage {
+    position: absolute;
+    width: 2.8vw;
+    height: 2.8vh;
+    transform: translateY(53%);
+    z-index: 1;
+}
+
+#dataNasc {
+    position: absolute;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    font-size: 2.5vh;
+    height: 5.8vh;
+    width: 9.3vw;
+    border-radius: 0.6vh;
+    border: 0;
+}
+
+#dataEntrada {
+    position: absolute;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    font-size: 2.5vh;
+    height: 5.8vh;
+    width: 9.3vw;
+    border-radius: 0.6vh;
+    border: 0;
+}
+ 
+#conjuentrada {
+    position: absolute;
+    margin-left: 56.5%;
+    margin-top: -3.85%;
+}
+
+#enviar {
+    position: absolute;
+    font-family: "Inter", sans-serif;
+    font-weight: 350;
+    font-size: 3vh;
+    height: 5vh;
+    width: 24.5vw;
+    border-radius: 0.6vh;
+    border: 0;
+    background-color: #D61717;
+    color: white;
+    margin-left: 10%;
+    margin-top: 10%;
+    cursor: pointer;
+}

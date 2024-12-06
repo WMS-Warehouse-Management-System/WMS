@@ -184,4 +184,26 @@ section {
   width: 2vw;
   margin-left: 90vw;
   margin-top: -5.5vh;
+  cursor: pointer;
 }
+#logoutButton:hover {
+transform: scale(1.05);
+  }
+
+#adicionarUsuario{
+    position: absolute;
+    margin-top: 3vh;
+    margin-left: 54.2vw;
+    text-decoration: none;
+    color: white;
+    padding-inline: 0.5vw;
+    padding-block: 1vh;
+    background-color: rgb(73, 73, 73);
+    border-radius: 0.4vw;
+ 
+  }
+  #adicionarUsuario:hover{
+    background-color: black;
+    transform: scale(1.05);
+    transition: all ease 0.4s;
+  }

@@ -184,4 +184,8 @@ section {
   width: 2vw;
   margin-left: 90vw;
   margin-top: -5.5vh;
+  cursor: pointer;
 }
+#logoutButton:hover {
+transform: scale(1.05);
+  }

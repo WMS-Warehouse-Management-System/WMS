@@ -1,32 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="adicionarUsuario.css">
     <title>Adicionar usuario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-    <form id="usuarioForm">
-        <label>email:
-            <input type="text" id="email" required>
-        </label><br><br>
-        <label>Nome:
-            <input type="text" id="nome" required>
-        </label><br><br>
+    <img id="bolinhacima" src="imglogineusuario/bolinhas.svg" alt="">
+    <img id="bolinhadireita" src="imglogineusuario/bolinhas.svg" alt="">
+    <img id="bolinhaesquerda" src="imglogineusuario/bolinhas.svg" alt="">
+    <img id="cima" src="imglogineusuario/caixascima.svg" alt="">
+    <img id="direita" src="imglogineusuario/caixasdireita.svg" alt="">
+    <img id="esquerda" src="imglogineusuario/caixasesquerda.svg" alt="">
+    <img id="logo" src="imglogineusuario/logosga.svg" alt="">
+    <img id="senai" src="imglogineusuario/senaibranco.svg" alt="">
+    <img id="grupo" src="imglogineusuario/logogrupo.svg" alt="">
 
-        <label>senha:
-            <input type="text" id="senha" required>
-        </label><br><br>
-        <label>data Nasc:
-            <input type="date" id="dataNasc" required>
-        </label><br><br>
-        <label>data Entrada:
-            <input type="date" id="dataEntrada" required>
-        </label><br><br>
-        <button type="submit">Enviar</button>
+    <div class="traco"></div>
+    <p id="mor">Morvan Figueiredo</p>
+    <p id="nomee">©DEVS-SENAI-SP - 2024</p>
+
+    <form id="usuarioForm">
+        <h1>Cadastro de Usuários</h1>
+
+        <div class="input-container" id="conjunome">
+            <img src="imglogineusuario/pessoa.svg" alt="Ícone" class="input-icon">
+            <input type="text" id="nome" placeholder="Nome de Usuário" class="custom-input" required>
+        </div>
+        <br><br>
+
+        <div class="input-container" id="conjuemail">
+            <img src="imglogineusuario/email.svg" alt="Ícone" class="input-icon">
+            <input type="text" id="email" placeholder="Email do Usuário" class="custom-input" required>
+        </div>
+        <br><br>
+
+        <div class="input-container" id="conjusenha">
+            <img src="imglogineusuario/senha.svg" alt="Ícone" class="input-icon">
+            <input type="text" id="senha" placeholder="Crie uma Senha" class="custom-input" required>
+        </div>
+        <br><br>
+
+        <div class="input-container" id="conjudatanasc">
+            <img src="imglogineusuario/nascimento.svg" alt="Ícone" class="nascimage">
+            <input type="text" class="custom-text" placeholder="Data de Nascimento" onfocus="toggleDateInput(this)">
+            <input type="date" id="dataNasc" onblur="toggleTextInput(this)" required>
+        </div>
+        <br><br>
+
+        <div class="input-container" id="conjuentrada">
+            <img src="imglogineusuario/entrada.svg" alt="Ícone" class="entraimage">
+            <input type="text" class="custom-text2" placeholder="Data de Entrada" onfocus="toggleDateInput(this)">
+            <input type="date" id="dataEntrada" onblur="toggleTextInput(this)" required>
+        </div>
+        <br><br>
+
+        <button id="enviar" type="submit">Enviar</button>
     </form>
+
+
+    <!-- Script para "esconder" o input data -->
+    <script>
+        function toggleDateInput(textInput) {
+            const dateInput = textInput.nextElementSibling;
+            const image = textInput.previousElementSibling;
+            textInput.style.display = 'none';
+            dateInput.style.display = 'inline-block';
+            image.style.display = 'none'; // Oculta a imagem
+            dateInput.focus();
+        }
+    
+        function toggleTextInput(dateInput) {
+            if (!dateInput.value) {
+                const textInput = dateInput.previousElementSibling;
+                const image = textInput.previousElementSibling;
+                dateInput.style.display = 'none';
+                textInput.style.display = 'inline-block';
+                image.style.display = 'inline-block'; // Exibe a imagem novamente
+            }
+        }
+    </script>
+
+
+
+
     <script>
         document.getElementById('usuarioForm').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -35,7 +101,7 @@
                 email: document.getElementById('email').value,
                 nome: document.getElementById('nome').value,
                 senha: document.getElementById('senha').value,
-                dataNasc:document.getElementById('dataNasc').value,
+                dataNasc: document.getElementById('dataNasc').value,
                 dataEntrada: document.getElementById('dataEntrada').value
             };
 
@@ -53,4 +119,5 @@
         });
     </script>
 </body>
+
 </html>
