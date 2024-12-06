@@ -393,6 +393,34 @@ app.post('/add-product', async (req, res) => {
     }
 });
 // Inicia o servidor na porta definida e exibe uma mensagem no console
+
+// -------------------------------------------grafico
+
+app.get('/telaInicial', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+        const query = `
+            SELECT dp.NOME_BASICO AS Produto, SUM(fr.QUANT) AS Quantidade
+            FROM DimProduto dp
+            JOIN FactRecebimento fr ON dp.CODIGO = fr.CODIGO
+            GROUP BY dp.NOME_BASICO
+            ORDER BY dp.NOME_BASICO;
+        `;
+        const result = await sql.query(query);
+
+        const data = {
+            categories: result.recordset.map(item => item.Produto),
+            values: result.recordset.map(item => item.Quantidade),
+        };
+
+        res.json(data);
+    } catch (err) {
+        res.status(500).send('Erro ao buscar dados: ' + err.message);
+    }
+});
+
+
+
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });

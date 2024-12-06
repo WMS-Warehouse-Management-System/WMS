@@ -116,104 +116,86 @@
         window.location.href = "catalogo.html"; 
     }
 
-    var chart; // Variável para armazenar a instância do gráfico
+        let chart; // Variável global para armazenar o gráfico
+        const colors = ['#FF4560', '#008FFB', '#00E396', '#FEB019', '#775DD0', '#546E7A', '#26A69A', '#D10CE8'];
 
-    // Definir cores para o gráfico de barras
-    var colors = ['#FF4560', '#008FFB', '#00E396', '#FEB019', '#775DD0', '#546E7A', '#26A69A', '#D10CE8'];
-
-    // Opções do gráfico 1
-    var options1 = {
-        series: [{
-            name: 'series1',
-            data: [31, 40, 28, 51, 42, 109, 100]
-        }, {
-            name: 'series2',
-            data: [11, 32, 45, 32, 34, 52, 41]
-        }],
-        chart: {
-            height: 350,
-            type: 'area'
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: {
-            type: 'datetime',
-            categories: [
-                "2018-09-19T00:00:00.000Z",
-                "2018-09-19T01:30:00.000Z",
-                "2018-09-19T02:30:00.000Z",
-                "2018-09-19T03:30:00.000Z",
-                "2018-09-19T04:30:00.000Z",
-                "2018-09-19T05:30:00.000Z",
-                "2018-09-19T06:30:00.000Z"
-            ]
-        },
-        tooltip: {
-            x: {
-                format: 'dd/MM/yy HH:mm'
+        // Função para buscar dados da API
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:3000/telaInicial');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+                return { categories: [], values: [] };
             }
         }
-    };
 
-    // Opções do gráfico 2
-    var options = {
-        series: [{
-            data: [21, 22, 10, 28, 16, 21, 13,38]
-        }],
-        chart: {
-            height: 350,
-            type: 'bar'
-        },
+        // Função para renderizar o gráfico
+        async function renderChart(type) {
+            const data = await fetchData();
+
+            const options = type === 'bar'
+    ? {
+        series: [{ data: data.values }],
+        chart: { height: 350, type: 'bar' },
         colors: colors,
         plotOptions: {
-            bar: {
-                columnWidth: '45%',
-                distributed: true,
-            }
+            bar: { columnWidth: '45%', distributed: true }
         },
-        dataLabels: {
-            enabled: false
-        },
-        legend: {
-            show: false
-        },
+        dataLabels: { enabled: false },
+        legend: { show: false },
         xaxis: {
+            categories: data.categories,
+            labels: {
+                style: { colors: colors, fontSize: '12px' }
+            }
+        }
+    }
+    : {
+        series: [
+            { name: 'Saída', data: [31, 40, 28, 51, 42, 109, 100] },
+            { name: 'Recebimento', data: [11, 32, 45, 32, 34, 52, 41] }
+        ],
+        chart: { height: 350, type: 'area' },
+        stroke: { curve: 'smooth' },
+        xaxis: {
+            type: 'category',
             categories: [
-                ['John', 'Doe'],
-                ['Joe', 'Smith'],
-                ['Jake', 'Williams'],
-                'Amber',
-                ['Peter', 'Brown'],
-                ['Mary', 'Evans'],
-                ['David', 'Wilson'],
-                ['Lily', 'Roberts'], 
+                "2018-09-19",
+                "2018-09-20",
+                "2018-09-21",
+                "2018-09-22",
+                "2018-09-23",
+                "2018-09-24",
+                "2018-09-25"
             ],
             labels: {
+                format: 'dd/MM/yyyy',
                 style: {
                     colors: colors,
                     fontSize: '12px'
                 }
             }
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yyyy'
+            }
         }
     };
-
-    function trocarGrafico() {
-        if (chart) chart.destroy();
-
-        var checkbox = document.getElementById('mudar');
-        if (checkbox.checked) {
+            if (chart) chart.destroy(); // Destroi o gráfico anterior
             chart = new ApexCharts(document.querySelector("#chart"), options);
-        } else {
-            chart = new ApexCharts(document.querySelector("#chart"), options1);
+            chart.render();
         }
-        chart.render(); 
-    }
 
-    trocarGrafico();
+        // Alternar entre os gráficos
+        function trocarGrafico() {
+            const checkbox = document.getElementById('mudar');
+            renderChart(checkbox.checked ? 'line' : 'bar');
+        }
 
-</script>
+        // Renderizar o gráfico inicial (barras)
+        renderChart('bar');
+    </script>
 </html>
