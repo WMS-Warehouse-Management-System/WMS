@@ -376,17 +376,20 @@ app.post('/add-product', async (req, res) => {
     // Criar a consulta SQL para inserir os dados
     await pool.request()
     .input('Nome', sql.NVarChar, Nome)          // Define o parâmetro 'Nome' como NVarchar
-    .input('Preco', sql.Decimal(10, 2), Preco)  // Define o parâmetro 'Preco' como Decimal com precisão
+    .input('Data', sql.Date, Data)  // Define o parâmetro 'Data' como Date com precisão
     .input('Quantidade', sql.Int, Quantidade)   // Define o parâmetro 'Quantidade' como Inteiro
-    .input('Categoria', sql.NVarChar, Categoria) // Define o parâmetro 'Categoria' como NVarchar
-    .query('INSERT INTO Produtos (Nome, Preco, Quantidade, Categoria) VALUES (@Nome, @Preco, @Quantidade, @Categoria)');
+    .input('Codigo', sql.BigInt, Codigo) // Define o parâmetro 'Codigo' como BigInt
+    .input('Validade', sql.Date, Validade)
+    .input('Lote', sql.NVarChar(30), Lote)
+    .input('Fornecedor', sql.VarChar(225), Fornecedor)
+    .query('INSERT INTO dbo.FactRecebimento ( DATA_RECEB, QUANT, CODIGO, VALIDADE, LOTE, FORNECEDOR) VALUES (@receivingDate, @quantityReceived, @productCode, @productValidade, @numbLote, @productFont)');
 
         // Retorna uma resposta de sucesso para o cliente
-        res.status(200).send('Produto adicionado com sucesso!');
+        res.status(200).send('Recebimento adicionado com sucesso!');
     } catch (err) {
         // Em caso de erro, loga o erro e retorna uma resposta de erro
-        console.error('Erro ao adicionar produto:', err);
-        res.status(500).send('Erro ao adicionar produto');
+        console.error('Erro ao adicionar recebimento:', err);
+        res.status(500).send('Erro ao adicionar recebimento');
     }
 });
 // Inicia o servidor na porta definida e exibe uma mensagem no console
