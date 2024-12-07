@@ -378,7 +378,7 @@ app.post('/adicionar-produto', async (req, res) => {
 app.get("/Recebimento", async (req, res) => {
     try {
       // Estabelecendo a conexão com o banco de dados
-      let pool = await sql.connect(config);
+      let pool = await sql.connect(dbConfig);
       
       // Sua query SQL
       const query = `
@@ -408,6 +408,53 @@ app.get("/Recebimento", async (req, res) => {
     }
   });
   
+
+//---------------------------------ADICIONAR PRODUTO FINANACEIRO 
+
+app.post('/adicionar-recebimento', async (req, res) => {
+    const {
+        nomeBasico,
+        fornecedor,
+        codigo,
+        quantidade,
+        numbLote,
+        dataRecebimento,
+        validade,
+        precoAqui
+    } = req.body;
+
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+        INSERT INTO FactRecebimento (
+            DATA_RECEB, QUANT, CODIGO, VALIDADE,
+            PRECO_DE_AQUISICAO, LOTE, FORNECEDOR
+             
+        )
+        VALUES (
+            @data_Receb, @quantidade, @codigo, @validade,  
+            @precoAqui, @numbLote, @fornecedor
+        )
+    `;
+
+        const request = new sql.Request();
+        request.input('nomeBasico', sql.NVarChar, nomeBasico);
+        request.input('fornecedor', sql.NVarChar, fornecedor);
+        request.input('codigo', sql.BigInt, codigo);
+        request.input('quantidade', sql.BigInt, quantidade);
+        request.input('numbLote', sql.BigInt, numbLote);
+        request.input('data_Receb', sql.DateTime, dataRecebimento);
+        request.input('precoAqui', sql.Decimal, precoAqui);
+        request.input('validade', sql.Date, validade);
+        
+        await request.query(query);
+
+        res.send('Produto adicionado com sucesso!');
+    } catch (error) {
+        res.status(500).send('Erro ao adicionar produto: ' + error.message);
+    }
+});
 
 
   //---------------------------------------------------------INserir dados no formulario recebimento

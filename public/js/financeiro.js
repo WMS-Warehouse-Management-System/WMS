@@ -265,3 +265,42 @@ mainRow.addEventListener("click", () => {
     detailsRow.style.display = "flex";
   }
 });
+
+
+// ADICIONAR RECEBIMENTO FORMULARIO
+
+// document.getElementById('registrationForm').addEventListener('submit', async function (event) {
+//   event.preventDefault();
+
+//   const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+
+//   const recebimento = {
+//       nomeBasico: document.getElementById('productName').value,
+//       fornecedor: document.getElementById('fornecedor').value,
+//       codigo: document.getElementById('codigo').value,
+//       quantidade: document.getElementById('quantityReceived').value,
+//       numbLote: document.getElementById('numbLote').value,
+//       dataRecebimento: document.getElementById('dataRecebimento').value,
+//       validade: document.getElementById('validade').value,
+//       inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
+//   };
+
+
+
+//   try {
+//       const response = await fetch('http://localhost:3000/adicionar-recebimento', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify(recebimento),
+//       });
+
+//       if (response.ok) {
+//           alert('recebimento adicionado com sucesso!');
+//       } else {
+//           const errorMessage = await response.text();
+//           alert('Erro: ' + errorMessage);
+//       }
+//   } catch (error) {
+//       alert('Erro ao adicionar recebimento ' + error.message);
+//   }
+// });
