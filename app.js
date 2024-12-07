@@ -513,6 +513,8 @@ app.get('/telaInicial', async (req, res) => {
 });
 
 
+const cadastroRoutes = require('./routes/cadastro');
+app.use('/cadastro', cadastroRoutes);
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
