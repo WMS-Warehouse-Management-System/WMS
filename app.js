@@ -126,88 +126,99 @@ app.get('/listar-usuarios-view', async (req, res) => {
 
 
 // ------------------------------------------------ver produtos
-
 app.get('/ver-catalogo', async (req, res) => {
     try {
         await sql.connect(dbConfig);
 
-        const query = `SELECT 
-        CODIGO
-      ,NOME_BASICO
-      ,NOME_MODIFICADOR
-      ,DESCRICAO_TECNICA
-      ,FABRICANTE
-      ,OBSERVACOES_ADICIONAL
-      ,IMAGEM
-      ,UNIDADE
-      ,PRECO_DE_VENDA
-      , CASE
-        WHEN FRAGILIDADE = 0 THEN 'NÃO'
-        WHEN FRAGILIDADE = 1 THEN 'SIM'
-        END AS FRAGILIDADE
-      ,inserido_por
-      ,RUA
-      ,COLUNA
-      ,ANDAR
-      ,ALTURA
-      ,LARGURA
-      ,PROFUNDIDADE
-      ,PESO 
-      FROM DimProduto
-      ORDER BY NOME_BASICO ASC`;
+        const query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
+        `;
+        
         const result = await new sql.Request().query(query);
 
-        res.json(result.recordset); 
+        res.json(result.recordset);  // Retorna todos os produtos
     } catch (error) {
         res.status(500).send('Erro ao obter os produtos: ' + error.message);
     }
 });
+
 
 // ----------------------------------FILTRO DE PESQUISA DO INPUT CATALOGO
 
+app.post('/ver-catalogo', async (req, res) => {
+    const { codigo } = req.body;  // Obtendo o código enviado pelo frontend
 
-app.get('/input-pesquisa', async (req, res) => {
     try {
         await sql.connect(dbConfig);
-        let pesquisaCatalogo = document.getElementById('pesquisa').value;
-
-        const query = 
-        `
-    
-        SELECT 
-        CODIGO
-      ,NOME_BASICO
-      ,NOME_MODIFICADOR
-      ,DESCRICAO_TECNICA
-      ,FABRICANTE
-      ,OBSERVACOES_ADICIONAL
-      ,IMAGEM
-      ,UNIDADE
-      ,PRECO_DE_VENDA
-      , CASE
-        WHEN FRAGILIDADE = 0 THEN 'NÃO'
-        WHEN FRAGILIDADE = 1 THEN 'SIM'
-        END AS FRAGILIDADE
-      ,inserido_por
-      ,RUA
-      ,COLUNA
-      ,ANDAR
-      ,ALTURA
-      ,LARGURA
-      ,PROFUNDIDADE
-      ,PESO 
-      FROM DimProduto
-	  WHERE CODIGO = '${pesquisaCatalogo}'
-      ORDER BY NOME_BASICO ASC
+        let query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
         `;
-        const result = await new sql.Request().query(query);
 
-        res.json(result.recordset); 
+        if (codigo) {
+            query += ' WHERE a.CODIGO = @codigo';
+        }
+
+        const request = new sql.Request();
+        if (codigo) {
+            request.input('codigo', sql.BigInt, codigo);
+        }
+
+        const result = await request.query(query);
+        res.json(result.recordset);  // Retorna os produtos filtrados
     } catch (error) {
-        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+        res.status(500).send('Erro ao obter os produtos filtrados: ' + error.message);
     }
 });
-
 
 
 
@@ -513,8 +524,8 @@ app.get('/telaInicial', async (req, res) => {
 });
 
 
-const cadastroRoutes = require('./routes/cadastro');
-app.use('/cadastro', cadastroRoutes);
+// const cadastroRoutes = require('./routes/cadastro');
+// app.use('/cadastro', cadastroRoutes);
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

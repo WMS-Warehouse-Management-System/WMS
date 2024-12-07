@@ -68,8 +68,10 @@
         </div>
     </div>
     <!-- acabou as mudanças -->
-    <div id="area"><input type="text" id="entrada"></div>
-    <div><button id="pesquisar" onclick="pesquisarProduto()">Pesquisar</button></div>
+    <form id="formPesquisa">
+        <div id="area"><input type="text" id="codigo"></div>
+        <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+    </form>
 </div>
 
 <div class="container">
@@ -96,131 +98,139 @@
 </div>
 
 <script>
-    async function fetchProdutosCatalogo() {
-        try {
-            const response = await fetch('/ver-catalogo');
-            
-            if (!response.ok) {
-                throw new Error('Erro ao buscar produtos: ' + response.statusText);
-            }
+//SCRIPT QUE LIGA OS INPUT AO BACK-END  
+document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Evita o comportamento padrão do formulário
 
-            const produtos = await response.json();
+    // Certifique-se de que 'pesquisa' seja declarada antes de ser usada
+    const pesquisa = {
+        codigo: document.getElementById('codigo').value, // Captura o valor do campo 'codigo'
+    };
 
-            const tbody = document.querySelector('#tabela-estoque tbody');
-            tbody.innerHTML = '';
+    try {
+        const response = await fetch('http://localhost:3000/ver-catalogo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pesquisa), // Passa 'pesquisa' no body
+        });
 
-            if (produtos.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6">Nenhum produtos encontrado</td></tr>';
+        if (response.ok) {
+            const pesquisa = await response.json(); // Obtém os produtos do servidor
+
+            if (pesquisa.length === 0) {
+                alert('Nenhum produto encontrado!');
                 return;
             }
 
-            produtos.forEach(produtos => {
+            const tbody = document.querySelector('#tabela-estoque tbody');
+            tbody.innerHTML = '';  // Limpa a tabela antes de adicionar novas linhas
 
-const row = `
-<tr>
-    <td>${produtos.CODIGO}</td>
-    <td>${produtos.NOME_BASICO}</td>
-    <td>${produtos.DESCRICAO_TECNICA}</td>
-    <td>${produtos.QUANTIDADE}</td>
-    <td>${produtos.CATEGORIA}</td>
-    <td>${produtos.FABRICANTE}</td>
-    <td class="colunaAbrirDetalhes" id="${produtos.CODIGO}"><button onclick=abrirLinha() class="btnAbrirLinha" id="${produtos.CODIGO}">+</button></td>
-</tr>
-<tr id="linhaDetalhe" style="display: none;">
-    <td colspan="6">
-        <div class="containerLinhaOculta">
-        <div class="containerLinhaDetalhes">
-            <div class="imagemProduto">
-                <img src="https://img.kalunga.com.br/fotosdeprodutos/124209d.jpg" alt="" id="imagemLinhaDetalhe">
-            </div>
-            <div class="endereco-obs">
-                <table>
-                    <thead>
-                        <th colspan="2">Endereçamento</th>
-                    </thead>
-                    <tbody id="tableEnderecamento">
-                        <tr>
-                            <td id="colunaTopico" class="celulaDetalhe">Rua</td>
-                            <td class="celulaDetalhe">${produtos.RUA}</td>
-                        </tr>
-                        <tr>
-                            <td id="colunaTopico" class="celulaDetalhe">Coluna</td>
-                            <td class="celulaDetalhe">${produtos.COLUNA}</td>
-                        </tr>
-                        <tr>
-                            <td id="colunaTopico" class="celulaDetalhe">Andar</td>
-                            <td class="celulaDetalhe">${produtos.ANDAR}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                     <thead>
-                        <th  id="tableObservacoes">Observações</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="celulaObservacoes">${produtos.OBSERVACOES_ADICIONAL}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="caractProd">
+          pesquisa.forEach((pesquisa) => {
+              const row = `
+              <tr>
+                  <td>${pesquisa.CODIGO}</td>
+                  <td>${pesquisa.NOME_BASICO}</td>
+                  <td>${pesquisa.DESCRICAO_TECNICA}</td>
+                  <td>${pesquisa.QUANT}</td>
+                  <td>${pesquisa.CATEGORIA}</td>
+                  <td>${pesquisa.FABRICANTE}</td>
+                  <td class="colunaAbrirDetalhes" id="${pesquisa.CODIGO}">
+                      <button onclick="abrirLinha()" class="btnAbrirLinha" id="${pesquisa.CODIGO}">+</button>
+                  </td>
+              </tr>
+              <tr id="linhaDetalhe" style="display: none;">
+                  <td colspan="6">
+                      <div class="containerLinhaOculta">
+                          <div class="containerLinhaDetalhes">
+                              <div class="imagemProduto">
+                                  <img src="https://img.kalunga.com.br/fotosdeprodutos/124209d.jpg" alt="" id="imagemLinhaDetalhe">
+                              </div>
+                              <div class="endereco-obs">
+                                  <table>
+                                      <thead>
+                                          <th colspan="2">Endereçamento</th>
+                                      </thead>
+                                      <tbody id="tableEnderecamento">
+                                          <tr>
+                                              <td id="colunaTopico" class="celulaDetalhe">Rua</td>
+                                              <td class="celulaDetalhe">${pesquisa.RUA}</td>
+                                          </tr>
+                                          <tr>
+                                              <td id="colunaTopico" class="celulaDetalhe">Coluna</td>
+                                              <td class="celulaDetalhe">${pesquisa.COLUNA}</td>
+                                          </tr>
+                                          <tr>
+                                              <td id="colunaTopico" class="celulaDetalhe">Andar</td>
+                                              <td class="celulaDetalhe">${pesquisa.ANDAR}</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                                  <table>
+                                       <thead>
+                                          <th id="tableObservacoes">Observações</th>
+                                      </thead>
+                                      <tbody>
+                                          <tr>
+                                              <td id="celulaObservacoes">${pesquisa.OBSERVACOES_ADICIONAL}</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                              <div class="caractProd">
+                                  <table>
+                                  <thead>
+                                      <th colspan="2">Características</th>
+                                  </thead>
+                                  <tbody id="tableCaracter">
+                                      <tr>
+                                          <td id="colunaTopico">Largura</td>
+                                          <td class="celulaDetalhe">${pesquisa.LARGURA} cm</td>
+                                      </tr>
+                                      <tr>
+                                          <td id="colunaTopico">Altura</td>
+                                          <td class="celulaDetalhe">${pesquisa.ALTURA} cm</td>
+                                      </tr>
+                                      <tr>
+                                          <td id="colunaTopico">Profundidade</td>
+                                          <td class="celulaDetalhe">${pesquisa.PROFUNDIDADE} cm</td>
+                                      </tr>
+                                      <tr>
+                                          <td id="colunaTopico">Peso</td>
+                                          <td class="celulaDetalhe">${pesquisa.PESO} Kg</td>
+                                      </tr>
+                                      <tr>
+                                          <td id="colunaTopico">Frágil</td>
+                                          <td class="celulaDetalhe">${pesquisa.FRAGILIDADE}</td>
+                                      </tr>
+                                  </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </td>
+              </tr>
+              `;
+              tbody.innerHTML += row;  // Adiciona a linha gerada na tabela
+          });
+          
 
-                <table>
-                <thead>
-                    <th  colspan="2">Características</th>
-                </thead>
-                <tbody id="tableCaracter">
-                    <tr>
-                        <td id="colunaTopico">Largura</td>
-                        <td class="celulaDetalhe">${produtos.LARGURA} cm</td>
-                    </tr>
-                    <tr>
-                        <td id="colunaTopico">Altura</td>
-                        <td class="celulaDetalhe">${produtos.ALTURA} cm</td>
-                    </tr>
-                    <tr>
-                        <td id="colunaTopico">Profundidade</td>
-                        <td class="celulaDetalhe">${produtos.PROFUNDIDADE} cm</td>
-                    <tr>
-                        <td id="colunaTopico">Peso</td>
-                        <td class="celulaDetalhe">${produtos.PESO} Kg</td>
-                    </tr>
-                    <tr>
-                        <td id="colunaTopico">Frágil</td>
-                        <td class="celulaDetalhe">${produtos.FRAGIL}</td>
-                    </tr>
-                    
-                </tbody>
-                </table>
-            </div>
-        </div>
-        </div>
-    </td>
-</tr>
-    `;
-tbody.innerHTML += row;
-});
-            } catch (error) {
-                alert('Erro ao buscar usuários: ' + error.message);
-            }
+        } else {
+            const errorMessage = await response.text();
+            alert('Erro: ' + errorMessage);
+        }
+    } catch (error) {
+        alert('Erro ao buscar produtos: ' + error.message);
     }
+});
 
-    window.onload = fetchProdutosCatalogo;
+
+
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        document.addEventListener('click', (event) => {
-            if (event.target && event.target.classList.contains('btnAbrirLinha')) {
-                const linhaDetalhe = event.target.closest('tr').nextElementSibling;
-                if (linhaDetalhe) {
-                    linhaDetalhe.style.display = linhaDetalhe.style.display === 'none' ? 'table-row' : 'none';
-                }
-            }
-        });
-    });
-</script>
+
+
+
+
 
 <script src="../app.js"></script>
 <script src="js/catalogo.js"></script>
