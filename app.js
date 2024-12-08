@@ -155,7 +155,7 @@ app.get('/ver-catalogo', async (req, res) => {
                 a.PESO,
                 SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
             FROM DimProduto AS a
-            JOIN FactRecebimento AS b
+            FULL JOIN FactRecebimento AS b
                 ON a.CODIGO = b.CODIGO
         `;
         
@@ -200,7 +200,7 @@ app.post('/ver-catalogo', async (req, res) => {
                 a.PESO,
                 SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
             FROM DimProduto AS a
-            JOIN FactRecebimento AS b
+            FULL JOIN FactRecebimento AS b
                 ON a.CODIGO = b.CODIGO
         `;
 
@@ -394,7 +394,7 @@ app.get("/Recebimento", async (req, res) => {
       // Sua query SQL
       const query = `
         SELECT 
-          FactRecebimento.DATA_RECEB,
+          FORMAT(FactRecebimento.DATA_RECEB, 'dd/MM/yyyy') AS DATA_RECEB,
           DimProduto.CODIGO,
           DimProduto.NOME_BASICO,
           DimProduto.FABRICANTE,
@@ -402,6 +402,7 @@ app.get("/Recebimento", async (req, res) => {
           FactRecebimento.PRECO_DE_AQUISICAO,
           DimProduto.IMAGEM,
           FactRecebimento.QUANT,
+          FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
           DimProduto.PRECO_DE_VENDA,
           DimProduto.FRAGILIDADE
         FROM FactRecebimento 

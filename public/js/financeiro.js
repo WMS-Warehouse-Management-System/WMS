@@ -152,60 +152,93 @@ document
 
 
 //--------------------------------------------------------------Aparecer os recebimentos na tela
-
 async function fetchVerRecebimentos() {
-    try {
-        const response = await fetch('/Recebimento');
-        
-        if (!response.ok) {
-            throw new Error('Erro ao buscar produtos: ' + response.statusText);
-        }
+  try {
+      const response = await fetch('/Recebimento');
+      
+      if (!response.ok) {
+          throw new Error('Erro ao buscar produtos: ' + response.statusText);
+      }
 
-        const recebimentos = await response.json();
+      const recebimentos = await response.json();
 
-        const tabelaRecebimentos = document.querySelector('.table-container');
-        if (!tabelaRecebimentos) {
-            throw new Error('Elemento com id "table-container" não encontrado no DOM.');
-        }
+      const tabelaRecebimentos = document.querySelector('.table-container');
+      if (!tabelaRecebimentos) {
+          throw new Error('Elemento com id "table-container" não encontrado no DOM.');
+      }
 
-        tabelaRecebimentos.innerHTML = ''; // Limpa o conteúdo anterior
+      tabelaRecebimentos.innerHTML = ''; // Limpa o conteúdo anterior
 
-        if (recebimentos.length === 0) {
-            tabelaRecebimentos.innerHTML = '<div class="nenhum-recebimento">Nenhum recebimento encontrado</div>';
-            return;
-        }
+      if (recebimentos.length === 0) {
+          tabelaRecebimentos.innerHTML = '<div class="nenhum-recebimento">Nenhum recebimento encontrado</div>';
+          return;
+      }
 
-        recebimentos.forEach(recebimento => {
+      recebimentos.forEach(recebimento => {
 
-            const row = `
-                <div class="tabela-recebimentos">
-                    <div class="table-container" id="table-container">
-                    <div class="linhaPrincipal">
-                        <div class="cell">Data<br><span>${recebimento.DATA_RECEB}</span></div>
-                        <div class="cell">Código<br><span>${recebimento.CODIGO}</span></div>
-                        <div class="cell">Item<br><span>${recebimento.NOME_BASICO}</span></div>
-                        <div class="cell">Fornecedor<br><span>${recebimento.Fornecedor}</span></div>
-                        <div class="cell">Preço Aquisição<br><span>${recebimento.PRECO_DE_AQUISICAO}</span></div>
-                        <div class="cell">Quantidade<br><span>${recebimento.QUANT}</span></div>  
-                    </div>
-                    <div class="detailsRow">
-                            <img src="${recebimento.IMAGEM}" alt="Imagem do Produto" />
-                            <div class="detail-item"><strong>Fabricante</strong> <span>${recebimento.FABRICANTE}</span></div>
-                            <div class="detail-item"><strong>Preço de Venda</strong> <span>${recebimento.PRECO_DE_VENDA}</span></div>
-                            <div class="detail-item"><strong>Fragilidade</strong> <span>${recebimento.FRAGILIDADE}</span></div>
-                    </div>
-                </div>   
+          const row = `
+              <div class="tabela-recebimentos">
+                  <div class="table-container" id="table-container">
+                  <div class="produtos">
+                  <div class="row main-row">
+                      <div class="cell">Data<br><span>${recebimento.DATA_RECEB}</span></div>
+                      <div class="cell">Código<br><span>${recebimento.CODIGO}</span></div>
+                      <div class="cell">Item<br><span>${recebimento.NOME_BASICO}</span></div>
+                      <div class="cell">Fornecedor<br><span>${recebimento.FORNECEDOR}</span></div>
+                      <div class="cell">Preço Aquisição<br><span>${recebimento.PRECO_DE_AQUISICAO}</span></div>
+                      <div class="cell">Quantidade<br><span>${recebimento.QUANT}</span></div>  
+                  </div>
+                  <div class="row details-row">
+            <div class="details-left">
+                <div class="image-placeholder">
+                    <img src="${recebimento.IMAGEM}" alt="Ícone de imagem">
                 </div>
-            `;
+            </div>
+            <div class="details-right">
+                <div class="detail-item"><strong>Fragilidade:</strong><span>${recebimento.FRAGILIDADE}</span></div>
+                <div class="detail-item"><strong>Fabricante:</strong><span>${recebimento.FABRICANTE}</span></div>
+                <div class="detail-item"><strong>Lote:</strong><span>${recebimento.LOTE}</span></div>
+                <div class="detail-item"><strong>Validade:</strong><span>${recebimento.VALIDADE}</span></div>
+                <div class="detail-item"><strong>Categoria:</strong><span>Eletrônico</span></div>
+                <div class="detail-item"><strong>Preço Venda:</strong><span>${recebimento.PRECO_DE_VENDA}</span></div>
+            </div>
+        </div>
+              </div>  
+              </div>   
+              </div>
+          `;
 
-            tabelaRecebimentos.innerHTML += row;
-        });
-    } catch (error) {
-        alert('Erro ao buscar recebimentos: ' + error.message);
-    }
+          tabelaRecebimentos.innerHTML += row;
+      });
+  } catch (error) {
+      alert('Erro ao buscar recebimentos: ' + error.message);
+  }
 }
 
 window.onload = fetchVerRecebimentos;
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const mainRows = document.querySelectorAll(".main-row"); // Seleciona todas as linhas principais
+
+  mainRows.forEach((row) => {
+      row.addEventListener("click", () => {
+          const detailsRow = row.nextElementSibling; // Seleciona a linha de detalhes imediatamente após a linha clicada
+          if (detailsRow && detailsRow.classList.contains("details-row")) {
+              // Alterna visibilidade
+              if (detailsRow.style.display === "flex") {
+                  detailsRow.style.display = "none"; // Esconder detalhes
+              } else {
+                  detailsRow.style.display = "flex"; // Mostrar detalhes
+              }
+          }
+      });
+  });
+});
 
 
 // document.addEventListener("DOMContentLoaded", () => {
@@ -258,14 +291,6 @@ window.onload = fetchVerRecebimentos;
 // });
 
 // Adicionar funcionalidade de clique
-mainRow.addEventListener("click", () => {
-  if (detailsRow.style.display === "flex") {
-    detailsRow.style.display = "none";
-  } else {
-    detailsRow.style.display = "flex";
-  }
-});
-
 
 // ADICIONAR RECEBIMENTO FORMULARIO
 
