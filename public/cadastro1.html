@@ -168,6 +168,13 @@
             const estoqueLink = document.getElementById('esto');
             const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
 
+            const submenuLinks = estoqueSubMenu.querySelectorAll('a');
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
+
             estoqueItem.addEventListener('click', function (event) {
                 event.preventDefault();
 
@@ -196,7 +203,7 @@
                 }
             });
 
-            
+
         });
 
 
