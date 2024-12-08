@@ -29,6 +29,10 @@ body {
     }
 }
 
+.cadastrar{
+    background-color: #000;
+}
+
 /* CADASTRO */
 section.cadastro {
     padding: 0vh 4%;

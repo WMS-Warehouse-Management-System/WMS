@@ -145,12 +145,12 @@
     font-family: "Inter", serif;
 }
 
-.container-logos #logo-gato{
+.container-logos #logo-gato {
     align-items: center;
     width: 40%;
 }
 
-.container-logos #logo-cubo{
+.container-logos #logo-cubo {
     width: 32%;
 }
 
@@ -266,6 +266,27 @@
         padding: 8px 10px;
         font-size: 18px;
     }
+}
+
+/* Estilos do item Estoque */
+.submenu li{
+    background-color: #000;
+}
+
+.submenu li:hover a{
+    color: #319DF6;
+}
+
+.estoque-item {
+    position: relative; 
+}
+
+.submenu {
+    position: absolute; 
+    left: 0;           
+    top: 100%;       
+    width: 100%;
+    display: none;  
 }
 
 /* DESKTOP MENOR  */
