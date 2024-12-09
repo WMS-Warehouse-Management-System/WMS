@@ -222,6 +222,67 @@ app.post('/ver-catalogo', async (req, res) => {
 
 
 
+// ----------------------------------------------------ESTOQUE REAL
+
+app.get('/estoque-real', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+	        SELECT 
+                CODIGO,
+                NOME_BASICO,
+                QUANTIDADE,
+                QUANT_RECENTE
+            FROM vw_EstoqueReal
+            ORDER BY CODIGO ASC;
+        `;
+        
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset);  // Retorna todos os produtos
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+
+// ----------------------------------------------------ESTOQUE REAL COM BARRA DE PESQUISA
+app.post('/estoque-real', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const { codigo } = req.body;  
+
+        let query = `
+	        SELECT 
+                CODIGO,
+                NOME_BASICO,
+                QUANTIDADE,
+                QUANT_RECENTE
+            FROM vw_EstoqueReal
+        `;
+        
+        if (codigo) {
+            query += ' WHERE CODIGO = @codigo ORDER BY CODIGO ASC';
+        }
+
+        const request = new sql.Request();
+
+        if (codigo) {
+            request.input('codigo', sql.BigInt, codigo);
+        }
+
+        const result = await request.query(query);
+
+        res.json(result.recordset);  
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
 
 // -----------------------------------------------------adicionar-usuario
 app.post('/adicionar-usuario', async (req, res) => {
