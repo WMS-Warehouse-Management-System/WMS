@@ -20,73 +20,72 @@
 
 <body>
   <!-- CABEÇALHO -->
-    <!---------------NAVBAR-------------------------------------------------->
-    <div class="navbar-caixa">
-      <div class="conteudo-nav">
-          <div class="texto-nav">Movimentação</div>
+  <!---------------NAVBAR-------------------------------------------------->
+  <div class="navbar-caixa">
+    <div class="conteudo-nav">
+      <div class="texto-nav">Movimentação</div>
 
-          <button id="menu-btn" class="menu-btn">&#9776;</button>
-      </div>
+      <button id="menu-btn" class="menu-btn">&#9776;</button>
+    </div>
 
-      <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
-      <div id="sidebar" class="sidebar">
-          <button id="close-btn" class="close-btn">&times;</button>
-          <img src="imglogineusuario/senaibranco.svg" alt="" />
-          <h3>Menu</h3>
-          <ul>
-
-
-              <li class="home">
-                  <a href="telaInicial.html" id="home">
-                      <div class="home"></div>
-                      <span>Home</span>
-                  </a>
-              </li>
+    <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
+    <div id="sidebar" class="sidebar">
+      <button id="close-btn" class="close-btn">&times;</button>
+      <img src="imglogineusuario/senaibranco.svg" alt="" />
+      <h3>Menu</h3>
+      <ul>
 
 
-              <li class="cadastrar">
-                  <a href="cadastro1.html" id="cadas">
-                      <div class="box-of-good-good"></div>
-                      <span>Cadastrar</span>
-                  </a>
-              </li>
+        <li class="home">
+          <a href="telaInicial.html" id="home">
+            <div class="home"></div>
+            <span>Home</span>
+          </a>
+        </li>
 
 
-              <li class="edicao">
-                  <a href="#" id="edicao">
-                      <div class="pencil"></div>
-                      <span>Edição</span>
-                  </a>
-              </li>
+        <li class="cadastrar">
+          <a href="cadastro1.html" id="cadas">
+            <div class="box-of-good-good"></div>
+            <span>Cadastrar</span>
+          </a>
+        </li>
 
 
-              <li class="estoque-item">
-                  <a href="#" id="esto" class="estoque-link">
-                      <div class="boxes-of-good-good"></div>
-                      <span>Estoque</span>
-                  </a>
-                  <ul id="estoque-submenu" class="submenu">
-                      <li><a href="catalogo.html">Catálogo</a></li>
-                      <li><a href="estoque_real.html">Estoque Real e Inventário</a></li>
-                      <li><a href="layout.html">Layout do Estoque</a></li>
-                  </ul>
-              </li>
+        <li class="edicao">
+          <a href="#" id="edicao">
+            <div class="pencil"></div>
+            <span>Edição</span>
+          </a>
+        </li>
 
 
-              <li class="financeiro">
-                  <a href="financeiro.html" id="finan">
-                      <div class="financial"></div>
-                      <span>Financeiro</span>
-                  </a>
-              </li>
+        <li class="estoque-item">
+          <a href="#" id="esto" class="estoque-link">
+            <div class="boxes-of-good-good"></div>
+            <span>Estoque</span>
+          </a>
+          <ul id="estoque-submenu" class="submenu">
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="estoque_real.html">Estoque Real e Inventário</a></li>
+            <li><a href="layout.html">Layout do Estoque</a></li>
           </ul>
+        </li>
 
-          <div class="container-logos">
-              <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
-              <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img src="imagens/logo-soft.svg"
-                  id="logo-cubo" />
-          </div>
+
+        <li class="financeiro">
+          <a href="financeiro.html" id="finan">
+            <div class="financial"></div>
+            <span>Financeiro</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="container-logos">
+        <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+        <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img src="imagens/logo-soft.svg" id="logo-cubo" />
       </div>
+    </div>
   </div>
   <!-------------------------------------------------------------------------------------------------------------------------------->
 
@@ -151,6 +150,87 @@
         </button>
       </form>
     </div>
+  </div>
+
+
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+  <div id="toggle-filter">
+    <div id="filtrarcontainer">
+      <!-- mudanças filtro -->
+      <div id="filtrarcontainer">
+        <div id="filtrar"><i class="fa fa-filter"></i>Filtrar</div>
+        <div id="caixote">
+          <div id="ajeitar">
+            <div id="subajeitada">
+              Filtros
+              <div id="textinho">
+                Limpar Filtros
+              </div>
+            </div>
+            <div id="dropdown" class="dentrodropdown">
+              <select id="categoria">
+                <option value="Categoria">Categoria</option>
+                <option value="papelaria">Papelaria</option>
+                <option value="escritorio">Escritório</option>
+                <option value="eletronicos">Eletrônicos</option>
+                <option value="armazenagem">Armazenagem</option>
+              </select>
+              <select id="fornecedor">
+                <option value="">Fornecedor</option>
+                <option value="papelDistrib">Papel Distrib.</option>
+                <option value="lapisCo">Lápis&Co</option>
+                <option value="bicDistrib">Bic Distrib</option>
+                <option value="escolarLTDA">Escolar LTDA</option>
+                <option value="kalunga">Kalunga</option>
+                <option value="embalagensBrasil">Embalagens Brasil</option>
+              </select>
+              <select id="fabricante">
+                <option value="">Fabricante</option>
+                <option value="tilibra">Tilibra</option>
+                <option value="faberCastell">Faber-Castell</option>
+                <option value="leoLeo">Leo&Leo</option>
+                <option value="bic">Bic</option>
+                <option value="sony">Sony</option>
+                <option value="duracell">Duracell</option>
+                <option value="hp">HP</option>
+                <option value="vacuPack">VacuPack</option>
+              </select>
+
+            </div>
+
+            <div id="inputdata">Data
+              <div id="ajeitardata">
+                <input type="date" id="dedata" class="datasize"></input>
+                à
+                <input type="date" id="atedata" class="datasize"></input>
+              </div>
+            </div>
+            <div id="ordernaritem">Ordenar Item
+              <div id="botoes">
+                <button>A a Z</button>
+                <button>Z a A</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- acabou as mudanças -->
+
+        <input type="text" id="entrada" placeholder="Digite o código do produto...">
+        <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+
+      </div>
+    </div>
+  </div>
+  <div class="header">
+    <span class="title">Itens recebidos</span>
+    <div class="divider"></div>
+  </div>
+
+  <div class="tabela-recebimentos">
+    <div class="table-container" id="table-container"></div>
   </div>
 
   <!--  SCRIPT QUE LIGA OS INPUT AO BACK-END  -->
@@ -242,91 +322,6 @@
 
   </script>
 
-
-
-
-
-
-
-  <!----------------------------------------------------------------------------------------------------------------------------------------->
-
-
-  <div id="toggle-filter">
-    <div id="filtrarcontainer">
-      <!-- mudanças filtro -->
-      <div id="filtrarcontainer">
-        <div id="filtrar"><i class="fa fa-filter"></i>Filtrar</div>
-        <div id="caixote">
-          <div id="ajeitar">
-            <div id="subajeitada">
-              Filtros
-              <div id="textinho">
-                Limpar Filtros
-              </div>
-            </div>
-            <div id="dropdown" class="dentrodropdown">
-              <select id="categoria">
-                <option value="Categoria">Categoria</option>
-                <option value="papelaria">Papelaria</option>
-                <option value="escritorio">Escritório</option>
-                <option value="eletronicos">Eletrônicos</option>
-                <option value="armazenagem">Armazenagem</option>
-              </select>
-              <select id="fornecedor">
-                <option value="">Fornecedor</option>
-                <option value="papelDistrib">Papel Distrib.</option>
-                <option value="lapisCo">Lápis&Co</option>
-                <option value="bicDistrib">Bic Distrib</option>
-                <option value="escolarLTDA">Escolar LTDA</option>
-                <option value="kalunga">Kalunga</option>
-                <option value="embalagensBrasil">Embalagens Brasil</option>
-              </select>
-              <select id="fabricante">
-                <option value="">Fabricante</option>
-                <option value="tilibra">Tilibra</option>
-                <option value="faberCastell">Faber-Castell</option>
-                <option value="leoLeo">Leo&Leo</option>
-                <option value="bic">Bic</option>
-                <option value="sony">Sony</option>
-                <option value="duracell">Duracell</option>
-                <option value="hp">HP</option>
-                <option value="vacuPack">VacuPack</option>
-              </select>
-
-            </div>
-
-            <div id="inputdata">Data
-              <div id="ajeitardata">
-                <input type="date" id="dedata" class="datasize"></input>
-                à
-                <input type="date" id="atedata" class="datasize"></input>
-              </div>
-            </div>
-            <div id="ordernaritem">Ordenar Item
-              <div id="botoes">
-                <button>A a Z</button>
-                <button>Z a A</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- acabou as mudanças -->
-
-        <input type="text" id="entrada" placeholder="Digite o código do produto...">
-        <div><button type="submit" id="pesquisar">Pesquisar</button></div>
-
-      </div>
-    </div>
-  </div>
-  <div class="header">
-    <span class="title">Itens recebidos</span>
-    <div class="divider"></div>
-  </div>
-
-  <div class="tabela-recebimentos">
-    <div class="table-container" id="table-container"></div>
-  </div>
 
   <script src="js/financeiro.js"></script>
   <script src="js/navbar.js"></script>
