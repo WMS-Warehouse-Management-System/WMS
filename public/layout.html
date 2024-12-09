@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!-- CABEÇALHO -->
     <!---------------NAVBAR-------------------------------------------------->
     <div class="navbar-caixa">
         <div class="conteudo-nav">
@@ -33,7 +34,7 @@
 
 
                 <li class="home">
-                    <a href="#" id="home">
+                    <a href="telaInicial.html" id="home">
                         <div class="home"></div>
                         <span>Home</span>
                     </a>
@@ -41,7 +42,7 @@
 
 
                 <li class="cadastrar">
-                    <a href="#" id="cadas">
+                    <a href="cadastro1.html" id="cadas">
                         <div class="box-of-good-good"></div>
                         <span>Cadastrar</span>
                     </a>
@@ -49,23 +50,28 @@
 
 
                 <li class="edicao">
-                    <a href="#" id="edicao">
+                    <a href="edicao.html" id="edicao">
                         <div class="pencil"></div>
                         <span>Edição</span>
                     </a>
                 </li>
 
 
-                <li class="estoque">
-                    <a href="#" id="esto">
+                <li class="estoque-item">
+                    <a href="#" id="esto" class="estoque-link">
                         <div class="boxes-of-good-good"></div>
                         <span>Estoque</span>
                     </a>
+                    <ul id="estoque-submenu" class="submenu">
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="estoque_real.html">Estoque Real e Inventário</a></li>
+                        <li><a href="layout.html">Layout do Estoque</a></li>
+                    </ul>
                 </li>
 
 
                 <li class="financeiro">
-                    <a href="#" id="finan">
+                    <a href="financeiro.html" id="finan">
                         <div class="financial"></div>
                         <span>Financeiro</span>
                     </a>
@@ -88,6 +94,55 @@
     <div class="footer">
         <img src="imgCADASTRO/gatinhoRodapé.svg" alt="">
     </div>
+
+    <!-- SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const estoqueItem = document.querySelector('.estoque-item');
+            const estoqueSubMenu = document.getElementById('estoque-submenu');
+            const estoqueLink = document.getElementById('esto');
+            const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
+
+            const submenuLinks = estoqueSubMenu.querySelectorAll('a');
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
+
+            estoqueItem.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                estoqueItem.classList.toggle('active');
+                if (estoqueItem.classList.contains('active')) {
+                    estoqueSubMenu.style.display = "block";
+                    estoqueItem.style.backgroundColor = "#000";
+                    estoqueLink.style.color = "#319DF6";
+                    iconeEstoque.style.backgroundImage = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E\")";
+                } else {
+                    estoqueSubMenu.style.display = "none";
+                    estoqueItem.style.backgroundColor = "";
+                    estoqueLink.style.color = "";
+                    iconeEstoque.style.backgroundImage = "";
+                }
+            });
+
+            // Fecha o dropdown ao clicar fora
+            document.addEventListener('click', function (event) {
+                if (!estoqueItem.contains(event.target)) {
+                    estoqueItem.classList.remove('active');
+                    estoqueSubMenu.style.display = "none";
+                    estoqueItem.style.backgroundColor = "";
+                    estoqueLink.style.color = "";
+                    iconeEstoque.style.backgroundImage = "";
+                }
+            });
+
+
+        });
+    </script>
+    <script src="js/navbar.js"></script>
 </body>
-<script src="js/navbar.js"></script>
+
 </html>

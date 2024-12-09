@@ -1,6 +1,42 @@
-*{
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", serif;
+}
+
+body {
     background-color: #F0F0F0;
+    height: 100vh;
+}
+
+/* CABEÇALHO */
+.texto-nav{
+    color: #DA0000;
+}
+
+.sidebar ul li #edicao{
+    color: #DA0000;
+
+    & .pencil {
+        display: inline-block;
+        width: 1.3em;
+        height: 1.3em;
+        --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M4.333 16.048L16.57 3.81a2.56 2.56 0 0 1 3.62 3.619L7.951 19.667a2 2 0 0 1-1.022.547L3 21l.786-3.93a2 2 0 0 1 .547-1.022'/%3E%3Cpath d='m14.5 6.5l3 3'/%3E%3C/g%3E%3C/svg%3E");
+        background-color: currentColor;
+        -webkit-mask-image: var(--svg);
+        mask-image: var(--svg);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+
+    }
+
+}
+
+.edicao{
+    background-color: #000;
 }
 
 .cabeca {
@@ -16,7 +52,7 @@
     background-color: white;
     color: #B50000;
     font-size: clamp(4vh,2.5vw,6vh); 
-    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
 }
 
 /* --------------------Mecanismo_Pesquisa--------------------- */
@@ -191,9 +227,21 @@ textarea:focus, input:focus, select:focus {
 /* ----------------------------------------- */
     font-size: 30px;
 /* ----------------------------------------- */
-    background-color: #fff;  
+    background-color: #d89696;  
     border: none;
     border-radius: 3px;
+}
+
+.imagemlixeira, .imagemlapis {
+/* ----------------------------------------- */
+    background-color: transparent;
+}
+
+.lixeira, .lapis {
+/* ----------------------------------------- */
+    width: 1vw;
+/* ----------------------------------------- */
+    background-color: transparent;
 }
 
 /* --------------------Final--------------------- */
@@ -204,4 +252,423 @@ textarea:focus, input:focus, select:focus {
     justify-content: center;
     align-items:center;
     margin-top: 5vh;
+}
+
+
+/* --------------------"Responsividade"--------------------- */
+
+@media (max-width: 1130px) {
+
+    #pesquisar {
+        font-size: 0;
+    }
+
+    #filtrar {
+        font-size: 0;
+    }
+
+    .div_pesquisa {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2vw;
+    }
+
+    #pesquisar img,
+    #filtrar img {
+        height: 5vh;
+        width: auto;
+        display: block;
+    }
+}
+
+/* --------------------Pop-up para excluir item--------------------- */
+
+/* Estilos para o Pop-up */
+
+.popup {
+/* ----------------------------------------- */
+    width: 100vw;
+    height: 100vh;
+/* ----------------------------------------- */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+/* ----------------------------------------- */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+/* ----------------------------------------- */
+    width: 30vw;
+    height: 22vh;
+/* ----------------------------------------- */
+    background-color: #fff;
+    padding: 3vh;
+    border-radius: 1vh;
+    text-align: center;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+.titulo {
+/* ----------------------------------------- */
+    width: 33vw;
+    height: 7vh;
+/* ----------------------------------------- */
+    margin-top: -3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    color: white;
+/* ----------------------------------------- */
+    margin-left: -1.5vw;
+    background-color: #B50000;
+    font-size: clamp(2.25vh,1.5vw,3.25vh);
+    border-radius: 1vh;
+
+}
+
+.popup input {
+/* ----------------------------------------- */
+    width: 80%;
+    height: 6vh;
+/* ----------------------------------------- */
+    font-family: "Inter", serif;
+    font-size: 2.5vh;
+/* ----------------------------------------- */
+    padding: 2.3%;
+    margin-top: 3vh;
+/* ----------------------------------------- */
+    border: 0.2vh solid #8a8a8a;
+    border-radius: 0.4vh;
+    box-sizing: border-box;
+    box-shadow: 0.4vh 0.4vh 0.4vh #b3b3b3;
+    background-color: white;
+}
+
+.popup button {
+/* ----------------------------------------- */
+    width: 30%;
+    height: 5vh;
+/* ----------------------------------------- */
+    margin-top: 4vh;
+/* ----------------------------------------- */
+    font-size: clamp(2.25vh,1.5vw,3.25vh); 
+/* ----------------------------------------- */
+    border: none;
+    border-radius: 1vh;
+    cursor: pointer;
+}
+
+.posicaobotao {
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: space-between;
+/* ----------------------------------------- */
+    background-color: white;
+}
+
+#senha-confirmar {
+/* ----------------------------------------- */
+    background-color: #0B6300;
+    color: white;
+}
+
+#senha-cancelar {
+/* ----------------------------------------- */
+    background-color: #B50000;
+    color: white;
+}
+
+#senha-confirmar:hover, #senha-cancelar:hover {
+/* ----------------------------------------- */
+    opacity: 0.8;
+    transform: scale(1.1); 
+}
+
+
+
+/* -----------------------------Pop-up de Edição------------------------------------------- */
+
+/* Tamanho 100% da tela (Parte preta) */
+
+.popup-edicao {
+/* ----------------------------------------- */
+    width: 100vw;
+    height: 100vh;
+/* ----------------------------------------- */
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+/* ----------------------------------------- */
+    background-color: rgba(0, 0, 0, 0.281);
+}
+
+/* Parte que possui as coisas */
+
+.conteudo {
+/* ----------------------------------------- */
+    width: 57.3vw;
+    height: 96.3vh;
+/* ----------------------------------------- */
+    background-color: #F0F0F0;
+    border-radius: 1.5vh;
+}
+
+/* Todos os títulos que tem parte vermelha */
+
+.titulo-edicao {
+/* ----------------------------------------- */
+    width: 100%;
+    height: 5.2vh;
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2.25vh,1.5vw,3.25vh); 
+    color: white;
+/* ----------------------------------------- */
+    background-color: #B50000;
+    border-radius: 0.5vh;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+/* Aquilo que parece uma foto (era pra ter uma foto) */
+
+#foto {
+/* ----------------------------------------- */
+    height: 30vh;
+    width: 14.8vw;
+}
+
+/* A primeira seção tem a "foto" e as "informações basicas" */
+
+.secao1 {
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: space-evenly;
+/* ----------------------------------------- */
+    margin-top: 4vh;
+/* ----------------------------------------- */
+    /* border: 0.1vh solid black; */
+}
+
+.informacoesbasicas {
+/* ----------------------------------------- */
+    height: 30vh;
+    width: 38.10vw;
+/* ----------------------------------------- */
+    background-color: #D4D4D4;
+    /* border: 0.1vh solid black; */
+    box-shadow: 0.1vw 0.1vh 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+
+}
+
+/* Geral de todos os inputs */
+.input {
+/* ----------------------------------------- */
+    height: 4vh;
+/* ----------------------------------------- */
+    margin-bottom: 0.5vh;
+/* ----------------------------------------- */
+    background-color: #F0EFEF;
+    box-shadow: 0.1vw 0.1vh 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+    border: 0.1vh solid rgba(0, 0, 0, 0.247);
+    border-radius: 0.3vh;
+    color: rgba(0, 0, 0, 0.753);
+}
+
+#nome_b, #nome_m, #cod, #categoria, #descricao, #fabricante {
+    width: 15.6vw;
+}
+
+.nome_b, .nome_m, .cod, .categoria, .descricao, .fabricante {
+/* ----------------------------------------- */
+    width: 15.6vw;
+/* ----------------------------------------- */
+    background-color: transparent;
+}
+
+.inputs1 {
+/* ----------------------------------------- */
+    height: 19vh;
+/* ----------------------------------------- */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 0.5vh;
+/* ----------------------------------------- */
+    background-color: transparent;
+
+}
+
+/* ------------------------------------------------Seção2------------------------------------------------ */
+
+.secao2 {
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: space-evenly;
+/* ----------------------------------------- */
+    margin-top: 2.5vh;
+/* ----------------------------------------- */
+    /* border: 0.1vh solid black; */
+}
+
+.detalhesdoproduto {
+/* ----------------------------------------- */
+    width: 26.2vw;
+    height: 25.2vh;
+/* ----------------------------------------- */
+    background-color: #D4D4D4;
+    /* border: 0.1vh solid black; */
+    box-shadow: 0.1vw 0.1vh 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#observacao, #unidade, #preco_v, #fragilidade {
+/* ----------------------------------------- */
+    width: 11vw;
+}
+
+.observacao, .unidade, .preco_v, .fragilidade {
+/* ----------------------------------------- */
+    width: 11vw;
+/* ----------------------------------------- */
+    background-color: transparent;
+}
+
+.inputs2 {
+/* ----------------------------------------- */
+    height: 19vh;
+/* ----------------------------------------- */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 1vh;
+/* ----------------------------------------- */
+    background-color: transparent;
+    
+}
+
+.lote {
+    /* ----------------------------------------- */
+        width: 26.2vw;
+        height: 25.2vh;
+    /* ----------------------------------------- */
+        background-color: #D4D4D4;
+        /* border: 0.1vh solid black; */
+        box-shadow: 0.1vw 0.1vh 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+    }
+
+/* ------------------------------------------------Seção3------------------------------------------------ */
+
+.secao3 {
+/* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+/* ----------------------------------------- */
+    margin-top: 2.5vh;
+/* ----------------------------------------- */
+    /* border: 0.1vh solid black; */
+}
+    
+.dadosfisicos {
+/* ----------------------------------------- */
+    width: 22.6vw;
+    height: 25.2vh;
+/* ----------------------------------------- */
+    margin-right: 1vw;
+/* ----------------------------------------- */
+    background-color: #D4D4D4;
+    /* border: 0.1vh solid black; */
+    box-shadow: 0.1vw 0.1vh 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+    
+#largura, #altura, #profundidade, #peso {
+/* ----------------------------------------- */
+    width: 9vw;
+}
+    
+.largura, .altura, .profundidade, .peso {
+/* ----------------------------------------- */
+    width: 9vw;
+/* ----------------------------------------- */
+    background-color: transparent;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+
+.localizacao {
+/* ----------------------------------------- */
+    width: 22.6vw;
+    height: 25.2vh;
+    clip-path: polygon(0 0, 100% 0, 100% 64%, 56% 64%, 56% 100%, 0 100%);
+/* ----------------------------------------- */
+    margin-left: 2vw;
+/* ----------------------------------------- */
+    background-color: #D4D4D4;
+    /* border: 0.1vh solid black; */
+    box-shadow: 0.1vw 0.1vh 0.1vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#rua, #coluna, #andar {
+/* ----------------------------------------- */
+    width: 9vw;
+}
+            
+.rua, .coluna, .andar {
+/* ----------------------------------------- */
+    width: 9vw;
+/* ----------------------------------------- */
+    background-color: transparent;
+}
+
+.inputs3 {
+/* ----------------------------------------- */
+    height: 19vh;
+    width: 20vw;
+/* ----------------------------------------- */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 1vh;
+    margin-left: 1vw;
+/* ----------------------------------------- */
+    background-color: transparent;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+
+.salvar_edicao {
+/* ----------------------------------------- */
+    height: 7vh;
+    width: 11vw;
+/* ----------------------------------------- */
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/* ----------------------------------------- */
+    margin-left: 41vw;
+    margin-top: 17.5vh;
+/* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(4vh,2.5vw,6vh); 
+    color: white;
+/* ----------------------------------------- */
+    background-color: #B50000;
+    border-radius: 0.5vh;
+    border: none;
+    cursor: pointer;
+}
+
+.salvar_edicao:hover {
+    transform: scale(1.1); 
 }

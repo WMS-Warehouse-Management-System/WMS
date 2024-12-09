@@ -1,140 +1,309 @@
 <!DOCTYPE html>
 <!-- /* TUDO CERTO */ -->
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movimentações</title>
-    <link rel="stylesheet" href="css/financeiro.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-  </head>
-  <body>
-    <!---------------NAVBAR-------------------------------------------------->
-    <div class="navbar-caixa">
-      <div class="conteudo-nav">
-        <div class="texto-nav">Movimentação</div>
-        <button id="menu-btn" class="menu-btn">&#9776;</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movimentações</title>
+  <link rel="stylesheet" href="css/financeiro.css" />
+  <link rel="stylesheet" href="css/navbar.css">
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-      <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
-      <div id="sidebar" class="sidebar">
-        <button id="close-btn" class="close-btn">&times;</button>
-        <img src="imagens/senai-logo.svg" alt="" />
-        <h3>Menu</h3>
-        <ul>
-          <li class="home">
-            <a href="#" id="home">
-              <div class="home"></div>
-              <span>Home</span>
-            </a>
-          </li>
+</head>
 
-          <li class="cadastrar">
-            <a href="#" id="cadas">
-              <div class="box-of-good-good"></div>
-              <span>Cadastrar</span>
-            </a>
-          </li>
+<body>
+  <!-- CABEÇALHO -->
+  <!---------------NAVBAR-------------------------------------------------->
+  <div class="navbar-caixa">
+    <div class="conteudo-nav">
+      <div class="texto-nav">Movimentação</div>
 
-          <li class="edicao">
-            <a href="#" id="edicao">
-              <div class="pencil"></div>
-              <span>Edição</span>
-            </a>
-          </li>
+      <button id="menu-btn" class="menu-btn">&#9776;</button>
+    </div>
 
-          <li class="estoque">
-            <a href="#" id="esto">
-              <div class="boxes-of-good-good"></div>
-              <span>Estoque</span>
-            </a>
-          </li>
+    <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
+    <div id="sidebar" class="sidebar">
+      <button id="close-btn" class="close-btn">&times;</button>
+      <img src="imglogineusuario/senaibranco.svg" alt="" />
+      <h3>Menu</h3>
+      <ul>
 
-          <li class="financeiro">
-            <a href="#" id="finan">
-              <div class="financial"></div>
-              <span>Financeiro</span>
-            </a>
-          </li>
-        </ul>
 
-        <div class="container-logos">
-          <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
-          <div class="container-img">
-          <img src="imagens/logo-emp.svg" id="logo-gato" alt="" />
-          <img src="imagens/logo-soft.svg" id="logo-cubo" />
-        </div>
-        </div>
+        <li class="home">
+          <a href="telaInicial.html" id="home">
+            <div class="home"></div>
+            <span>Home</span>
+          </a>
+        </li>
+
+
+        <li class="cadastrar">
+          <a href="cadastro1.html" id="cadas">
+            <div class="box-of-good-good"></div>
+            <span>Cadastrar</span>
+          </a>
+        </li>
+
+
+        <li class="edicao">
+          <a href="edicao.html" id="edicao">
+            <div class="pencil"></div>
+            <span>Edição</span>
+          </a>
+        </li>
+
+
+        <li class="estoque-item">
+          <a href="#" id="esto" class="estoque-link">
+            <div class="boxes-of-good-good"></div>
+            <span>Estoque</span>
+          </a>
+          <ul id="estoque-submenu" class="submenu">
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="estoque_real.html">Estoque Real e Inventário</a></li>
+            <li><a href="layout.html">Layout do Estoque</a></li>
+          </ul>
+        </li>
+
+
+        <li class="financeiro">
+          <a href="financeiro.html" id="finan">
+            <div class="financial"></div>
+            <span>Financeiro</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="container-logos">
+        <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+        <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img src="imagens/logo-soft.svg" id="logo-cubo" />
       </div>
     </div>
+  </div>
+  <!-------------------------------------------------------------------------------------------------------------------------------->
+
+  <div class="container">
+    <button id="btn-recebim">Recebimentos</button>
+    <button id="btn-saida">Saídas</button>
+    <button id="btn-saldo">Saldo</button>
+
+  </div>
+
+
+
+  <div class="conteudo_pag">
+    <button id="caixa-recebimento" onclick="toggleForm()">+</button>
+
+    <div id="formContainer">
+      <h2>Novo Recebimento</h2>
+      <button id="close-btn" class="close-btn">&times;</button>
+      <form id="registrationForm">
+        <div class="input-container">
+          <input type="text" id="productName" placeholder=" " required />
+          <label for="productName">Nome do produto</label>
+        </div>
+
+        <div class="input-container">
+          <input type="text" id="productFont" placeholder=" " required />
+          <label for="productFont">Nome do fornecedor</label>
+        </div>
+
+        <div class="input-container">
+          <input type="number" id="codigo" min="0" max="9999999999999" placeholder=" " required />
+          <label for="productCode">Código do produto</label>
+        </div>
+
+        <div class="input-container">
+          <input type="number" id="quantityReceived" placeholder=" " required />
+          <label for="quantityReceived">Quantidade recebida</label>
+        </div>
+
+        <div class="input-container">
+          <input type="number" id="numbLote" placeholder=" " required />
+          <label for="numbLote">N° do Lote</label>
+        </div>
+
+        <div class="input-container">
+          <input type="date" id="dataRecebimento" placeholder=" " required />
+          <label for="dataRecebimento">Data de recebimento</label>
+        </div>
+
+        <div class="input-container">
+          <input type="date" id="validade" placeholder=" " />
+          <label for="validade">Data de Validade</label>
+        </div>
+
+        <div class="input-container">
+          <input type="number" step="0.01" id="precoAqui" placeholder=" " required />
+          <label for="validade">Preço de Aquisição</label>
+        </div>
+
+        <button type="submit" id="submitButton">
+          <h3>Cadastrar</h3>
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+  <div id="toggle-filter">
+    <div id="filtrarcontainer">
+      <!-- mudanças filtro -->
+      <div id="filtrarcontainer">
+        <div id="filtrar"><i class="fa fa-filter"></i>Filtrar</div>
+        <div id="caixote">
+          <div id="ajeitar">
+            <div id="subajeitada">
+              Filtros
+              <div id="textinho">
+                Limpar Filtros
+              </div>
+            </div>
+            <div id="dropdown" class="dentrodropdown">
+              <select id="categoria">
+                <option value="Categoria">Categoria</option>
+                <option value="papelaria">Papelaria</option>
+                <option value="escritorio">Escritório</option>
+                <option value="eletronicos">Eletrônicos</option>
+                <option value="armazenagem">Armazenagem</option>
+              </select>
+              <select id="fornecedor">
+                <option value="">Fornecedor</option>
+                <option value="papelDistrib">Papel Distrib.</option>
+                <option value="lapisCo">Lápis&Co</option>
+                <option value="bicDistrib">Bic Distrib</option>
+                <option value="escolarLTDA">Escolar LTDA</option>
+                <option value="kalunga">Kalunga</option>
+                <option value="embalagensBrasil">Embalagens Brasil</option>
+              </select>
+              <select id="fabricante">
+                <option value="">Fabricante</option>
+                <option value="tilibra">Tilibra</option>
+                <option value="faberCastell">Faber-Castell</option>
+                <option value="leoLeo">Leo&Leo</option>
+                <option value="bic">Bic</option>
+                <option value="sony">Sony</option>
+                <option value="duracell">Duracell</option>
+                <option value="hp">HP</option>
+                <option value="vacuPack">VacuPack</option>
+              </select>
+
+            </div>
+
+            <div id="inputdata">Data
+              <div id="ajeitardata">
+                <input type="date" id="dedata" class="datasize"></input>
+                à
+                <input type="date" id="atedata" class="datasize"></input>
+              </div>
+            </div>
+            <div id="ordernaritem">Ordenar Item
+              <div id="botoes">
+                <button>A a Z</button>
+                <button>Z a A</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- acabou as mudanças -->
+
+        <input type="text" id="entrada" placeholder="Digite o código do produto...">
+        <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+
+      </div>
+    </div>
+<<<<<<< HEAD
     <!-------------------------------------------------------------------------------------------------------------------------------->
     <div class="container">
       <button id="btn-recebim">Recebimentos</button>
       <a href="saidas.html"><button id="btn-saida" >Saídas</button></a>
       <button id="btn-saldo">Saldo</button>
+=======
+  </div>
+  <div class="header">
+    <span class="title">Itens recebidos</span>
+    <div class="divider"></div>
+  </div>
+>>>>>>> b3820b137a71af71c09afe378cbbaf1f2cf85fb5
 
-    </div>
+  <div class="tabela-recebimentos">
+    <div class="table-container" id="table-container"></div>
+  </div>
 
-    
+  <!--  SCRIPT QUE LIGA OS INPUT AO BACK-END  -->
 
-    <div class="conteudo_pag">
-      <button id="caixa-recebimento" onclick="toggleForm()">+</button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
 
+<<<<<<< HEAD
       <div id="formContainer">
         <h2>Novo Recebimento</h2>
         <button id="close-btn" class="close-btn">&times;</button>
         <form id="registrationForm">
+=======
+      const estoqueItem = document.querySelector('.estoque-item');
+      const estoqueSubMenu = document.getElementById('estoque-submenu');
+      const estoqueLink = document.getElementById('esto');
+      const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
+>>>>>>> b3820b137a71af71c09afe378cbbaf1f2cf85fb5
 
-          <div class="input-container">
-            <input type="text" id="productFont" placeholder=" " required />
-            <label for="productFont">Nome do fornecedor</label>
-          </div>
+      const submenuLinks = estoqueSubMenu.querySelectorAll('a');
+      submenuLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+          event.stopPropagation();
+        });
+      });
 
-          <div class="input-container">
-            <input
-              type="number"
-              id="codigo"
-              min="0"
-              max="9999999999999"
-              placeholder=" "
-              required
-            />
-            <label for="productCode">Código do produto</label>
-          </div>
+      estoqueItem.addEventListener('click', function (event) {
+        event.preventDefault();
 
-          <div class="input-container">
-            <input type="number" id="quantityReceived" placeholder=" " required />
-            <label for="quantityReceived">Quantidade recebida</label>
-          </div>
+        estoqueItem.classList.toggle('active');
+        if (estoqueItem.classList.contains('active')) {
+          estoqueSubMenu.style.display = "block";
+          estoqueItem.style.backgroundColor = "#000";
+          estoqueLink.style.color = "#319DF6";
+          iconeEstoque.style.backgroundImage = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E\")";
+        } else {
+          estoqueSubMenu.style.display = "none";
+          estoqueItem.style.backgroundColor = "";
+          estoqueLink.style.color = "";
+          iconeEstoque.style.backgroundImage = "";
+        }
+      });
 
-          <div class="input-container">
-            <input type="number" id="numbLote" placeholder=" " required />
-            <label for="numbLote">N° do Lote</label>
-          </div>
+      // Fecha o dropdown ao clicar fora
+      document.addEventListener('click', function (event) {
+        if (!estoqueItem.contains(event.target)) {
+          estoqueItem.classList.remove('active');
+          estoqueSubMenu.style.display = "none";
+          estoqueItem.style.backgroundColor = "";
+          estoqueLink.style.color = "";
+          iconeEstoque.style.backgroundImage = "";
+        }
+      });
 
-          <div class="input-container">
-            <input type="date" id="dataRecebimento" placeholder=" " required />
-            <label for="dataRecebimento">Data de recebimento</label>
-          </div>
 
-          <div class="input-container">
-            <input type="date" id="validade" placeholder=" "  />
-            <label for="validade">Data de Validade</label>
-          </div>
+    });
 
-          <div class="input-container">
-            <input type="number" step="0.01" id="precoAqui" placeholder=" " required />
-            <label for="validade">Preço de Aquisição</label>
-          </div>
+    document.getElementById('registrationForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
 
-          <button type="submit" id="submitButton"><h3>Cadastrar</h3></button>
-        </form>
-      </div>
-    </div>
+      const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
-<!--  SCRIPT QUE LIGA OS INPUT AO BACK-END  -->
+      const formContainer = document.getElementById("formContainer");
 
+<<<<<<< HEAD
 <script>
   
 document.getElementById('registrationForm').addEventListener('submit', async function (event) {
@@ -154,32 +323,54 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
       precoAqui: document.getElementById('precoAqui').value,
       inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
   };
+=======
+      const recebimento = {
+        nomeBasico: document.getElementById('productName').value,
+        fornecedor: document.getElementById('productFont').value,
+        codigo: document.getElementById('codigo').value,
+        quantidade: document.getElementById('quantityReceived').value,
+        numbLote: document.getElementById('numbLote').value,
+        dataRecebimento: document.getElementById('dataRecebimento').value,
+        validade: document.getElementById('validade').value,
+        precoAqui: document.getElementById('precoAqui').value,
+        inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
+      };
+>>>>>>> b3820b137a71af71c09afe378cbbaf1f2cf85fb5
 
 
 
-  try {
-      const response = await fetch('http://localhost:3000/adicionar-recebimento', {
+      try {
+        const response = await fetch('http://localhost:3000/adicionar-recebimento', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(recebimento),
-      });
+        });
 
-      if (response.ok) {
+        if (response.ok) {
           alert('recebimento adicionado com sucesso!');
+<<<<<<< HEAD
           formContainer.style.display = "block";
       } else {
+=======
+        } else {
+>>>>>>> b3820b137a71af71c09afe378cbbaf1f2cf85fb5
           const errorMessage = await response.text();
           alert('Erro: ' + errorMessage);
+        }
+      } catch (error) {
+        alert('Erro ao adicionar recebimento ' + error.message);
       }
-  } catch (error) {
-      alert('Erro ao adicionar recebimento ' + error.message);
-  }
-});
+    });
 
-</script>
+  </script>
 
 
+  <script src="js/financeiro.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/app.js"></script>
+</body>
 
+<<<<<<< HEAD
 
 
 
@@ -359,3 +550,6 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     <script src="js/app.js"></script>
   </body>
 </html>
+=======
+</html>
+>>>>>>> b3820b137a71af71c09afe378cbbaf1f2cf85fb5

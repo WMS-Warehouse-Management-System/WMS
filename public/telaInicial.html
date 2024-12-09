@@ -28,7 +28,7 @@
             <small>Cadastrar Novo Item</small>
         </div>
     </div>
-    <div class="button red">
+    <div class="button red" onclick="redirecionarEdicao()">
         <img src="imagens/Vector.svg" alt="">
         <div class="texto">
             <p>Edição</p>
@@ -46,7 +46,7 @@
     <div class="dropdown-content" id="estoqueDropdown" style="display: none;">
         <a href="catalogo.html">• Catálogo</a>
         <a href="estoque_real.html">• Estoque Real e Inventário</a>
-        <a href="layout_estoque.html">• Layout do Estoque</a>
+        <a href="layout.html">• Layout do Estoque</a>
     </div>
 
     <div class="button yellow" onclick="redirecionarFinanceiro()">
@@ -122,6 +122,10 @@
     function redirecionarCadastro() {
         window.location.href = "cadastro1.html";
     }
+    function redirecionarEdicao() {
+        window.location.href = "edicao.html";
+    }
+
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // Seleciona o botão e o dropdown

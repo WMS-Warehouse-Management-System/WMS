@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+//   muda o botao
+function activateButton(clickedButton) {
+const buttons = document.querySelectorAll('.botoes'); 
+buttons.forEach(button => button.classList.remove('clicked')); 
+clickedButton.classList.add('clicked');}
 
 //----------SCRIPT PRINCIPAL
 

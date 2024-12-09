@@ -1,26 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <title>Catálogo</title>
     <link rel="stylesheet" href="css/catalogo.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
-<body>  
-    
-<div id="barradebusca">
-    <!-- mudanças filtro -->
-    <div id="filtrarcontainer">    
-        <div id="filtrar">Filtrar</div>
-        <div id="caixote">
-            <div id="ajeitar">
-                <div id="subajeitada">
-                Filtros
-                <div id="textinho">
-                   Limpar Filtros
-                </div> 
-                </div>
-                <div id="dropdown" class="dentrodropdown">
+
+<body>
+    <!-- CABEÇALHO -->
+    <!---------------NAVBAR-------------------------------------------------->
+    <div class="navbar-caixa">
+        <div class="conteudo-nav">
+            <div class="texto-nav">Catálogo</div>
+
+            <button id="menu-btn" class="menu-btn">&#9776;</button>
+        </div>
+
+        <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
+        <div id="sidebar" class="sidebar">
+            <button id="close-btn" class="close-btn">&times;</button>
+            <img src="imglogineusuario/senaibranco.svg" alt="" />
+            <h3>Menu</h3>
+            <ul>
+
+
+                <li class="home">
+                    <a href="telaInicial.html" id="home">
+                        <div class="home"></div>
+                        <span>Home</span>
+                    </a>
+                </li>
+
+
+                <li class="cadastrar">
+                    <a href="cadastro1.html" id="cadas">
+                        <div class="box-of-good-good"></div>
+                        <span>Cadastrar</span>
+                    </a>
+                </li>
+
+
+                <li class="edicao">
+                    <a href="edicao.html" id="edicao">
+                        <div class="pencil"></div>
+                        <span>Edição</span>
+                    </a>
+                </li>
+
+
+                <li class="estoque-item">
+                    <a href="#" id="esto" class="estoque-link">
+                        <div class="boxes-of-good-good"></div>
+                        <span>Estoque</span>
+                    </a>
+                    <ul id="estoque-submenu" class="submenu">
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="estoque_real.html">Estoque Real e Inventário</a></li>
+                        <li><a href="layout.html">Layout do Estoque</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="financeiro">
+                    <a href="financeiro.html" id="finan">
+                        <div class="financial"></div>
+                        <span>Financeiro</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="container-logos">
+                <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+                <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img src="imagens/logo-soft.svg"
+                    id="logo-cubo" />
+            </div>
+        </div>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------------------------->
+
+    <div id="barradebusca">
+        <!-- mudanças filtro -->
+        <div id="filtrarcontainer">
+            <div class="div_pesquisa">
+                <button id="filtrar"><img src="imagens/filtro.svg" alt="" id="fil">Filtrar</button>
+            </div>
+            <div id="caixote">
+                <div id="ajeitar">
+                    <div id="subajeitada">
+                        Filtros
+                        <div id="textinho">
+                            Limpar Filtros
+                        </div>
+                    </div>
+                    <div id="dropdown" class="dentrodropdown">
                         <select id="categoria">
                             <option value="Categoria">Categoria</option>
                             <option value="papelaria">Papelaria</option>
@@ -48,84 +129,136 @@
                             <option value="hp">HP</option>
                             <option value="vacuPack">VacuPack</option>
                         </select>
-                    
-                </div>
-                
-                <div id="inputdata">Data
-                    <div id="ajeitardata">
-                    <input type="date" id="dedata" class="datasize"></input>
-                    à
-                    <input type="date" id="atedata" class="datasize"></input>
+
                     </div>
-                </div>
-                <div id="ordernaritem">Ordenar Item
-                    <div id="botoes">
-                        <button>A a Z</button>
-                        <button>Z a A</button>
+
+                    <div id="inputdata">Data
+                        <div id="ajeitardata">
+                            <input type="date" id="dedata" class="datasize"></input>
+                            à
+                            <input type="date" id="atedata" class="datasize"></input>
+                        </div>
+                    </div>
+                    <div id="ordernaritem">Ordenar Item
+                        <div id="botoesaz">
+                            <button class="botoes" onclick="activateButton(this)">A-Z</button>
+                            <button class="botoes" onclick="activateButton(this)">Z-A</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- acabou as mudanças -->
+        <form id="formPesquisa">
+            <div class="div_pesquisa">
+                <div id="area"><input type="text" id="codigo"></div>
+                <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+            </div>
+        </form>
     </div>
-    <!-- acabou as mudanças -->
-    <form id="formPesquisa">
-        <div id="area"><input type="text" id="codigo"></div>
-        <div><button type="submit" id="pesquisar">Pesquisar</button></div>
-    </form>
-</div>
 
-<div class="container">
-<div class="content-table">
-<table id="tabela-estoque">
+    <div class="container">
+        <div class="content-table">
+            <table id="tabela-estoque">
 
-    <thead>
-        <tr id="cabecalho-table">
-            <th>Código de Barras</th>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Categoria</th>
-            <th>Fabricante</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-    </tbody>
+                <thead>
+                    <tr id="cabecalho-table">
+                        <th>Código de Barras</th>
+                        <th>Item</th>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Categoria</th>
+                        <th>Fabricante</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
 
 
-</table>
-</div>
-</div>
+            </table>
+        </div>
+    </div>
 
-<script>
-//SCRIPT QUE LIGA OS INPUT AO BACK-END  
-document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Evita o comportamento padrão do formulário
+    <div class="footer">
+        <img src="imgCADASTRO/gatinhoRodapé.svg" alt="">
+    </div>
 
-    const pesquisa = {
-        codigo: document.getElementById('codigo').value, 
-    };
+    <script>
+        // HAMBURGUER 
+        document.addEventListener('DOMContentLoaded', function () {
 
-    try {
-        const response = await fetch('http://localhost:3000/ver-catalogo', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(pesquisa), 
+            const estoqueItem = document.querySelector('.estoque-item');
+            const estoqueSubMenu = document.getElementById('estoque-submenu');
+            const estoqueLink = document.getElementById('esto');
+            const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
+
+            const submenuLinks = estoqueSubMenu.querySelectorAll('a');
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
+
+            estoqueItem.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                estoqueItem.classList.toggle('active');
+                if (estoqueItem.classList.contains('active')) {
+                    estoqueSubMenu.style.display = "block";
+                    estoqueItem.style.backgroundColor = "#000";
+                    estoqueLink.style.color = "#319DF6";
+                    iconeEstoque.style.backgroundImage = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E\")";
+                } else {
+                    estoqueSubMenu.style.display = "none";
+                    estoqueItem.style.backgroundColor = "";
+                    estoqueLink.style.color = "";
+                    iconeEstoque.style.backgroundImage = "";
+                }
+            });
+
+            // Fecha o dropdown ao clicar fora
+            document.addEventListener('click', function (event) {
+                if (!estoqueItem.contains(event.target)) {
+                    estoqueItem.classList.remove('active');
+                    estoqueSubMenu.style.display = "none";
+                    estoqueItem.style.backgroundColor = "";
+                    estoqueLink.style.color = "";
+                    iconeEstoque.style.backgroundImage = "";
+                }
+            });
+
+
         });
 
-        if (response.ok) {
-            const pesquisa = await response.json(); 
+        //SCRIPT QUE LIGA OS INPUT AO BACK-END  
+        document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Evita o comportamento padrão do formulário
 
-            if (pesquisa.length === 0) {
-                alert('Nenhum produto encontrado!');
-                return;
-            }
+            const pesquisa = {
+                codigo: document.getElementById('codigo').value,
+            };
 
-            const tbody = document.querySelector('#tabela-estoque tbody');
-            tbody.innerHTML = '';  
+            try {
+                const response = await fetch('http://localhost:3000/ver-catalogo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pesquisa),
+                });
 
-          pesquisa.forEach((pesquisa) => {
-              const row = `
+                if (response.ok) {
+                    const pesquisa = await response.json();
+
+                    if (pesquisa.length === 0) {
+                        alert('Nenhum produto encontrado!');
+                        return;
+                    }
+
+                    const tbody = document.querySelector('#tabela-estoque tbody');
+                    tbody.innerHTML = '';
+
+                    pesquisa.forEach((pesquisa) => {
+                        const row = `
               <tr>
                   <td>${pesquisa.CODIGO}</td>
                   <td>${pesquisa.NOME_BASICO}</td>
@@ -209,31 +342,33 @@ document.getElementById('formPesquisa').addEventListener('submit', async functio
                   </td>
               </tr>
               `;
-              tbody.innerHTML += row;  // Adiciona a linha gerada na tabela
-          });
-          
-
-        } else {
-            const errorMessage = await response.text();
-            alert('Erro: ' + errorMessage);
-        }
-    } catch (error) {
-        alert('Erro ao buscar produtos: ' + error.message);
-    }
-});
+                        tbody.innerHTML += row;  // Adiciona a linha gerada na tabela
+                    });
 
 
+                } else {
+                    const errorMessage = await response.text();
+                    alert('Erro: ' + errorMessage);
+                }
+            } catch (error) {
+                alert('Erro ao buscar produtos: ' + error.message);
+            }
+        });
 
-</script>
 
 
+    </script>
 
 
 
 
-<script src="../app.js"></script>
-<script src="js/catalogo.js"></script>
+
+
+    <script src="../app.js"></script>
+    <script src="js/catalogo.js"></script>
+    <script src="js/navbar.js"></script>
 
 
 </body>
+
 </html>
