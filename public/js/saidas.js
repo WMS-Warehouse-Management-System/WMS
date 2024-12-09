@@ -33,7 +33,6 @@ function toggleForm() {
       const data = document.getElementById("receiving_date").value;
       const quantidade = document.getElementById("quantity_received").value;
       const codigo = document.getElementById("product_code").value;
-      const validade = document.getElementById("product_validade").value;
       const lote = document.getElementById("numb_lote").value;
       const fornecedor = document.getElementById("product_font").value;
   
@@ -50,7 +49,6 @@ function toggleForm() {
           Data: data,
           Quantidade: quantidade,
           Codigo: codigo,
-          Validade: validade,
           Lote: lote,
           Fornecedor: fornecedor,
         }),

@@ -500,15 +500,16 @@ app.get("/Recebimento", async (req, res) => {
           DimProduto.NOME_BASICO,
           DimProduto.FABRICANTE,
           FactSaidas.FORNECEDOR,
-          FactSaidas.PRECO_DE_AQUISICAO,
+          FactRecebimento.PRECO_DE_AQUISICAO,
           DimProduto.IMAGEM,
           FactSaidas.QUANT,
-          FactSaidas.LOTE,
-          FORMAT(FactSaidas.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
+          FactRecebimento.LOTE,
+          FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
           DimProduto.PRECO_DE_VENDA,
           DimProduto.FRAGILIDADE
         FROM FactSaidas 
-        INNER JOIN DimProduto ON FactSaidas.CODIGO = DimProduto.CODIGO;
+        INNER JOIN DimProduto ON FactSaidas.CODIGO = DimProduto.CODIGO
+         INNER JOIN FactRecebimento ON FactSaidas.CODIGO = FactRecebimento.CODIGO
       `;
   
       // Executando a query
@@ -532,9 +533,7 @@ app.post('/adicionar-saida', async (req, res) => {
         codigo,
         quantidade,
         numbLote,
-        dataRecebimento,
-        validade,
-        precoAqui
+        dataRecebimento
     } = req.body;
 
     try {
@@ -542,13 +541,11 @@ app.post('/adicionar-saida', async (req, res) => {
 
         const query = `
         INSERT INTO FactSaidas(
-            DATA_SAIDA, QUANT, CODIGO, VALIDADE,
-            PRECO_DE_AQUISICAO, LOTE, FORNECEDOR
+            DATA_SAIDA, QUANT, CODIGO, LOTE, FORNECEDOR
              
         )
         VALUES (
-            @data_Receb, @quantidade, @codigo, @validade,  
-            @precoAqui, @numbLote, @fornecedor
+            @data_Receb, @quantidade, @codigo, @numbLote, @fornecedor
         )
     `;
 
@@ -558,8 +555,6 @@ app.post('/adicionar-saida', async (req, res) => {
         request.input('quantidade', sql.BigInt, quantidade);
         request.input('numbLote', sql.BigInt, numbLote);
         request.input('data_Receb', sql.DateTime, dataRecebimento);
-        request.input('precoAqui', sql.Decimal, precoAqui);
-        request.input('validade', sql.Date, validade);
         
         await request.query(query);
 

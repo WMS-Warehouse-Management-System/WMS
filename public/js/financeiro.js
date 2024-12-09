@@ -119,7 +119,6 @@ async function fetchVerRecebimentos() {
           <div class="detail-item"><strong>Fabricante:</strong><span>${recebimento.FABRICANTE}</span></div>
           <div class="detail-item"><strong>Lote:</strong><span>${recebimento.LOTE}</span></div>
           <div class="detail-item"><strong>Validade:</strong><span>${recebimento.VALIDADE}</span></div>
-          <div class="detail-item"><strong>Categoria:</strong><span>Eletrônico</span></div>
           <div class="detail-item"><strong>Preço Venda:</strong><span>${recebimento.PRECO_DE_VENDA} RS</span></div>
         </div>
       `;

@@ -105,7 +105,7 @@
 
           <div class="input-container">
             <input type="number" id="quantityReceived" placeholder=" " required />
-            <label for="quantityReceived">Quantidade recebida</label>
+            <label for="quantityReceived">Quantidade saída</label>
           </div>
 
           <div class="input-container">
@@ -116,16 +116,6 @@
           <div class="input-container">
             <input type="date" id="dataRecebimento" placeholder=" " required />
             <label for="dataRecebimento">Data de saída</label>
-          </div>
-
-          <div class="input-container">
-            <input type="date" id="validade" placeholder=" "  />
-            <label for="validade">Data de Validade</label>
-          </div>
-
-          <div class="input-container">
-            <input type="number" step="0.01" id="precoAqui" placeholder=" " required />
-            <label for="validade">Preço de Aquisição</label>
           </div>
 
           <button type="submit" id="submitButton"><h3>Cadastrar</h3></button>
@@ -150,8 +140,6 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
       quantidade: document.getElementById('quantityReceived').value,
       numbLote: document.getElementById('numbLote').value,
       dataRecebimento: document.getElementById('dataRecebimento').value,
-      validade: document.getElementById('validade').value,
-      precoAqui: document.getElementById('precoAqui').value,
       inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
   };
 

@@ -700,7 +700,14 @@ select:hover option:hover {
     padding: 20px;
     border-radius: 8px;
   }
+
+  a{
+    text-decoration: none;
+  }
   #btn-recebim{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     width: 19vh;
     height: 9vh;
@@ -717,6 +724,9 @@ select:hover option:hover {
 
   #btn-saida{
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 19vh;
     height: 9vh;
     border-radius:1.2vh ;
@@ -729,6 +739,9 @@ select:hover option:hover {
 
   #btn-saldo{
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 19vh;
     height: 9vh;
     border-radius:1.2vh ;
