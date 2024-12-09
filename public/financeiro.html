@@ -4,9 +4,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movimentações</title>
+    <title>SGA - Financeiro</title>
     <link rel="stylesheet" href="css/financeiro.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/navbar.css">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 
   </head>
   <body>
@@ -17,59 +23,69 @@
         <button id="menu-btn" class="menu-btn">&#9776;</button>
       </div>
 
-      <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
-      <div id="sidebar" class="sidebar">
+       <!--------------------------------HAMBURGUER------------------------------------------------------------------------------------>
+       <div id="sidebar" class="sidebar">
         <button id="close-btn" class="close-btn">&times;</button>
-        <img src="imagens/senai-logo.svg" alt="" />
+        <img src="imglogineusuario/senaibranco.svg" alt="" />
         <h3>Menu</h3>
         <ul>
-          <li class="home">
-            <a href="#" id="home">
-              <div class="home"></div>
-              <span>Home</span>
-            </a>
-          </li>
 
-          <li class="cadastrar">
-            <a href="#" id="cadas">
-              <div class="box-of-good-good"></div>
-              <span>Cadastrar</span>
-            </a>
-          </li>
 
-          <li class="edicao">
-            <a href="#" id="edicao">
-              <div class="pencil"></div>
-              <span>Edição</span>
-            </a>
-          </li>
+            <li class="home">
+                <a href="telaInicial.html" id="home">
+                    <div class="home"></div>
+                    <span>Home</span>
+                </a>
+            </li>
 
-          <li class="estoque">
-            <a href="#" id="esto">
-              <div class="boxes-of-good-good"></div>
-              <span>Estoque</span>
-            </a>
-          </li>
 
-          <li class="financeiro">
-            <a href="#" id="finan">
-              <div class="financial"></div>
-              <span>Financeiro</span>
-            </a>
-          </li>
+            <li class="cadastrar">
+                <a href="cadastro1.html" id="cadas">
+                    <div class="box-of-good-good"></div>
+                    <span>Cadastrar</span>
+                </a>
+            </li>
+
+
+            <li class="edicao">
+                <a href="edicao.html" id="edicao">
+                    <div class="pencil"></div>
+                    <span>Edição</span>
+                </a>
+            </li>
+
+
+            <li class="estoque-item">
+                <a href="#" id="esto" class="estoque-link">
+                    <div class="boxes-of-good-good"></div>
+                    <span>Estoque</span>
+                </a>
+                <ul id="estoque-submenu" class="submenu">
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="estoque_real.html">Estoque Real e Inventário</a></li>
+                    <li><a href="layout.html">Layout do Estoque</a></li>
+                </ul>
+            </li>
+
+
+            <li class="financeiro">
+                <a href="financeiro.html" id="finan">
+                    <div class="financial"></div>
+                    <span>Financeiro</span>
+                </a>
+            </li>
         </ul>
 
         <div class="container-logos">
-          <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
-          <div class="container-img">
-          <img src="imagens/logo-emp.svg" id="logo-gato" alt="" />
-          <img src="imagens/logo-soft.svg" id="logo-cubo" />
+            <h4>SGA - Sistema de Gerenciamento de Armazém</h4>
+            <img src="imagens/logo-emp.svg" id="logo-gato" alt="" /><img src="imagens/logo-soft.svg"
+                id="logo-cubo" />
         </div>
-        </div>
-      </div>
     </div>
-    <!-------------------------------------------------------------------------------------------------------------------------------->
-    <div class="container">
+</div>
+<!-------------------------------------------------------------------------------------------------------------------------------->
+   
+<div class="container">
       <button id="btn-recebim">Recebimentos</button>
       <a href="saidas.html"><button id="btn-saida" >Saídas</button></a>
       <button id="btn-saldo">Saldo</button>
@@ -191,7 +207,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
       <div id="filtrarcontainer">
       <!-- mudanças filtro -->
       <div id="filtrarcontainer">    
-          <div id="filtrar"><i class="fa fa-filter"></i>Filtrar</div>
+        <button id="filtrar"><img src="imagens/filtro.svg" alt="" id="fil">Filtrar</button>
           <div id="caixote">
               <div id="ajeitar">
                   <div id="subajeitada">
@@ -256,6 +272,51 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
   </div>
 
 <script>
+   document.addEventListener('DOMContentLoaded', function () {
+
+const estoqueItem = document.querySelector('.estoque-item');
+const estoqueSubMenu = document.getElementById('estoque-submenu');
+const estoqueLink = document.getElementById('esto');
+const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
+
+const submenuLinks = estoqueSubMenu.querySelectorAll('a');
+submenuLinks.forEach(link => {
+    link.addEventListener('click', function (event) {
+        event.stopPropagation();
+    });
+});
+
+estoqueItem.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    estoqueItem.classList.toggle('active');
+    if (estoqueItem.classList.contains('active')) {
+        estoqueSubMenu.style.display = "block";
+        estoqueItem.style.backgroundColor = "#000";
+        estoqueLink.style.color = "#319DF6";
+        iconeEstoque.style.backgroundImage = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E\")";
+    } else {
+        estoqueSubMenu.style.display = "none";
+        estoqueItem.style.backgroundColor = "";
+        estoqueLink.style.color = "";
+        iconeEstoque.style.backgroundImage = "";
+    }
+});
+
+// Fecha o dropdown ao clicar fora
+document.addEventListener('click', function (event) {
+    if (!estoqueItem.contains(event.target)) {
+        estoqueItem.classList.remove('active');
+        estoqueSubMenu.style.display = "none";
+        estoqueItem.style.backgroundColor = "";
+        estoqueLink.style.color = "";
+        iconeEstoque.style.backgroundImage = "";
+    }
+});
+
+
+});
+
   document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
     event.preventDefault(); // Evita o comportamento padrão do formulário
 
