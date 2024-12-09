@@ -10,6 +10,69 @@
 
 <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
 
+<div class="popup-edicao">
+    <div class="conteudo">
+        <div class="titulo-edicao">Edição</div>
+<!-- /* ---------------------------------------------------------------------------------------- */ -->
+        <div class="secao1">
+            <img src="imagens/Foto(Edição).svg" alt="" id="foto">
+            <div class="informacoesbasicas">
+                <div class="titulo-edicao">Informações Básicas</div>
+                <div class="inputs1">
+                    <div class="nome_b">Nome Básico:<input type="text" class="input" id="nome_b"></div>
+                    <div class="nome_m">Nome Modificador:<input type="text" class="input" id="nome_m"></div> 
+                    <div class="categoria">Categoria:<input type="text" class="input" id="categoria"></div>
+                    <div class="cod">Cód. Barras:<input type="number" class="input" id="cod"></div>
+                    <div class="descricao">Descrição Técnica:<input type="text" class="input" id="descricao"></div>
+                    <div class="fabricante">Fabricante:<input type="text" class="input" id="fabricante"></div>
+                </div>
+            </div>
+        </div>
+<!-- /* ---------------------------------------------------------------------------------------- */ -->
+        <div class="secao2">
+            <div class="detalhesdoproduto">
+                <div class="titulo-edicao">Detalhes do Produto</div>
+                <div class="inputs2">
+                    <div class="observacao">Observação Adicional:<input type="text" class="input" id="observacao"></div> 
+                    <div class="unidade">Unidade:<input type="text" class="input" id="unidade"></div>
+                    <div class="preco_v">Preço de Venda:<input type="number" class="input" id="preco_v"></div>
+                    <div class="fragilidade">Fragilidade:<input type="number" class="input" id="fragilidade"></div>
+                </div>
+            </div>
+            <div class="lote">
+                <div class="titulo-edicao">Lote</div>
+                <div class="inputs2">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+<!-- /* ---------------------------------------------------------------------------------------- */ -->
+        <div class="secao3">
+            <div class="dadosfisicos">
+                <div class="titulo-edicao">Dados Físicos:</div>
+                <div class="inputs2">
+                    <div class="altura">Altura:<input type="number" class="input" id="altura"></div> 
+                    <div class="largura">Largura:<input type="number" class="input" id="largura"></div>
+                    <div class="profundidade">Profundidade:<input type="number" class="input" id="profundidade"></div>
+                    <div class="peso">Peso:<input type="number" class="input" id="peso"></div>
+                </div>
+            </div>
+            <div class="localizacao">
+                <div class="titulo-edicao">Localização:</div>
+                <div class="inputs3">
+                    <div class="rua">Rua:<input type="number" class="input" id="rua"></div> 
+                    <div class="coluna">Coluna:<input type="number" class="input" id="coluna"></div>
+                    <div class="andar">Andar:<input type="number" class="input" id="andar"></div>
+                </div>
+            </div>
+            <button class="salvar_edicao">Salvar</button>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+
     <div class="cabeca">Editar/Excluir Itens</div>
 
     <div class="div_pesquisa">
@@ -32,8 +95,6 @@
                     <th>Quantidade</th>
                     <th>Categoria</th>
                     <th>Fabricante</th>
-                    <th><img src="imagens/Lixeira(Edição).svg" alt=""></th>
-                    <th><img src="imagens/Lapis(Edição).svg" alt=""></th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +108,25 @@
 
 <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
 
+<!-- Pop-up de Senha -->
+
+    <div id="senha-popup" class="popup">
+        <div class="popup-content">
+            <div class="titulo">Digite a senha do Professor para a exclusão:</div>
+            <input type="password" id="senha-input" placeholder="Senha">
+            <div class="posicaobotao">
+                <button id="senha-cancelar" onclick="cancelarSenha()">Cancelar</button>
+                <button id="senha-confirmar" onclick="verificarSenha()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+
 <script>
+
+// <!-- -------------------------------------Mostrar a Tabela----------------------------------------------------------- -->
+
     async function fetchProdutosCatalogo() {
         try {
             const response = await fetch('/ver-catalogo');
@@ -62,32 +141,93 @@
             tbody.innerHTML = '';
 
             if (produtos.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6">Nenhum produtos encontrado</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6">Nenhum produto encontrado</td></tr>';
                 return;
             }
 
-            produtos.forEach(produtos => {
-
-const row = `
-    <tr>
-        <td>${produtos.CODIGO}</td>
-        <td>${produtos.NOME_BASICO}</td>
-        <td>${produtos.DESCRICAO_TECNICA}</td>
-        <td>${produtos.QUANTIDADE}</td>
-        <td>${produtos.CATEGORIA}</td>
-        <td>${produtos.FABRICANTE}</td>
-        <td><img src="imagens/Lixeira(Edição).svg" alt=""></td>
-        <td><img src="imagens/Lapis(Edição).svg" alt=""></td>
-    </tr>`;
-tbody.innerHTML += row;
-});
-            } catch (error) {
-                alert('Erro ao buscar usuários: ' + error.message);
-            }
+            produtos.forEach(produto => {
+                const row = `
+                    <tr id="produto-${produto.CODIGO}">
+                        <td>${produto.CODIGO}</td>
+                        <td>${produto.NOME_BASICO}</td>
+                        <td>${produto.DESCRICAO_TECNICA}</td>
+                        <td>${produto.QUANTIDADE}</td>
+                        <td>${produto.CATEGORIA}</td>
+                        <td>${produto.FABRICANTE}</td>
+                        <td class="lixeira">
+                            <img src="imagens/Lixeira(Normal).svg" alt="Lixeira" class="imagemlixeira" onmouseover="this.src='imagens/Lixeira(Modificado).svg';" onmouseout="this.src='imagens/Lixeira(Normal).svg';" onclick="excluirProduto(${produto.CODIGO})">
+                        </td>
+                        <td class="lapis">
+                            <img src="imagens/Lapis(Normal).svg" alt="Lápis" class="imagemlapis" onmouseover="this.src='imagens/Lapis(Modificado).svg';" onmouseout="this.src='imagens/Lapis(Normal).svg';">
+                        </td>
+                    </tr>`;
+                tbody.innerHTML += row;
+            });
+        } catch (error) {
+            alert('Erro ao buscar produtos: ' + error.message);
+        }
     }
 
+// <!-- -------------------------------------Excluir/Deletar Item----------------------------------------------------------- -->
+
+    let codigoProdutoExcluido = null;  // Variável global para guardar o código do produto
+
+// Exibe o pop-up de senha
+    function excluirProduto(codigo) {
+        codigoProdutoExcluido = codigo;  // Salva o código do produto a ser excluído
+        document.getElementById('senha-popup').style.display = 'flex';  // Exibe o pop-up
+    }
+
+// Função para verificar a senha
+    function verificarSenha() {
+        const senha = document.getElementById('senha-input').value;
+
+        if (senha !== 'professor123') {
+            alert('Senha incorreta!');
+            return;
+        }
+
+        // Realiza a exclusão do produto se a senha for correta
+        fetch('/deletar-produto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ codigo: codigoProdutoExcluido, senha: senha })
+        })
+        .then(response => response.text())
+        .then(message => {
+            console.log(message);
+            if (message.includes('sucesso')) {
+                document.querySelector(`#produto-${codigoProdutoExcluido}`).remove();
+            } else {
+                alert(message);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao excluir produto');
+        });
+
+        // Fecha o pop-up
+        cancelarSenha();
+    }
+
+// Fecha o pop-up sem fazer nada
+
+    function cancelarSenha() {
+        document.getElementById('senha-popup').style.display = 'none';
+        document.getElementById('senha-input').value = '';  // Limpa o campo da senha
+    }
+
+    
+
+
     window.onload = fetchProdutosCatalogo;
+
 </script>
+
+
 
 <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -96,7 +236,7 @@ tbody.innerHTML += row;
 
 </body>
 
-<script src="Edicao.js"></script>
+<script src="js/edicao.js"></script>
 
 <!-- Letra inter -->
  

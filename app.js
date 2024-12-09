@@ -541,4 +541,36 @@ app.listen(port, () => {
 });
   
 
+//---------------------------------------------------------Deletar item
 
+// Deleta o item respectivo na tela de edição
+
+app.post('/deletar-produto', async (req, res) => {
+    const { codigo, senha } = req.body;
+
+    // Verificação de senha
+    if (senha !== 'professor123') {
+        return res.status(403).send('Senha incorreta!');
+    }
+
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+            DELETE FROM DimProduto WHERE CODIGO = @codigo
+        `;
+        const request = new sql.Request();
+        request.input('codigo', sql.SmallInt, codigo);
+
+        const result = await request.query(query);
+
+        if (result.rowsAffected[0] > 0) {
+            res.send('Produto excluído com sucesso!');
+        } else {
+            res.status(404).send('Produto não encontrado!');
+        }
+    } catch (error) {
+        console.error('Erro ao excluir produto:', error.message);
+        res.status(500).send('Erro ao excluir produto: ' + error.message);
+    }
+});
