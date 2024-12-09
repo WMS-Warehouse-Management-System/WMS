@@ -705,11 +705,13 @@ select:hover option:hover {
     width: 19vh;
     height: 9vh;
     border-radius:1.2vh ;
-    border: #FFCC00;
+    border-style: solid;
+    border-color: #FFCC00;
+    border-width: 0.22vw;
     font-size: 2.5vh;
     font-weight: 600;
-    color: white;
-    background-color: #FFCC00;
+    color: #FFCC00;
+    background-color: white;
   }
 
 
@@ -718,13 +720,11 @@ select:hover option:hover {
     width: 19vh;
     height: 9vh;
     border-radius:1.2vh ;
-    border-style: solid;
-    border-color: #FFCC00;
-    border-width: 0.22vw;
+    border: #FFCC00;
     font-size: 2.5vh;
     font-weight: 600;
-    color: #FFCC00;
-    background-color: WHIte;
+    color: white;
+    background-color: #FFCC00;
   }
 
   #btn-saldo{
@@ -741,7 +741,7 @@ select:hover option:hover {
     background-color: white;
   }
 
-  #btn-saida:hover, #btn-saldo:hover{
+  #btn-recebim:hover, #btn-saldo:hover{
     border-style: solid;
     border-color: #FFCC00;
     border-width: 0.27vw;

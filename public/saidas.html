@@ -4,8 +4,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movimentações</title>
-    <link rel="stylesheet" href="css/financeiro.css" />
+    <title>Saídas</title>
+    <link rel="stylesheet" href="css/saidas.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
   </head>
@@ -70,8 +70,8 @@
     </div>
     <!-------------------------------------------------------------------------------------------------------------------------------->
     <div class="container">
-      <button id="btn-recebim">Recebimentos</button>
-      <a href="saidas.html"><button id="btn-saida" >Saídas</button></a>
+        <a href="financeiro.html"><button id="btn-recebim">Recebimentos</button></a>
+      <button id="btn-saida">Saídas</button>
       <button id="btn-saldo">Saldo</button>
 
     </div>
@@ -82,7 +82,7 @@
       <button id="caixa-recebimento" onclick="toggleForm()">+</button>
 
       <div id="formContainer">
-        <h2>Novo Recebimento</h2>
+        <h2>Nova Saída</h2>
         <button id="close-btn" class="close-btn">&times;</button>
         <form id="registrationForm">
 
@@ -115,7 +115,7 @@
 
           <div class="input-container">
             <input type="date" id="dataRecebimento" placeholder=" " required />
-            <label for="dataRecebimento">Data de recebimento</label>
+            <label for="dataRecebimento">Data de saída</label>
           </div>
 
           <div class="input-container">
@@ -158,21 +158,21 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
 
   try {
-      const response = await fetch('http://localhost:3000/adicionar-recebimento', {
+      const response = await fetch('http://localhost:3000/adicionar-saida', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(recebimento),
       });
 
       if (response.ok) {
-          alert('recebimento adicionado com sucesso!');
+          alert('Saída adicionada com sucesso!');
           formContainer.style.display = "block";
       } else {
           const errorMessage = await response.text();
           alert('Erro: ' + errorMessage);
       }
   } catch (error) {
-      alert('Erro ao adicionar recebimento ' + error.message);
+      alert('Erro ao adicionar saída ' + error.message);
   }
 });
 
@@ -264,7 +264,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     };
 
     try {
-        const response = await fetch('http://localhost:3000/Recebimento', {
+        const response = await fetch('http://localhost:3000/Saidas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pesquisa), 
@@ -274,24 +274,24 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
             const pesquisa = await response.json(); 
 
             if (pesquisa.length === 0) {
-                alert('Nenhum produto encontrado!');
+                alert('Nenhum saída encontrado!');
                 return;
             }
 
             const tbody = document.querySelector('#table-container');
             tbody.innerHTML = '';  
 
-            recebimentos.forEach((recebimento) => {
+            saidas.forEach((saida) => {
       // Cria uma linha principal
       const mainRow = document.createElement('div');
       mainRow.classList.add('row', 'main-row');
       mainRow.innerHTML = `
-        <div class="cell"><strong>Data</strong><span>${recebimento.DATA_RECEB}</span></div>
-        <div class="cell"><strong>Código</strong><span>${recebimento.CODIGO}</span></div>
-        <div class="cell"><strong>Item</strong><span>${recebimento.NOME_BASICO}</span></div>
-        <div class="cell"><strong>Fornecedor</strong><span>${recebimento.FORNECEDOR}</span></div>
-        <div class="cell"><strong>Preço Aquisição</strong><span>${recebimento.PRECO_DE_AQUISICAO} R$</span></div>
-        <div class="cell"><strong>Quantidade</strong><span>${recebimento.QUANT}</span></div>
+        <div class="cell"><strong>Data</strong><span>${saida.DATA_RECEB}</span></div>
+        <div class="cell"><strong>Código</strong><span>${saida.CODIGO}</span></div>
+        <div class="cell"><strong>Item</strong><span>${saida.NOME_BASICO}</span></div>
+        <div class="cell"><strong>Fornecedor</strong><span>${saida.FORNECEDOR}</span></div>
+        <div class="cell"><strong>Preço Aquisição</strong><span>${saida.PRECO_DE_AQUISICAO} R$</span></div>
+        <div class="cell"><strong>Quantidade</strong><span>${saida.QUANT}</span></div>
       `;
 
       // Cria a linha de detalhes
@@ -301,16 +301,15 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
       detailsRow.innerHTML = `
         <div class="details-left">
           <div class="image-placeholder">
-            <img src="${recebimento.IMAGEM}" alt="Ícone de imagem">
+            <img src="${saida.IMAGEM}" alt="Ícone de imagem">
           </div>
         </div>
         <div class="details-right">
-          <div class="detail-item"><strong>Fragilidade:</strong><span>${recebimento.FRAGILIDADE}</span></div>
-          <div class="detail-item"><strong>Fabricante:</strong><span>${recebimento.FABRICANTE}</span></div>
-          <div class="detail-item"><strong>Lote:</strong><span>${recebimento.LOTE}</span></div>
-          <div class="detail-item"><strong>Validade:</strong><span>${recebimento.VALIDADE}</span></div>
-          <div class="detail-item"><strong>Categoria:</strong><span>Eletrônico</span></div>
-          <div class="detail-item"><strong>Preço Venda:</strong><span>${recebimento.PRECO_DE_VENDA} RS</span></div>
+          <div class="detail-item"><strong>Fragilidade:</strong><span>${saida.FRAGILIDADE}</span></div>
+          <div class="detail-item"><strong>Fabricante:</strong><span>${saida.FABRICANTE}</span></div>
+          <div class="detail-item"><strong>Lote:</strong><span>${saida.LOTE}</span></div>
+          <div class="detail-item"><strong>Validade:</strong><span>${saida.VALIDADE}</span></div>
+          <div class="detail-item"><strong>Preço Venda:</strong><span>${saida.PRECO_DE_VENDA} RS</span></div>
         </div>
       `;
 
@@ -346,7 +345,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
     </div>
     <div class="header">
-      <span class="title">Itens recebidos</span>
+      <span class="title">Itens retirados</span>
       <div class="divider"></div>
       </div>
 
@@ -354,7 +353,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
         <div class="table-container" id="table-container"></div>
     </div>
 
-    <script src="js/financeiro.js"></script>
+    <script src="js/saidas.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/app.js"></script>
   </body>

@@ -422,13 +422,146 @@ app.get("/Recebimento", async (req, res) => {
       res.status(500).send("Erro ao buscar dados.");
     }
   });
+
+  //------------------------------------------------SAIDAS
+  //------------------------------------------- vizualizar as saidas
+
+  app.get("/Saidas", async (req, res) => {
+    try {
+      // Estabelecendo a conexão com o banco de dados
+      let pool = await sql.connect(dbConfig);
+      
+      // Sua query SQL
+      const query = `
+        SELECT 
+          FORMAT(FactSaidas.DATA_SAIDA, 'dd/MM/yyyy') AS DATA_SAIDA,
+          DimProduto.CODIGO,
+          DimProduto.NOME_BASICO,
+          DimProduto.FABRICANTE,
+          FactSaidas.FORNECEDOR,
+          FactSaidas.PRECO_DE_AQUISICAO,
+          DimProduto.IMAGEM,
+          FactSaidas.QUANT,
+          FactSaidas.LOTE,
+          FORMAT(FactSaidas.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
+          DimProduto.PRECO_DE_VENDA,
+          DimProduto.FRAGILIDADE
+        FROM FactSaidas 
+        INNER JOIN DimProduto ON FactSaidas.CODIGO = DimProduto.CODIGO;
+      `;
+  
+      // Executando a query
+      const result = await pool.request().query(query);
+
+      
+  
+      // Retorna os dados como JSON
+      res.json(result.recordset);
+    } catch (err) {
+      console.error("Erro ao buscar dados:", err);
+      res.status(500).send("Erro ao buscar dados.");
+    }
+  });
+//---------------------------------------------------------
+//--------------------------------------- Adicionar saida
+
+app.post('/adicionar-saida', async (req, res) => {
+    const {
+        fornecedor,
+        codigo,
+        quantidade,
+        numbLote,
+        dataRecebimento,
+        validade,
+        precoAqui
+    } = req.body;
+
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+        INSERT INTO FactSaidas(
+            DATA_SAIDA, QUANT, CODIGO, VALIDADE,
+            PRECO_DE_AQUISICAO, LOTE, FORNECEDOR
+             
+        )
+        VALUES (
+            @data_Receb, @quantidade, @codigo, @validade,  
+            @precoAqui, @numbLote, @fornecedor
+        )
+    `;
+
+        const request = new sql.Request();
+        request.input('fornecedor', sql.NVarChar, fornecedor);
+        request.input('codigo', sql.BigInt, codigo);
+        request.input('quantidade', sql.BigInt, quantidade);
+        request.input('numbLote', sql.BigInt, numbLote);
+        request.input('data_Receb', sql.DateTime, dataRecebimento);
+        request.input('precoAqui', sql.Decimal, precoAqui);
+        request.input('validade', sql.Date, validade);
+        
+        await request.query(query);
+
+        res.send('Produto adicionado com sucesso!');
+    } catch (error) {
+        res.status(500).send('Erro ao adicionar produto: ' + error.message);
+    }
+});
+//--------------------------------------------------------------------------
+
+
+  //Pesquisa financeiro
+  app.post("/Recebimento", async (req, res) => {
+    
+    try {
+      // Estabelecendo a conexão com o banco de dados
+      let pool = await sql.connect(dbConfig);
+      const { codigo } = req.body;
+      
+      // Sua query SQL
+      const query = `
+        SELECT 
+          FORMAT(FactRecebimento.DATA_RECEB, 'dd/MM/yyyy') AS DATA_RECEB,
+          DimProduto.CODIGO,
+          DimProduto.NOME_BASICO,
+          DimProduto.FABRICANTE,
+          FactRecebimento.FORNECEDOR,
+          FactRecebimento.PRECO_DE_AQUISICAO,
+          DimProduto.IMAGEM,
+          FactRecebimento.QUANT,
+          FactRecebimento.LOTE,
+          FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
+          DimProduto.PRECO_DE_VENDA,
+          DimProduto.FRAGILIDADE
+        FROM FactRecebimento 
+        INNER JOIN DimProduto ON FactRecebimento.CODIGO = DimProduto.CODIGO;
+      `;
+  
+      // Executando a query
+      const result = await pool.request().query(query);
+
+      if (codigo) {
+        query += ' WHERE DimProduto.CODIGO = @entrada';
+    }
+
+    const request = new sql.Request();
+    if (codigo) {
+        request.input('entrada', sql.BigInt, codigo);
+    }
+  
+      // Retorna os dados como JSON
+      res.json(result.recordset);
+    } catch (err) {
+      console.error("Erro ao buscar dados:", err);
+      res.status(500).send("Erro ao buscar dados.");
+    }
+  });
   
 
 //---------------------------------ADICIONAR PRODUTO FINANACEIRO 
 
 app.post('/adicionar-recebimento', async (req, res) => {
     const {
-        nomeBasico,
         fornecedor,
         codigo,
         quantidade,
@@ -454,7 +587,6 @@ app.post('/adicionar-recebimento', async (req, res) => {
     `;
 
         const request = new sql.Request();
-        request.input('nomeBasico', sql.NVarChar, nomeBasico);
         request.input('fornecedor', sql.NVarChar, fornecedor);
         request.input('codigo', sql.BigInt, codigo);
         request.input('quantidade', sql.BigInt, quantidade);
@@ -465,11 +597,14 @@ app.post('/adicionar-recebimento', async (req, res) => {
         
         await request.query(query);
 
-        res.send('Produto adicionado com sucesso!');
+        res.send('Recebimento adicionado com sucesso!');
     } catch (error) {
-        res.status(500).send('Erro ao adicionar produto: ' + error.message);
+        res.status(500).send('Erro ao adicionar recebimento: ' + error.message);
     }
 });
+
+///////
+
 
 
   //---------------------------------------------------------INserir dados no formulario recebimento
@@ -541,4 +676,36 @@ app.listen(port, () => {
 });
   
 
+//---------------------------------------------------------Deletar item
 
+// Deleta o item respectivo na tela de edição
+
+app.post('/deletar-produto', async (req, res) => {
+    const { codigo, senha } = req.body;
+
+    // Verificação de senha
+    if (senha !== 'professor123') {
+        return res.status(403).send('Senha incorreta!');
+    }
+
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+            DELETE FROM DimProduto WHERE CODIGO = @codigo
+        `;
+        const request = new sql.Request();
+        request.input('codigo', sql.SmallInt, codigo);
+
+        const result = await request.query(query);
+
+        if (result.rowsAffected[0] > 0) {
+            res.send('Produto excluído com sucesso!');
+        } else {
+            res.status(404).send('Produto não encontrado!');
+        }
+    } catch (error) {
+        console.error('Erro ao excluir produto:', error.message);
+        res.status(500).send('Erro ao excluir produto: ' + error.message);
+    }
+});

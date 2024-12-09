@@ -29,7 +29,7 @@ document
   .getElementById("formContainer")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
-    const nome = document.getElementById("productName").value;
+    
     const data = document.getElementById("receiving_date").value;
     const quantidade = document.getElementById("quantity_received").value;
     const codigo = document.getElementById("product_code").value;
@@ -46,7 +46,7 @@ document
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        Nome: nome,
+        
         Data: data,
         Quantidade: quantidade,
         Codigo: codigo,
@@ -60,6 +60,7 @@ document
       alert("Recebimento adicionado com sucesso!");
       document.getElementById("productForm").reset(); // Limpa o formulário
       formContainer.style.display = "none";
+
     } else {
       alert("Erro ao adicionar recebimento!");
     }
