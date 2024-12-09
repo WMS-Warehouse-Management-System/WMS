@@ -1,10 +1,247 @@
-
+/* TUDO CERTO */
 
 /* Reset */
 body {
+    padding: 0;
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: F0F0F0;
+}
+
+
+
+
+/* Barra de busca alinhada em linha */
+#barradebusca {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* Espaçamento entre os elementos */
+    padding: 1rem; /* Espaço interno */
+    background-color: #f4f4f4;
+    border-radius: 1vh;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+/* Botão Filtrar */
+#filtrarcontainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Espaçamento entre o botão e a barra de pesquisa */
+}
+
+#filtrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3vh;
+    width: auto; /* Ajuste automático ao conteúdo */
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border-radius: 1vh;
+    border: 1px solid #ccc;
+    box-shadow: 0.1em 0.1em;
+    font-weight: 400;
+    cursor: pointer;
+    gap: 0.5rem; /* Espaçamento entre ícone e texto */
+}
+
+/* Ícone no botão Filtrar */
+#filtrar i {
+    font-size: 1.2em;
+    color: #FFCC00;
+}
+
+/* Barra de entrada */
+#entrada {
+    width: 30vw;
+    height: 4vh;
+    border-radius: 1vh;
+    border: 1px solid #ccc;
+    padding: 0 1rem;
+    font-size: larger;
+    box-shadow: 0.1em 0.1em;
+}
+
+/* Botão Pesquisar */
+#pesquisar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
+    width: auto; /* Ajuste automático ao conteúdo */
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border-radius: 1vh;
+    border: 1px solid #ccc;
+    box-shadow: 0.1em 0.1em;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+/* Dropdowns nos filtros */
+select {
+    width: 10vw;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    font-size: 14px;
+    color: #fff;
+    background-color: #FFCC00;
+    border: none;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    appearance: none; /* Remove a seta padrão */
+}
+
+/* Estilo dos campos de data */
+.datasize {
+    width: 6vw;
+    height: 4vh;
+    margin-right: 2%;
+    border: 1px solid #ccc;
+    border-radius: 1vh;
+    padding: 0.5rem;
+    box-shadow: 0.1em 0.1em;
+}
+
+/* Alinhamento do container dos filtros */
+#caixote {
+    display: none; /* Inicialmente escondido */
+    position: absolute;
+    top: 50px; /* Ajuste para aparecer abaixo do botão Filtrar */
+    width: 20vw;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 1vh;
+    padding: 1rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* Mostra o dropdown quando ativo */
+#caixote.active {
+    display: block;
+}
+
+#ajeitar{
+    display: flex;
+    flex-direction: column;
+}
+#subajeitada{
+    display: flex;
+    justify-items: center;
+    justify-content: space-around;
+    margin-top: 5%;
+}
+#textinho{
+    color: #FFCC00;
+}
+#dropdown {
+    display: none;
+    position: relative;
+    margin-top: 5%;
+    width: 5vw;
+    background-color: transparent;
+    border-radius: 0.5vh;
+    all: unset;
+    z-index: 1;
+}
+
+#caixote.active #dropdown {
+    display: block;
+}
+
+/* estilizando os selects */
+select {
+    width: 10vw;
+    margin-top: 4%;
+    margin-left: 10%;
+    padding: 0.9vh 0.9vw;
+    font-size: 14px;
+    color: #fff;
+    background-color: #FFCC00;
+    border-color: transparent;
+    border-radius: 0.5vh;
+    appearance: none; /* remove a seta padrao do select */
+    cursor: pointer;
+}
+
+/* estilo quando o select e focado */
+select:focus {
+    outline: none;
+    border-color: #FFCC00;
+}
+
+/* estilizando as opçoes do select */
+option {
+    font-size: 14px;
+    padding: 1vh;
+    color: #ffffff;
+}
+
+/* Estilo quando o select é hovered */
+select:hover {
+    border-color: #FFCC00;
+}
+
+select:hover option:hover {
+    background-color: #eaeaea;
+}
+
+#inputdata{
+    margin-top: 5%;
+    margin-left: 10%;
+}
+.datasize{
+    width: 6vw;
+    height: 4vh;
+    margin-right: 2%;
+    appearance: none;
+    border-color: transparent;
+    background-color: #f4f4f4;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 1vh;
+}
+
+#ordernaritem{
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+/* acabou mudanças */
+#entrada {
+    
+    z-index: 1;
+    width: 40vw;
+    height: 4vh;
+    border-radius: 1vh;
+    border: 1px solid #ccc;
+    font-size: larger;
+    color: #000;
+    box-shadow: 0.1em 0.1em;
+}
+
+#entrada::placeholder {
+    color: #FFCC00; /* Cor do placeholder */
+    font-size: 2.5vh; /* Tamanho da fonte do placeholder */
+    opacity: 1; /* Garante visibilidade */
+}
+#entrada:focus, #entrada:focus, #entradao:focus {
+    outline: 0;
+}
+
+#pesquisar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
+    width: 8vw;
+    background-color: #ffff;
+    border-radius: 1vh;
+    box-shadow: 0.1em 0.1em;
+    border: 1px solid #ccc; /* Borda para consistência */
+    font-weight: 300;
+    cursor: pointer;
 }
 /******************************************/
 .navbar-caixa {
@@ -315,42 +552,27 @@ body {
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 #caixa-recebimento {
+    width: 9vh;
     height: 9vh;
-    padding: 2vh 3vh;
-    font-size: 3vh;
+    border-radius: 50%;
+    font-size: 8.7vh;
     font-weight: 500;
-    background-color: White;
-    color: #FFCC00;
+    background-color: #FFCC00;
+    color: White;
     border: solid 0.4vh #FFCC00;
     cursor: pointer;
-    border-radius: 1vh;
     display: flex;
-    margin-right:4vh ;
-    margin-top: 60vh;
-    align-content: center;
     justify-content: center;
+    align-items: center;
+    margin-top: 60vh;
+    margin-right:4vh ;
     justify-self: right;
 }
 
+#caixa-recebimento:hover{
+    background-color: White;
+    color: #FFCC00;
 
-#caixa-recebimento .circle{
-    border-radius: 50%;
-    width: 5vh;
-    height: 5vh;
-    margin-right: 1vh;
-    background-color: #FFCC00;
-    color: white;
-    font-size: 4.5vh;
-}
-
-#caixa-recebimento:hover {
-    background-color: #FFCC00;
-    color: white;  
-    
-    &.circle{
-        background-color: white;
-        color: #FFCC00; 
-    }
 }
 
 /* Estilos do formulário (inicialmente oculto) */
@@ -370,23 +592,23 @@ body {
     max-width: 450px;
     width: 100%;
     margin-top: -80vh;
-    z-index: 1;
+    z-index: 99999;
 }
 
 #formContainer h2{
     justify-self: center;
     font-size: 4vh;
-    z-index: 999;
+    z-index: 9911119;
 }
 
 /* Estilos do campo de input */
 .input-container {
     position: relative;
     margin-bottom: 20px;
-    z-index: 999;
+    z-index: 991119;
 }
 
-input {
+#registrationForm input {
     display: flex;
     justify-self: center;
     align-content: center;
@@ -399,16 +621,16 @@ input {
     border-radius: 5px;
     background-color: #fff;
     outline: none;
-    z-index: 999;
+    z-index: 9911119;
 }
 
-input:focus {
+#registrationForm input:focus {
     border-color: #FFCC00;
-    z-index: 999;
+    z-index: 911199;
 }
 
 /* Estilos das labels */
-label {
+#registrationForm label {
     position: absolute;
     top: 50%;
     left: 6.4vh;
@@ -417,21 +639,21 @@ label {
     font-size: 16px;
     color: #999;
     transition: all 0.3s ease;
-    z-index: 999;
+    z-index: 911199;
 }
 
-input:focus + label,
-input:not(:placeholder-shown) + label {
+#registrationForm input:focus + label,
+#registrationForm input:not(:placeholder-shown) +  label {
     top: -1vh;
     font-size: 15px;
     color: #FFCC00;
     font-family: 'poppins', sans-serif;
-    z-index: 999;
+    z-index: 991119;
 }
 
-input::placeholder {
+#registrationForm input::placeholder {
     visibility: hidden;
-    z-index: 999;
+    z-index: 991119;
 }
 
 /* Estilo do botão de envio */
@@ -496,11 +718,13 @@ input::placeholder {
     width: 19vh;
     height: 9vh;
     border-radius:1.2vh ;
-    border: #FFCC00;
+    border-style: solid;
+    border-color: #FFCC00;
+    border-width: 0.27vw;
     font-size: 2.5vh;
     font-weight: 600;
-    color: white;
-    background-color: #FFCC00;
+    color: #FFCC00;
+    background-color: WHIte;
   }
 
   #btn-saldo{
@@ -508,27 +732,31 @@ input::placeholder {
     width: 19vh;
     height: 9vh;
     border-radius:1.2vh ;
-    border: #FFCC00;
+    border-style: solid;
+    border-color: #FFCC00;
+    border-width: 0.27vw;
     font-size: 2.5vh;
     font-weight: 600;
-    color: white;
-    background-color: #FFCC00;
+    color: #FFCC00;
+    background-color: white;
   }
 
   #btn-saida:hover, #btn-saldo:hover{
     border-style: solid;
     border-color: #FFCC00;
     border-width: 0.27vw;
-    background-color: white;
-    color: #FFCC00;
+    background-color: #FFCC00;
+    color: white;
     cursor: pointer;
   }
 
 
 
   #toggle-filter {
-    position:static;
+    
     display: flex;
+    width: 100%;
+    justify-self: center;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: 520;
@@ -536,62 +764,19 @@ input::placeholder {
     background-color: white;
     color: #FFCC00;
     margin-top: -65.7vh;
-    margin-left: 12vw;
-    border: solid;
-    border-width: 0.287vh;
-    border-color: #FFCC00;
-    border-radius: 0.5vh;
     cursor: pointer;
+    justify-content: center; /* Centraliza os elementos horizontalmente */
+    align-items: center; /* Alinha os elementos verticalmente */
+    gap: 0.5%; /* Espaçamento entre os itens */
+    padding: 0; /* Remove preenchimentos extras */
+    border-radius: 1vh; /* Bordas arredondadas */
+ 
+    
 }
 
-#toggle-filter:hover {
-    background-color: #f1f1f1;
-}
 
-.filter-overlay {
-    display: none;
-    position: absolute;
-    top: 31vh;
-    left: 19vw;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 20vw;
-    background: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    z-index: 1000;
-    border-radius: 5px;
-}
 
-.filter-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.filter-section label{
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-
-}
-
-.filter-section input, .filter-section select, .filter-section button {
-    padding: 8px;
-    font-size: 16px;
-}
-
-.filter-section button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.filter-section button:hover {
-    background-color: #218838;
-}
 
 .products-list {
     margin-top: 20px;
@@ -607,8 +792,8 @@ input::placeholder {
 
 /* -----linha tela */
 .header {
-    position: relative;
     display: flex;
+    z-index: 1;
     margin-top: 2vh;
     margin-bottom:1.5vh ;
     justify-self: center;
@@ -642,10 +827,10 @@ input::placeholder {
     width: 100%;
     max-width: 800px;
     margin-top: auto;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-    height: 55vh;
+    overflow-y: auto; /* ativa o scroll vertical */
+    overflow-x: hidden; /* desativa o scroll horizontal */
+    height: 60vh;
+    padding-right: 1vw;
 }
 
 .linhaPrincipal{
@@ -653,11 +838,25 @@ input::placeholder {
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0.7vh;
-    gap: 2vh;
+    gap: 5vh;
 }
+.table-container::-webkit-scrollbar {
+    width: 0.6vw; /* largura da barra */
+  }
+  
+.table-container::-webkit-scrollbar-thumb {
+    width: 2vw;
+    background: #FFCC00; /* cor do "polegar" da barra */
+    border-radius: 2vw; /* arredondamento */
+  }
+  
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #c8a001; /* cor ao passar o mouse */
+  }
 
 .produtos{
-    margin-bottom: 1.6vh;
+    margin-bottom: 1.9vh;
+    gap: 5vh;
 
 }
 .row {
@@ -670,8 +869,9 @@ input::placeholder {
     cursor: pointer;
     background-color: #f5f5f5;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
+    margin-bottom: 5px; /* Adiciona um pequeno espaçamento entre as linhas principais */
 }
+    
 
 .cell {
     display:flex;
@@ -696,8 +896,13 @@ input::placeholder {
     flex-direction: row;
     padding: 15px 20px;
     background-color: #fff7e6;
-    border-top: 3px solid #ffcc00;
+    border-top: 0.3vh solid #ffcc00;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -1vh;
 }
+
+
 
 .details-left {
     flex: 1;

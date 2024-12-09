@@ -1,4 +1,4 @@
-
+/* TUDO CERTO */
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
@@ -220,65 +220,7 @@ app.post('/ver-catalogo', async (req, res) => {
     }
 });
 
-// ----------------------------------------------------ESTOQUE REAL
 
-app.get('/estoque-real', async (req, res) => {
-    try {
-        await sql.connect(dbConfig);
-
-        const query = `
-	        SELECT 
-                CODIGO,
-                NOME_BASICO,
-                QUANTIDADE,
-                QUANT_RECENTE
-            FROM vw_EstoqueReal
-            ORDER BY CODIGO ASC;
-        `;
-        
-        const result = await new sql.Request().query(query);
-
-        res.json(result.recordset);  // Retorna todos os produtos
-    } catch (error) {
-        res.status(500).send('Erro ao obter os produtos: ' + error.message);
-    }
-});
-
-
-
-// ----------------------------------------------------ESTOQUE REAL COM BARRA DE PESQUISA
-app.post('/estoque-real', async (req, res) => {
-    try {
-        await sql.connect(dbConfig);
-
-        const { codigo } = req.body;  
-
-        let query = `
-	        SELECT 
-                CODIGO,
-                NOME_BASICO,
-                QUANTIDADE,
-                QUANT_RECENTE
-            FROM vw_EstoqueReal
-        `;
-        
-        if (codigo) {
-            query += ' WHERE CODIGO = @codigo ORDER BY CODIGO ASC';
-        }
-
-        const request = new sql.Request();
-
-        if (codigo) {
-            request.input('codigo', sql.BigInt, codigo);
-        }
-
-        const result = await request.query(query);
-
-        res.json(result.recordset);  
-    } catch (error) {
-        res.status(500).send('Erro ao obter os produtos: ' + error.message);
-    }
-});
 
 
 // -----------------------------------------------------adicionar-usuario
@@ -309,7 +251,6 @@ app.post('/adicionar-usuario', async (req, res) => {
         res.status(500).send('Erro ao adicionar Usuario: ' + 'ta duplicano ai meu bom');
     }
 });
-
 
 // ----------------------------------------------------login
 
@@ -457,10 +398,11 @@ app.get("/Recebimento", async (req, res) => {
           DimProduto.CODIGO,
           DimProduto.NOME_BASICO,
           DimProduto.FABRICANTE,
-          FactRecebimento.Fornecedor,
+          FactRecebimento.FORNECEDOR,
           FactRecebimento.PRECO_DE_AQUISICAO,
           DimProduto.IMAGEM,
           FactRecebimento.QUANT,
+          FactRecebimento.LOTE,
           FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
           DimProduto.PRECO_DE_VENDA,
           DimProduto.FRAGILIDADE
@@ -470,6 +412,8 @@ app.get("/Recebimento", async (req, res) => {
   
       // Executando a query
       const result = await pool.request().query(query);
+
+      
   
       // Retorna os dados como JSON
       res.json(result.recordset);
@@ -532,7 +476,7 @@ app.post('/adicionar-recebimento', async (req, res) => {
 
 // Rota para receber os dados do formulário
 app.post('/add-product', async (req, res) => {
-    const { productName, productFont, productCode, quantityReceived, numbLote, receivingDate, productValidade } = req.body;
+    const { productName,productFont, productCode, quantityReceived, numbLote, receivingDate, productValidade } = req.body;
 
     try {
         // Conecta ao banco de dados usando a configuração definida em dbConfig
@@ -587,7 +531,14 @@ app.get('/telaInicial', async (req, res) => {
 // const cadastroRoutes = require('./routes/cadastro');
 // app.use('/cadastro', cadastroRoutes);
 
+
+
+
+
+
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
   
+
+

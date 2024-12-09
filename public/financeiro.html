@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+<!-- /* TUDO CERTO */ -->
 <html lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menu Lateral</title>
+    <title>Movimentações</title>
     <link rel="stylesheet" href="css/financeiro.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
   </head>
   <body>
     <!---------------NAVBAR-------------------------------------------------->
@@ -73,8 +76,10 @@
 
     </div>
 
+    
+
     <div class="conteudo_pag">
-      <button id="caixa-recebimento" onclick="toggleForm()"><div class="circle">+</div>Recebimento</button>
+      <button id="caixa-recebimento" onclick="toggleForm()">+</button>
 
       <div id="formContainer">
         <h2>Novo Recebimento</h2>
@@ -118,7 +123,7 @@
           </div>
 
           <div class="input-container">
-            <input type="date" id="validade" placeholder=" " required />
+            <input type="date" id="validade" placeholder=" "  />
             <label for="validade">Data de Validade</label>
           </div>
 
@@ -140,6 +145,8 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
   event.preventDefault();
 
   const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+
+  const formContainer = document.getElementById("formContainer");
 
   const recebimento = {
       nomeBasico: document.getElementById('productName').value,
@@ -182,43 +189,75 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
 
     <!----------------------------------------------------------------------------------------------------------------------------------------->
-    <button id="toggle-filter">Filtrar Recebimentos &#9660;</button>
 
-    <div class="filter-overlay" id="filter-overlay">
-       
-          <div class="filter-section">
-            <label for="fornecedor">Fornecedor:</label>
-            <select id="fornecedor">
-                <option value="">Todos</option>
-                <!-- Opções serão carregadas dinamicamente -->
-            </select>
-        
-            <label for="fabricante">Fabricante:</label>
-            <select id="fabricante">
-                <option value="">Todos</option>
-                <!-- Opções serão carregadas dinamicamente -->
-            </select>
-        
-            <label for="tipo">Tipo de Produto:</label>
-            <select id="tipo">
-                <option value="">Todos</option>
-                <!-- Opções serão carregadas dinamicamente -->
-            </select>
-        
-            <label for="nome">Nome do Produto:</label>
-            <select id="nome">
-                <option value="">Todos</option>
-                <!-- Opções serão carregadas dinamicamente -->
-            </select>
-        
-            <label for="ordenacao">Ordenar por:</label>
-            <select id="ordenacao">
-                <option value="nome">Nome (A-Z)</option>
-                <option value="data_validade">Data de Validade</option>
-            </select>
 
-            <button id="filtrar">Aplicar Filtros</button>
-        </div>
+    <div id="toggle-filter">
+      <div id="filtrarcontainer">
+      <!-- mudanças filtro -->
+      <div id="filtrarcontainer">    
+          <div id="filtrar"><i class="fa fa-filter"></i>Filtrar</div>
+          <div id="caixote">
+              <div id="ajeitar">
+                  <div id="subajeitada">
+                  Filtros
+                  <div id="textinho">
+                     Limpar Filtros
+                  </div> 
+                  </div>
+                  <div id="dropdown" class="dentrodropdown">
+                          <select id="categoria">
+                              <option value="Categoria">Categoria</option>
+                              <option value="papelaria">Papelaria</option>
+                              <option value="escritorio">Escritório</option>
+                              <option value="eletronicos">Eletrônicos</option>
+                              <option value="armazenagem">Armazenagem</option>
+                          </select>
+                          <select id="fornecedor">
+                              <option value="">Fornecedor</option>
+                              <option value="papelDistrib">Papel Distrib.</option>
+                              <option value="lapisCo">Lápis&Co</option>
+                              <option value="bicDistrib">Bic Distrib</option>
+                              <option value="escolarLTDA">Escolar LTDA</option>
+                              <option value="kalunga">Kalunga</option>
+                              <option value="embalagensBrasil">Embalagens Brasil</option>
+                          </select>
+                          <select id="fabricante">
+                              <option value="">Fabricante</option>
+                              <option value="tilibra">Tilibra</option>
+                              <option value="faberCastell">Faber-Castell</option>
+                              <option value="leoLeo">Leo&Leo</option>
+                              <option value="bic">Bic</option>
+                              <option value="sony">Sony</option>
+                              <option value="duracell">Duracell</option>
+                              <option value="hp">HP</option>
+                              <option value="vacuPack">VacuPack</option>
+                          </select>
+                      
+                  </div>
+                  
+                  <div id="inputdata">Data
+                      <div id="ajeitardata">
+                      <input type="date" id="dedata" class="datasize"></input>
+                      à
+                      <input type="date" id="atedata" class="datasize"></input>
+                      </div>
+                  </div>
+                  <div id="ordernaritem">Ordenar Item
+                      <div id="botoes">
+                          <button>A a Z</button>
+                          <button>Z a A</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      
+      <!-- acabou as mudanças -->
+      
+          <input type="text" id="entrada" placeholder="Digite o código do produto...">
+          <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+      
+    </div>
+  </div>
     </div>
     <div class="header">
       <span class="title">Itens recebidos</span>
@@ -226,9 +265,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
       </div>
 
       <div class="tabela-recebimentos">
-        
         <div class="table-container" id="table-container"></div>
-      
     </div>
 
     <script src="js/financeiro.js"></script>
