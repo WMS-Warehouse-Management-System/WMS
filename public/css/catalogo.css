@@ -150,7 +150,22 @@ select:hover option:hover {
     margin-top: 5%;
     margin-left: 10%;
 }
-
+#ordernaritem{
+    margin-top: 5%;
+    margin-left: 10%;
+}
+.botoes{
+    background-color: #f4f4f4;
+    appearance: none;
+    height: 4vh;
+    width: 3vw;
+    border-radius: 1vh;
+    border: 0.1vh solid rgb(173, 173, 173);
+    cursor: pointer;;
+}
+.botoes.clicked {
+    background-color: rgb(173, 173, 173);
+}
 /* acabou mudanças */
 #entrada{
     width: 50vw;
