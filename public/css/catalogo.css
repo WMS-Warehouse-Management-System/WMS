@@ -39,7 +39,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2%;
 
 }
 
@@ -76,7 +75,7 @@ body {
 }
 
 #filtrar:hover {
-    transform: scale(1.1);
+    transform: scale(1.03);
 }
 
 textarea:focus,
@@ -90,15 +89,9 @@ select:focus {
     justify-content: center;
     align-items: center;
     margin-top: 5vh;
-    gap: 5vh;
+    gap: 1.5vh;
 }
 
-#formPesquisa {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1vh;
-}
 
 #codigo {
     /* ----------------------------------------- */
@@ -148,7 +141,7 @@ select:focus {
     }
     
     #pesquisar:hover {
-        transform: scale(1.1); 
+        transform: scale(1.03); 
     }
     
     textarea:focus, input:focus, select:focus {
@@ -158,20 +151,6 @@ select:focus {
 #filtrarcontainer {
     position: relative;
     display: inline-block;
-}
-
-#filtrar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 4vh;
-    width: 8vw;
-    background-color: #ffff;
-    border-radius: 1vh;
-    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
-    margin-right: 2%;
-    font-weight: 300;
-    cursor: pointer;
 }
 
 #caixote {
@@ -314,18 +293,6 @@ textarea:focus,
 input:focus,
 select:focus {
     outline: 0;
-}
-
-#pesquisar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 4vh;
-    width: 8vw;
-    background-color: #ffff;
-    border-radius: 1vh;
-    box-shadow: 0.1em 0.1em;
-    margin-left: 2%;
 }
 
 
