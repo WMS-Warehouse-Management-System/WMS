@@ -102,20 +102,19 @@
 document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
     event.preventDefault(); // Evita o comportamento padrão do formulário
 
-    // Certifique-se de que 'pesquisa' seja declarada antes de ser usada
     const pesquisa = {
-        codigo: document.getElementById('codigo').value, // Captura o valor do campo 'codigo'
+        codigo: document.getElementById('codigo').value, 
     };
 
     try {
         const response = await fetch('http://localhost:3000/ver-catalogo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(pesquisa), // Passa 'pesquisa' no body
+            body: JSON.stringify(pesquisa), 
         });
 
         if (response.ok) {
-            const pesquisa = await response.json(); // Obtém os produtos do servidor
+            const pesquisa = await response.json(); 
 
             if (pesquisa.length === 0) {
                 alert('Nenhum produto encontrado!');
@@ -123,7 +122,7 @@ document.getElementById('formPesquisa').addEventListener('submit', async functio
             }
 
             const tbody = document.querySelector('#tabela-estoque tbody');
-            tbody.innerHTML = '';  // Limpa a tabela antes de adicionar novas linhas
+            tbody.innerHTML = '';  
 
           pesquisa.forEach((pesquisa) => {
               const row = `

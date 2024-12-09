@@ -15,8 +15,24 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: 5vh;
+    gap: 5vh ;
 }
-/* mudanças filtro */
+
+#formPesquisa{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+}
+
+#codigo{
+    height: 3vh;
+    width: 15vw;
+    border-radius: 0.5vh;
+    border: 1px solid black ;
+    padding: 1vh;
+}
+
 #filtrarcontainer {
     position: relative;
     display: inline-block;
