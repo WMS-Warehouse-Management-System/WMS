@@ -90,7 +90,9 @@
     <div id="barradebusca">
         <!-- mudanças filtro -->
         <div id="filtrarcontainer">
-            <div id="filtrar">Filtrar</div>
+            <div class="div_pesquisa">
+                <button id="filtrar"><img src="imagens/filtro.svg" alt="" id="fil">Filtrar</button>
+            </div>
             <div id="caixote">
                 <div id="ajeitar">
                     <div id="subajeitada">
@@ -148,8 +150,10 @@
         </div>
         <!-- acabou as mudanças -->
         <form id="formPesquisa">
-            <div id="area"><input type="text" id="codigo"></div>
-            <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+            <div class="div_pesquisa">
+                <div id="area"><input type="text" id="codigo"></div>
+                <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+            </div>
         </form>
     </div>
 
@@ -184,48 +188,48 @@
         // HAMBURGUER 
         document.addEventListener('DOMContentLoaded', function () {
 
-const estoqueItem = document.querySelector('.estoque-item');
-const estoqueSubMenu = document.getElementById('estoque-submenu');
-const estoqueLink = document.getElementById('esto');
-const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
+            const estoqueItem = document.querySelector('.estoque-item');
+            const estoqueSubMenu = document.getElementById('estoque-submenu');
+            const estoqueLink = document.getElementById('esto');
+            const iconeEstoque = estoqueLink.querySelector('.boxes-of-good-good');
 
-const submenuLinks = estoqueSubMenu.querySelectorAll('a');
-submenuLinks.forEach(link => {
-    link.addEventListener('click', function (event) {
-        event.stopPropagation();
-    });
-});
+            const submenuLinks = estoqueSubMenu.querySelectorAll('a');
+            submenuLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
 
-estoqueItem.addEventListener('click', function (event) {
-    event.preventDefault();
+            estoqueItem.addEventListener('click', function (event) {
+                event.preventDefault();
 
-    estoqueItem.classList.toggle('active');
-    if (estoqueItem.classList.contains('active')) {
-        estoqueSubMenu.style.display = "block";
-        estoqueItem.style.backgroundColor = "#000";
-        estoqueLink.style.color = "#319DF6";
-        iconeEstoque.style.backgroundImage = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E\")";
-    } else {
-        estoqueSubMenu.style.display = "none";
-        estoqueItem.style.backgroundColor = "";
-        estoqueLink.style.color = "";
-        iconeEstoque.style.backgroundImage = "";
-    }
-});
+                estoqueItem.classList.toggle('active');
+                if (estoqueItem.classList.contains('active')) {
+                    estoqueSubMenu.style.display = "block";
+                    estoqueItem.style.backgroundColor = "#000";
+                    estoqueLink.style.color = "#319DF6";
+                    iconeEstoque.style.backgroundImage = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E\")";
+                } else {
+                    estoqueSubMenu.style.display = "none";
+                    estoqueItem.style.backgroundColor = "";
+                    estoqueLink.style.color = "";
+                    iconeEstoque.style.backgroundImage = "";
+                }
+            });
 
-// Fecha o dropdown ao clicar fora
-document.addEventListener('click', function (event) {
-    if (!estoqueItem.contains(event.target)) {
-        estoqueItem.classList.remove('active');
-        estoqueSubMenu.style.display = "none";
-        estoqueItem.style.backgroundColor = "";
-        estoqueLink.style.color = "";
-        iconeEstoque.style.backgroundImage = "";
-    }
-});
+            // Fecha o dropdown ao clicar fora
+            document.addEventListener('click', function (event) {
+                if (!estoqueItem.contains(event.target)) {
+                    estoqueItem.classList.remove('active');
+                    estoqueSubMenu.style.display = "none";
+                    estoqueItem.style.backgroundColor = "";
+                    estoqueLink.style.color = "";
+                    iconeEstoque.style.backgroundImage = "";
+                }
+            });
 
 
-});
+        });
 
         //SCRIPT QUE LIGA OS INPUT AO BACK-END  
         document.getElementById('formPesquisa').addEventListener('submit', async function (event) {

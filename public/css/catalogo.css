@@ -11,11 +11,11 @@ body {
 }
 
 /* CABEÇALHO */
-.texto-nav{
+.texto-nav {
     color: #1F6FAF;
 }
 
-.sidebar ul li #esto{
+.sidebar ul li #esto {
     color: #319DF6;
 
     & .boxes-of-good-good {
@@ -28,32 +28,132 @@ body {
     }
 }
 
-.estoque-item{
+.estoque-item {
     background-color: #000;
 }
 
-#barradebusca{
+/* --------------------Mecanismo_Pesquisa--------------------- */
+
+.div_pesquisa {
+    /* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+
+}
+
+
+/* --------------------Filtro--------------------- */
+
+#filtrar {
+    /* ----------------------------------------- */
+    height: 5.5vh;
+    width: 8.2vw;
+    /* ----------------------------------------- */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* ----------------------------------------- */
+    padding-left: 0.5%;
+    margin-right: 1%;
+    /* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2vh, 1.25vw, 3vh);
+    /* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#fil {
+    /* ----------------------------------------- */
+    height: 70%;
+    /* ----------------------------------------- */
+    background-color: white;
+}
+
+#filtrar:hover {
+    transform: scale(1.1);
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    outline: 0;
+}
+
+#barradebusca {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 5vh;
-    gap: 5vh ;
+    gap: 5vh;
 }
 
-#formPesquisa{
+#formPesquisa {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1vh;
 }
 
-#codigo{
-    height: 3vh;
-    width: 15vw;
-    border-radius: 0.5vh;
-    border: 1px solid black ;
-    padding: 1vh;
+#codigo {
+    /* ----------------------------------------- */
+    height: 5.4vh;
+    width: 55.10vw;
+    /* ----------------------------------------- */
+
+    padding-left: 0.5%;
+    /* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2.25vh, 1.5vw, 3.25vh);
+    /* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
 }
+
+#pesquisar {
+    /* ----------------------------------------- */
+        height: 5.5vh;
+        width: 10.7vw;
+    /* ----------------------------------------- */
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    /* ----------------------------------------- */
+        padding-left: 0.5%; 
+        margin-left: 1%;
+    /* ----------------------------------------- */
+        font-family: "Inter", sans-serif;
+        font-size: clamp(2vh,1.25vw,3vh); 
+    /* ----------------------------------------- */
+        background-color: white;
+        border-radius: 1.3vh;
+        cursor: pointer;
+        border: transparent;
+        box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+    }
+    
+    #pes {
+    /* ----------------------------------------- */
+        height: 50%;
+    /* ----------------------------------------- */
+        background-color: white;
+    }
+    
+    #pesquisar:hover {
+        transform: scale(1.1); 
+    }
+    
+    textarea:focus, input:focus, select:focus {
+        outline: 0;
+    }
 
 #filtrarcontainer {
     position: relative;
@@ -88,19 +188,23 @@ body {
 #caixote.active {
     display: block;
 }
-#ajeitar{
+
+#ajeitar {
     display: flex;
     flex-direction: column;
 }
-#subajeitada{
+
+#subajeitada {
     display: flex;
     justify-items: center;
     justify-content: space-around;
     margin-top: 5%;
 }
-#textinho{
+
+#textinho {
     color: #4E97D1;
 }
+
 #dropdown {
     display: none;
     position: relative;
@@ -127,7 +231,8 @@ select {
     background-color: #4E97D1;
     border-color: transparent;
     border-radius: 0.5vh;
-    appearance: none; /* remove a seta padrao do select */
+    appearance: none;
+    /* remove a seta padrao do select */
     cursor: pointer;
 }
 
@@ -153,11 +258,12 @@ select:hover option:hover {
     background-color: #eaeaea;
 }
 
-#inputdata{
+#inputdata {
     margin-top: 5%;
     margin-left: 10%;
 }
-.datasize{
+
+.datasize {
     width: 6vw;
     height: 4vh;
     margin-right: 2%;
@@ -168,28 +274,33 @@ select:hover option:hover {
     border-radius: 1vh;
 }
 
-#ordernaritem{
+#ordernaritem {
     margin-top: 5%;
     margin-left: 10%;
 }
-#ordernaritem{
+
+#ordernaritem {
     margin-top: 5%;
     margin-left: 10%;
 }
-.botoes{
+
+.botoes {
     background-color: #f4f4f4;
     appearance: none;
     height: 4vh;
     width: 3vw;
     border-radius: 1vh;
     border: 0.1vh solid rgb(173, 173, 173);
-    cursor: pointer;;
+    cursor: pointer;
+    ;
 }
+
 .botoes.clicked {
     background-color: rgb(173, 173, 173);
 }
+
 /* acabou mudanças */
-#entrada{
+#entrada {
     width: 50vw;
     height: 4vh;
     border-radius: 1vh;
@@ -198,11 +309,14 @@ select:hover option:hover {
     font-size: larger;
 
 }
-textarea:focus, input:focus, select:focus {
+
+textarea:focus,
+input:focus,
+select:focus {
     outline: 0;
 }
 
-#pesquisar{
+#pesquisar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -210,18 +324,18 @@ textarea:focus, input:focus, select:focus {
     width: 8vw;
     background-color: #ffff;
     border-radius: 1vh;
-    box-shadow: 0.1em 0.1em ;
+    box-shadow: 0.1em 0.1em;
     margin-left: 2%;
 }
 
 
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.content-table{
+.content-table {
     margin-top: 8vh;
     display: flex;
     justify-content: center;
@@ -231,11 +345,11 @@ textarea:focus, input:focus, select:focus {
     width: 81.51vw;
 }
 
-#tabela-estoque{
+#tabela-estoque {
     width: 81.51vw;
 }
 
-#tabela-estoque th{
+#tabela-estoque th {
     background-color: #4E97D1;
     height: 4.074vh;
     color: #fff;
@@ -243,33 +357,35 @@ textarea:focus, input:focus, select:focus {
     padding: 1vh;
 }
 
-#tabela-estoque tr, td{
+#tabela-estoque tr,
+td {
     background-color: #FFFFFF;
     height: 4.074vh;
     padding: 0.12vh 0.4vh 0.12vh 0.4vh;
-    
+
 }
 
-#cabecalho-table{
+#cabecalho-table {
     /* position: sticky; */
     top: 0;
 }
 
-.colunaAbrirDetalhes{
+.colunaAbrirDetalhes {
     background-color: #40ff00;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.colunaAbrirDetalhes{
+.colunaAbrirDetalhes {
     background-color: #F0F0F0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    
+
 }
-.colunaAbrirDetalhes button{
+
+.colunaAbrirDetalhes button {
     border: none;
     font-size: 20px;
     background-color: #fff;
@@ -280,13 +396,14 @@ textarea:focus, input:focus, select:focus {
 */
 /*-----LINHA DETALHES DA TABELA------*/
 
-.containerLinhaOculta{
+.containerLinhaOculta {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
-.containerLinhaDetalhes{
+
+.containerLinhaDetalhes {
     width: 75vw;
     height: 40vh;
     display: flex;
@@ -294,7 +411,8 @@ textarea:focus, input:focus, select:focus {
     align-items: center;
     gap: 5vh;
 }
-.imagemProduto{
+
+.imagemProduto {
     background-color: beige;
     height: 30vh;
     width: 18vw;
@@ -303,37 +421,37 @@ textarea:focus, input:focus, select:focus {
     align-items: center;
 }
 
-#imagemLinhaDetalhe{
+#imagemLinhaDetalhe {
     height: 100%;
     width: 100%;
 }
 
-.endereco-obs{
+.endereco-obs {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
 }
 
-#colunaTopico{
+#colunaTopico {
     background-color: #D9D9D9;
 }
 
-.celulaDetalhe{
+.celulaDetalhe {
     background-color: #F6F5F5;
     height: 4vh;
     width: 13vw;
     padding: 0.4vh;
 }
 
-#tableObservacoes{
+#tableObservacoes {
     height: 5vh;
     width: 26.85vw;
     padding: 0.4vh;
     background-color: #F6F5F5;
 }
 
-#celulaObservacoes{
+#celulaObservacoes {
     background-color: #F6F5F5;
 }
 
