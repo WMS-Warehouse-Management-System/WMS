@@ -1,13 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: 'inter';
+    box-sizing: border-box;
+    font-family: "Inter", serif;
 }
 
-body{
+body {
     background-color: #F0F0F0;
+    height: 100vh;
+}
+
+/* CABEÇALHO */
+.texto-nav{
+    color: #1F6FAF;
+}
+
+.sidebar ul li #esto{
+    color: #319DF6;
+
+    & .boxes-of-good-good {
+        display: inline-block;
+        width: 1.3em;
+        height: 1.3em;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E");
+    }
+}
+
+.estoque-item{
+    background-color: #000;
 }
 
 #barradebusca{
@@ -229,7 +251,7 @@ textarea:focus, input:focus, select:focus {
 }
 
 #cabecalho-table{
-    position: sticky;
+    /* position: sticky; */
     top: 0;
 }
 
@@ -313,4 +335,16 @@ textarea:focus, input:focus, select:focus {
 
 #celulaObservacoes{
     background-color: #F6F5F5;
+}
+
+/* FOOTER */
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 6vh;
+}
+
+.footer img {
+    height: auto;
+    width: 35vh;
 }
