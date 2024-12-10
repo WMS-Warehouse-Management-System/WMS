@@ -131,11 +131,15 @@
                             <h1>Informações de Entrada</h1>
 
                             <div class="caixaTexto">
-                                <input id="fabricante" type="text" placeholder="Fabricante">
+                                <input id="fabricante" type="text" name="fabricante" placeholder="Fabricante">
                             </div>
 
                             <div class="caixaTexto">
-                                <input id="fornecedor" type="text" placeholder="Fornecedor">
+                                <input id="fabricante" type="text" name="unidade" placeholder="unidade">
+                            </div>
+
+                            <div class="caixaTexto">
+                                <input id="fabricante" type="text" name="precoVenda" placeholder="Preço de venda">
                             </div>
 
                             <h1 id="fragil">Item Frágil?</h1>
@@ -208,41 +212,9 @@
         });
 
 
-        document.getElementById('formAdicional').addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            const SNProfessor = localStorage.getItem('SNProfessor');
-
-            const produto = {
-                codigo: document.getElementById('codigo').value,
-                nomebasico: document.getElementById('nomebasico').value,
-                nomeModificador: document.getElementById('nomemodificador').value,
-                descricao: document.getElementById('descricao').value,
-                inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
-            };
-
-            try {
-                const response = await fetch('http://localhost:3000/adicionar-produto', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(produto),
-                });
-
-                if (response.ok) {
-                    alert('Produto cadastrado com sucesso!');
-                } else {
-                    const errorMessage = await response.text();
-                    alert('Erro: ' + errorMessage);
-                }
-            } catch (error) {
-                alert('Erro ao cadastrar produto: ' + error.message);
-            }
-        });
-
     </script>
 
-    <script src="js/navbar.js"></script>
+    <script src="/js/navbar.js"></script>
 </body>
 
 </html>

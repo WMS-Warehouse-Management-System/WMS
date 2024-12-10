@@ -131,7 +131,7 @@
                             <div class="imagem">
                                 <div class="image-upload">
                                     <label for="image-input">Imagem</label>
-                                    <input type="file" id="image-input" name="imagem" accept="image/*" required>
+                                    <input type="file" id="image-input" name="imagem" accept="image/*" >
                                     <img id="uploaded-image" src="" alt="Uploaded Image">
                                 </div>
                             </div>
@@ -204,43 +204,10 @@
 
         });
 
-
-        document.getElementById('formAdicional').addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            const SNProfessor = localStorage.getItem('SNProfessor');
-
-            const produto = {
-                codigo: document.getElementById('codigo').value,
-                nomebasico: document.getElementById('nomebasico').value,
-                nomeModificador: document.getElementById('nomemodificador').value,
-                descricao: document.getElementById('descricao').value,
-                inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
-            };
-
-            try {
-                const response = await fetch('http://localhost:3000/adicionar-produto', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(produto),
-                });
-
-                if (response.ok) {
-                    alert('Produto cadastrado com sucesso!');
-                } else {
-                    const errorMessage = await response.text();
-                    alert('Erro: ' + errorMessage);
-                }
-            } catch (error) {
-                alert('Erro ao cadastrar produto: ' + error.message);
-            }
-        });
-
     </script>
 
-    <script src="js/cadastro5.js"></script>
-    <script src="js/navbar.js"></script>
+    <script src="/js/cadastro5.js"></script>
+    <script src="/js/navbar.js"></script>
 </body>
 
 </html>
