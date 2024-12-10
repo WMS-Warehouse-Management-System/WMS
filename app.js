@@ -311,6 +311,93 @@ app.post('/estoque-real', async (req, res) => {
 });
 
 
+//------------------FILTRO 
+
+app.get('/filtro-fabricante', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+            SELECT DISTINCT 
+                FABRICANTE  
+            FROM DimProduto
+        `;
+        
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset);  // Retorna todos os produtos
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+
+//----------------------------FILTRO FORM
+
+app.post('/filtro-catalogo', async (req, res) => {
+    try {
+        const { fabricante } = req.body;  
+        console.log('Fabricante recebido:', fabricante);  // Console que retorna o input do filtro
+
+        await sql.connect(dbConfig);
+
+        // Consulta SQL base
+        let query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            FULL JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
+        `;
+
+        if (fabricante) {
+            query += ' WHERE a.FABRICANTE = @fabricante';
+        }
+
+        
+        const request = new sql.Request();
+        
+        if (fabricante) {
+            request.input('fabricante', sql.VarChar, fabricante); 
+        }
+
+        const result = await request.query(query);
+
+        console.log('Produtos encontrados:', result.recordset);  // Retorna no console os produtos filtrados para teste
+
+        if (result.recordset.length === 0) {
+            return res.status(404).send('Nenhum item encontrado.');
+        }
+
+        res.json(result.recordset);  
+    } catch (error) {
+        console.error('Erro interno no servidor:', error);
+        res.status(500).send('Erro interno no servidor.');
+    }
+});
+
 
 // -----------------------------------------------------adicionar-usuario
 app.post('/adicionar-usuario', async (req, res) => {

@@ -13,6 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+document.getElementById('filtrarBtn').addEventListener('click', function () {
+    const caixote = document.getElementById('caixote');
+    
+    // Alterna a classe 'active' para mostrar ou esconder o formulário de filtro
+    caixote.classList.toggle('active');
+});
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const filtrarButton = document.querySelector("#filtrar");
     const caixote = document.querySelector("#caixote");
@@ -149,3 +160,94 @@ tbody.innerHTML += row;
     }
 
     window.onload = fetchProdutosCatalogo;
+
+//---------------------LIMPAR FILTRO
+
+function limparFiltros() {
+    document.getElementById('categoria').value = '';
+    document.getElementById('fabricante').value = '';
+    document.getElementById('dedata').value = '';
+    document.getElementById('atedata').value = '';
+}
+
+//---------------------------FILTRO BACK END
+
+
+
+//-----------------------FILTRO CATEGORIA
+
+
+
+
+//-----------------------FILTRO FABRICANTE
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const filtroFabricante = document.getElementById('fabricante');
+
+    try {
+        const response = await fetch('http://localhost:3000/filtro-fabricante');
+        if (response.ok) {
+            const fabricantes = await response.json();
+
+            fabricantes.forEach(fabricante => {
+                const option = document.createElement('option');
+                option.value = fabricante.FABRICANTE;
+                option.textContent = fabricante.FABRICANTE;
+                filtroFabricante.appendChild(option);
+            });
+        } else {
+            console.error('Erro ao carregar fabricantes:', await response.text());
+        }
+    } catch (error) {
+        console.error('Erro ao conectar ao servidor:', error);
+    }
+});
+
+function atualizarTabela(dados) {
+    const tbody = document.querySelector('#tabela-estoque tbody');
+    tbody.innerHTML = '';
+
+    if (dados.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">Nenhum produto encontrado</td></tr>';
+        return;
+    }
+
+    dados.forEach(produto => {
+        const row = `
+            <tr>
+                <td>${produto.CODIGO}</td>
+                <td>${produto.NOME_BASICO}</td>
+                <td>${produto.DESCRICAO_TECNICA}</td>
+                <td>${produto.QUANT}</td>
+                <td>${produto.CATEGORIA}</td>
+                <td>${produto.FABRICANTE}</td>
+            </tr>`;
+        tbody.innerHTML += row;
+    });
+}
+
+
+function atualizarTabela(dados) {
+    const tbody = document.querySelector('#tabela-estoque tbody');
+    tbody.innerHTML = '';
+
+    if (dados.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">Nenhum produto encontrado</td></tr>';
+        return;
+    }
+
+    dados.forEach(produto => {
+        const row = `
+            <tr>
+                <td>${produto.CODIGO}</td>
+                <td>${produto.NOME_BASICO}</td>
+                <td>${produto.DESCRICAO_TECNICA}</td>
+                <td>${produto.QUANT}</td>
+                <td>${produto.CATEGORIA}</td>
+                <td>${produto.FABRICANTE}</td>
+            </tr>`;
+        tbody.innerHTML += row;
+    });
+}
+
+
