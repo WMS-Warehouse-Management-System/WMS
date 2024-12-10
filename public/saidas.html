@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saídas</title>
     <link rel="stylesheet" href="css/saidas.css" />
+    <link rel="stylesheet" href="css/navbar.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
   </head>
@@ -83,41 +84,47 @@
 
       <div id="formContainer">
         <h2>Nova Saída</h2>
-        <button id="close-btn" class="close-btn">&times;</button>
+        <button id="close-btn" class="close-btn" onclick="toggleForm()">&times;</button>
         <form id="registrationForm">
-
           <div class="input-container">
-            <input type="text" id="productFont" placeholder=" " required />
-            <label for="productFont">Nome do fornecedor</label>
+            <input type="number" id="product_code" placeholder=" " required />
+            <label for="product_code">Código do Produto</label>
           </div>
-
+          <div class="input-container">
+            <select id="product_font" required>
+              <option value="" disabled selected>Selecione o fornecedor</option>
+              <!-- Opções dinâmicas adicionadas via JS -->
+            </select>
+            <label for="product_font">Fornecedor</label>
+          </div>
+    
+          <div class="input-container">
+            <select id="numb_lote" required>
+              <option value="" disabled selected>Selecione o lote</option>
+              <!-- Opções dinâmicas adicionadas via JS -->
+            </select>
+            <label for="numb_lote">N° do Lote</label>
+            <p id="quantity_hint" class="hint">Estoque disponível: </p>
+          </div>
+    
           <div class="input-container">
             <input
               type="number"
-              id="codigo"
-              min="0"
-              max="9999999999999"
+              id="quantity_received"
+              min="1"
               placeholder=" "
               required
             />
-            <label for="productCode">Código do produto</label>
+            <label for="quantity_received">Quantidade saída</label>
           </div>
-
+    
+         
+    
           <div class="input-container">
-            <input type="number" id="quantityReceived" placeholder=" " required />
-            <label for="quantityReceived">Quantidade saída</label>
+            <input type="date" id="receiving_date" placeholder=" " required />
+            <label for="receiving_date">Data de saída</label>
           </div>
-
-          <div class="input-container">
-            <input type="number" id="numbLote" placeholder=" " required />
-            <label for="numbLote">N° do Lote</label>
-          </div>
-
-          <div class="input-container">
-            <input type="date" id="dataRecebimento" placeholder=" " required />
-            <label for="dataRecebimento">Data de saída</label>
-          </div>
-
+    
           <button type="submit" id="submitButton"><h3>Cadastrar</h3></button>
         </form>
       </div>

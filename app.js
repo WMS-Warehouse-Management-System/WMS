@@ -528,42 +528,124 @@ app.get("/Recebimento", async (req, res) => {
 //--------------------------------------- Adicionar saida
 
 app.post('/adicionar-saida', async (req, res) => {
-    const {
-        fornecedor,
-        codigo,
-        quantidade,
-        numbLote,
-        dataRecebimento
-    } = req.body;
+    const { fornecedor, codigo, quantidade, numbLote, dataRecebimento } = req.body;
+
+    try {
+        await sql.connect(dbConfig);
+
+        const estoqueQuery = `
+            SELECT 
+                ISNULL(SUM(FR.QUANT), 0) - ISNULL(SUM(FS.QUANT), 0) AS EstoqueDisponivel
+            FROM FactRecebimento FR
+            LEFT JOIN FactSaidas FS
+                ON FR.LOTE = FS.LOTE 
+                AND FR.CODIGO = FS.CODIGO 
+                AND FR.FORNECEDOR = FS.FORNECEDOR
+            WHERE FR.LOTE = @numbLote
+              AND FR.CODIGO = @codigo
+              AND FR.FORNECEDOR = @fornecedor
+        `;
+
+        const estoqueRequest = new sql.Request();
+        estoqueRequest.input('numbLote', sql.BigInt, numbLote);
+        estoqueRequest.input('codigo', sql.BigInt, codigo);
+        estoqueRequest.input('fornecedor', sql.NVarChar, fornecedor);
+
+        const estoqueResult = await estoqueRequest.query(estoqueQuery);
+
+        if (estoqueResult.recordset.length === 0) {
+            return res.status(400).json({ success: false, message: 'Estoque não encontrado.' });
+        }
+
+        const quantidadeDisponivel = estoqueResult.recordset[0].EstoqueDisponivel;
+
+       
+        const registrarSaidaQuery = `
+            INSERT INTO FactSaidas (DATA_SAIDA, QUANT, CODIGO, LOTE, FORNECEDOR)
+            VALUES (@dataRecebimento, @quantidade, @codigo, @numbLote, @fornecedor)
+        `;
+
+        const registrarRequest = new sql.Request();
+        registrarRequest.input('fornecedor', sql.NVarChar, fornecedor);
+        registrarRequest.input('codigo', sql.BigInt, codigo);
+        registrarRequest.input('quantidade', sql.BigInt, quantidade);
+        registrarRequest.input('numbLote', sql.BigInt, numbLote);
+        registrarRequest.input('dataRecebimento', sql.DateTime, dataRecebimento);
+
+        await registrarRequest.query(registrarSaidaQuery);
+
+        res.json({ success: true, message: 'Saída registrada com sucesso!' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erro ao registrar saída: ' + error.message });
+    }
+});
+
+// Rota para buscar fornecedores com base no código do produto
+app.get('/fornecedores', async (req, res) => {
+    const { codigo } = req.query;
 
     try {
         await sql.connect(dbConfig);
 
         const query = `
-        INSERT INTO FactSaidas(
-            DATA_SAIDA, QUANT, CODIGO, LOTE, FORNECEDOR
-             
-        )
-        VALUES (
-            @data_Receb, @quantidade, @codigo, @numbLote, @fornecedor
-        )
-    `;
+            SELECT DISTINCT FORNECEDOR 
+            FROM FactRecebimento
+            WHERE CODIGO = @codigo
+        `;
+
+        const request = new sql.Request();
+        request.input('codigo', sql.BigInt, codigo);
+
+        const result = await request.query(query);
+
+        const fornecedores = result.recordset.map(row => ({
+            id: row.FORNECEDOR,
+            nome: row.FORNECEDOR
+        }));
+
+        res.json(fornecedores);
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Erro ao buscar fornecedores: ' + error.message });
+    }
+});
+
+// Rota para buscar lotes com base no fornecedor e código do produto
+app.get('/lotes', async (req, res) => {
+    const { fornecedor, codigo } = req.query;
+
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+        SELECT 
+        ISNULL(SUM(FactRecebimento.QUANT), 0) - ISNULL(SUM(FactSaidas.QUANT), 0) AS EstoqueDisponivel,
+        FactRecebimento.LOTE
+        FROM 
+        FactRecebimento LEFT JOIN FactSaidas ON FactRecebimento.CODIGO = FactSaidas.CODIGO
+        WHERE FactRecebimento.CODIGO = @codigo AND FactRecebimento.FORNECEDOR = @FORNECEDOR
+        GROUP BY FactRecebimento.LOTE;
+        `;
 
         const request = new sql.Request();
         request.input('fornecedor', sql.NVarChar, fornecedor);
         request.input('codigo', sql.BigInt, codigo);
-        request.input('quantidade', sql.BigInt, quantidade);
-        request.input('numbLote', sql.BigInt, numbLote);
-        request.input('data_Receb', sql.DateTime, dataRecebimento);
-        
-        await request.query(query);
 
-        res.send('Produto adicionado com sucesso!');
+        const result = await request.query(query);
+
+        const lotes = result.recordset.map(row => ({
+            id: row.LOTE,
+            codigo: row.CODIGO,
+            lote:row.LOTE,
+            fornecedor: row.FORNECEDOR,
+            estoqueDisponivel: row.EstoqueDisponivel
+        }));
+
+        res.json(lotes);
     } catch (error) {
-        res.status(500).send('Erro ao adicionar produto: ' + error.message);
+        res.status(500).json({ success: false, message: 'Erro ao buscar lotes: ' + error.message });
     }
 });
-//--------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 
   //Pesquisa financeiro

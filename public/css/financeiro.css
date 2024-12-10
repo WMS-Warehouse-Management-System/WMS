@@ -33,7 +33,10 @@ body {
 }
 
 
-
+#formPesquisa{
+    display: flex;
+    flex-direction: row;
+}
 
 /* Barra de busca alinhada em linha */
 #barradebusca {
@@ -284,6 +287,9 @@ select:hover option:hover {
     font-weight: 300;
     cursor: pointer;
 }
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 #caixa-recebimento {
     width: 9vh;
@@ -301,6 +307,7 @@ select:hover option:hover {
     margin-top: 60vh;
     margin-right:16vh ;
     justify-self: right;
+
 }
 
 #caixa-recebimento:hover{
@@ -311,6 +318,7 @@ select:hover option:hover {
 
 /* Estilos do formulário (inicialmente oculto) */
 #formContainer {
+    display: none;
     display: none;
     justify-self: center;
     align-self: center;
@@ -325,11 +333,13 @@ select:hover option:hover {
     justify-self: center;
     max-width: 450px;
     width: 100%;
-    margin-top: -80vh;
+    margin-top: -70vh;
     z-index: 99999;
 }
 
 #formContainer h2{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
     justify-self: center;
     font-size: 4vh;
     z-index: 9911119;
@@ -367,7 +377,7 @@ select:hover option:hover {
 #registrationForm label {
     position: absolute;
     top: 50%;
-    left: 6.4vh;
+    left: 4.4vw;
     transform: translateY(-50%);
     font-family: 'poppins', sans-serif;
     font-size: 16px;

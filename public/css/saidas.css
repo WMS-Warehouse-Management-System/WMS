@@ -10,7 +10,31 @@ body {
 
 
 
+#formPesquisa{
+    display: flex;
+    flex-direction: row;
+}
+/* CABEÇALHO */
+.texto-nav{
+    color: #FFCC00;
+}
 
+.sidebar ul li #finan{
+    color: #FFCC00;
+
+    & .financial {
+        display: inline-block;
+        width: 1.1em;
+        height: 1.1em;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath fill='%23ffcc00' d='m0 1898l384-384v534H0zm512-512l384-384v1046H512zm1280-490h128v1152h-384v-918zm-448 426l64-64v790h-384V1002zm704-1066v512h-128V475l-576 575l-384-384L0 1627v-182l960-959l384 384l485-486h-293V256z'/%3E%3C/svg%3E");
+    }
+}
+
+.financeiro{
+    background-color: #000;
+}
 /* Barra de busca alinhada em linha */
 #barradebusca {
     display: flex;
@@ -254,39 +278,6 @@ select:hover option:hover {
 
 }
 
-/* INSERIR NO SEU CSS "color:" */
-.texto-nav {
-    font-size: 4.5vh;
-    display: flex;
-    justify-self: center;
-    align-self: center;
-    padding: 1vh;
-    color: #FFCC00;
-    padding-right: 41.5vw;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-}
-
-
-
-
-.menu-btn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: transparent;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 5px;
-    font-size: 7vh;
-    display: flex;
-    padding-left: 5vh;
-    padding-bottom: vh;
-
-
-
-}
 
 
 .conteudo-nav {
@@ -301,213 +292,6 @@ select:hover option:hover {
 /******************************************/
 /* Sidebar */
 
-
-
-.sidebar {
-    height: 100%;
-    width: 350px;
-    position: fixed;
-    top: 0;
-    left: -350px;
-    /* Escondido por padrão */
-    background-color: #0f0f0f;
-    color: white;
-    overflow-x: hidden;
-    transition: 0.3s;
-    padding-top: 20px;
-    font-size: 2vh;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.sidebar img {
-    align-self: center;
-    padding-left: 4vw;
-    padding-top: 1vw;
-    color: #f1f1f1;
-}
-
-.sidebar h3 {
-    margin-left: 1.5vw;
-    margin-top: 30px;
-    font-size: 1vw;
-    color: #f1f1f1;
-    padding: 10px 0;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    display: flex;
-    align-items: center;
-    padding: 18px 50px;
-    font-weight: 300;
-    cursor: pointer;
-    font-size: 1.4vw;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.sidebar ul li a {
-    color: #f1f1f1;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.sidebar ul li a div {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.sidebar ul li a span {
-    margin-left: 20px;
-    /* Distância entre ícone e texto */
-}
-
-.sidebar ul li:hover,
-.sidebar ul li a:hover {
-    background-color: #000;
-    border-radius: 5px;
-    color: inherit;
-}
-
-.sidebar ul li:hover div {
-    transform: scale(1.3);
-    /* Efeito de zoom no ícone */
-    transition: transform 0.3s ease;
-}
-
-.sidebar h4 {
-    display: flex;
-    justify-self: center;
-    align-self: baseline;
-    margin-top: 260px;
-    font-size: 0.75em;
-    font-weight: 300;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.container-logos #logo-gato{
-    align-items: center;
-    width: 40%;
-}
-
-.container-logos #logo-cubo{
-    width: 32%;
-}
-
-/* Estilos específicos de hover */
-.sidebar ul li #home:hover {
-    color: #E65332;
-    font-weight: 300;
-
-    & .home {
-        display: inline-block;
-        width: 1.3em;
-        height: 1.3em;
-        background-repeat: no-repeat;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23e65332' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/g%3E%3C/svg%3E");
-    }
-}
-
-.sidebar ul li #cadas:hover {
-    color: #50CD58;
-    font-weight: 300;
-
-    & .box-of-good-good {
-        display: inline-block;
-        width: 1.3em;
-        height: 1.3em;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2350cd58' d='m17.578 4.432l-2-1.05C13.822 2.461 12.944 2 12 2s-1.822.46-3.578 1.382l-.321.169l8.923 5.099l4.016-2.01c-.646-.732-1.688-1.279-3.462-2.21m4.17 3.534l-3.998 2V13a.75.75 0 0 1-1.5 0v-2.286l-3.5 1.75v9.44c.718-.179 1.535-.607 2.828-1.286l2-1.05c2.151-1.129 3.227-1.693 3.825-2.708c.597-1.014.597-2.277.597-4.8v-.117c0-1.893 0-3.076-.252-3.978M11.25 21.904v-9.44l-8.998-4.5C2 8.866 2 10.05 2 11.941v.117c0 2.525 0 3.788.597 4.802c.598 1.015 1.674 1.58 3.825 2.709l2 1.049c1.293.679 2.11 1.107 2.828 1.286M2.96 6.641l9.04 4.52l3.411-1.705l-8.886-5.078l-.103.054c-1.773.93-2.816 1.477-3.462 2.21'/%3E%3C/svg%3E");
-    }
-}
-
-
-.sidebar ul li #edicao:hover {
-    color: #DA0000;
-    font-weight: 300;
-
-    & .pencil {
-        display: inline-block;
-        width: 1.3em;
-        height: 1.3em;
-        --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M4.333 16.048L16.57 3.81a2.56 2.56 0 0 1 3.62 3.619L7.951 19.667a2 2 0 0 1-1.022.547L3 21l.786-3.93a2 2 0 0 1 .547-1.022'/%3E%3Cpath d='m14.5 6.5l3 3'/%3E%3C/g%3E%3C/svg%3E");
-        background-color: currentColor;
-        -webkit-mask-image: var(--svg);
-        mask-image: var(--svg);
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
-
-    }
-
-}
-
-.sidebar ul li #esto:hover {
-    color: #319DF6;
-    font-weight: 300;
-
-    & .boxes-of-good-good {
-        display: inline-block;
-        width: 1.3em;
-        height: 1.3em;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23319df6' d='M10 4v11h12V4zm2 2h2v4l2-2l2 2V6h2v7h-8zM3 17v11h12V17zm14 0v11h12V17zM5 19h2v4l2-2l2 2v-4h2v7H5zm14 0h2v4l2-2l2 2v-4h2v7h-8z'/%3E%3C/svg%3E");
-    }
-}
-
-.sidebar ul li #finan:hover {
-    color: #FFCC00;
-    font-weight: 300;
-
-    & .financial {
-        display: inline-block;
-        width: 1.3em;
-        height: 1.3em;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath fill='%23ffcc00' d='m0 1898l384-384v534H0zm512-512l384-384v1046H512zm1280-490h128v1152h-384v-918zm-448 426l64-64v790h-384V1002zm704-1066v512h-128V475l-576 575l-384-384L0 1627v-182l960-959l384 384l485-486h-293V256z'/%3E%3C/svg%3E");
-    }
-}
-
-.container-img{
-    display: flex;
-    gap: 1px;
-    flex-direction: row;
-    width: 100%;
-}
-
-.container-img img{
-    display: flex;
-    gap: 1px;
-    justify-self: center;
-    width: 10vh;
-    height: 10vh;
-}
 
 /* Close Button */
 .close-btn {
@@ -595,6 +379,7 @@ select:hover option:hover {
     z-index: 99999;
 }
 
+
 #formContainer h2{
     justify-self: center;
     font-size: 4vh;
@@ -602,59 +387,92 @@ select:hover option:hover {
 }
 
 /* Estilos do campo de input */
+/* Estilo dos campos do formulário com classes específicas */
 .input-container {
+    width: 100%; /* Garante que o campo ocupe 100% da largura */
     position: relative;
-    margin-bottom: 20px;
-    z-index: 991119;
+    margin-bottom: 3vh;
+    
 }
 
-#registrationForm input {
+/* Estilo para inputs de número, data e selects */
+.input-container input[type="number"],
+.input-container input[type="date"] {
     display: flex;
     justify-self: center;
-    align-content: center;
-    margin-left: 1vw;
-    width: 80%;
-    padding: 12px;
-    font-size: 16px;
-    font-family: 'poppins', sans-serif;
-    border: 1px solid #ccc;
+    width: 70%; /* Garante largura igual para todos os campos */
+    padding: 1.5vh 2vw;  /* Usando vh e vw para tamanho proporcional */
+    border: 1px solid #FFCC00;
     border-radius: 5px;
-    background-color: #fff;
     outline: none;
-    z-index: 9911119;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
 }
-
-#registrationForm input:focus {
-    border-color: #FFCC00;
-    z-index: 911199;
+.input-container select{
+    width: 81%; /* Garante largura igual para todos os campos */
+    padding: 1.5vh 2vw;  /* Usando vh e vw para tamanho proporcional */
+    border: 1px solid #FFCC00;
+    border-radius: 5px;
+    font-size: 1.5vw;
+    outline: none;
+    top: 4vh;
+    font-size: 1.2vw;
+    color: black;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
 }
-
-/* Estilos das labels */
-#registrationForm label {
-    position: absolute;
-    top: 50%;
-    left: 6.4vh;
-    transform: translateY(-50%);
-    font-family: 'poppins', sans-serif;
-    font-size: 16px;
-    color: #999;
-    transition: all 0.3s ease;
-    z-index: 911199;
-}
-
-#registrationForm input:focus + label,
-#registrationForm input:not(:placeholder-shown) +  label {
-    top: -1vh;
-    font-size: 15px;
+.input-container option{
     color: #FFCC00;
-    font-family: 'poppins', sans-serif;
-    z-index: 991119;
 }
 
-#registrationForm input::placeholder {
-    visibility: hidden;
-    z-index: 991119;
+#quantity_hint{
+    margin-left: 3.6vw;
 }
+
+#product_code label,
+#quantity_received label{
+   margin-top: -30vh;
+    margin-left: 2vw;
+    font-size: 1.175vw;
+}
+
+.input-container select
+
+
+/* Quando o input ou select está em foco */
+.input-container input[type="number"]:focus,
+.input-container input[type="date"]:focus {
+    border-color: #FFCC00;
+}
+
+/* Estilo do label */
+.input-container label {
+    position: absolute;
+    top: -1.5vh;
+    left: 2vw;
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #FFCC00;
+    transition: 0.3s ease;
+}
+
+/* Quando o input ou select está em foco ou preenchido */
+.input-container input:focus + label,
+.input-container select:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+    top: -2vh;
+    margin-left: 2vw;
+    font-size: 1.175vw;
+    color: #FFCC00;
+}
+
+/* Estilo do parágrafo de dica (estoque disponível) */
+.input-container #quantity_hint {
+    font-size: 1.2vw;
+    color: #555;
+    margin-top: -0.1vw;
+}
+
 
 /* Estilo do botão de envio */
 #submitButton {
