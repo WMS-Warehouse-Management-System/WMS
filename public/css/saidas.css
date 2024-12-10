@@ -38,27 +38,7 @@ body {
     display: flex;
     flex-direction: row;
 }
-/* CABEÇALHO */
-.texto-nav{
-    color: #FFCC00;
-}
 
-.sidebar ul li #finan{
-    color: #FFCC00;
-
-    & .financial {
-        display: inline-block;
-        width: 1.1em;
-        height: 1.1em;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath fill='%23ffcc00' d='m0 1898l384-384v534H0zm512-512l384-384v1046H512zm1280-490h128v1152h-384v-918zm-448 426l64-64v790h-384V1002zm704-1066v512h-128V475l-576 575l-384-384L0 1627v-182l960-959l384 384l485-486h-293V256z'/%3E%3C/svg%3E");
-    }
-}
-
-.financeiro{
-    background-color: #000;
-}
 /* Barra de busca alinhada em linha */
 #barradebusca {
     display: flex;
