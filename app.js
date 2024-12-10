@@ -20,6 +20,34 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public')); // Serve arquivos estáticos da pasta 'public'
 
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const path = require('path');
+const cadastroRoutes = require('./routes/cadastro'); // Importando as rotas de cadastro
+
+
+// Configuração do middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Configuração da sessão
+app.use(session({
+    secret: '1234',
+    resave: false,
+    saveUninitialized: true,
+}));
+
+// Configuração da engine de views
+app.set('view engine', 'ejs'); // Alterar para HTML se necessário
+app.set('views', './views'); // Certifique-se de que as telas estão na pasta 'views'
+// Servindo arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Usando as rotas de cadastro
+app.use('/cadastro', cadastroRoutes);
+
+
+
 app.post('/adicionar-usuario', async (req, res) => {
     const { email,nome,senha,dataNasc,dataEntrada } = req.body;
 
