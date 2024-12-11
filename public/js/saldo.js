@@ -31,7 +31,6 @@
           <div class="cell"><strong>Item</strong><span>${saldo.NOME_BASICO}</span></div>
           <div class="cell"><strong>Código</strong><span>${saldo.CODIGO}</span></div>
           <div class="cell"><strong>Lote</strong><span>${saldo.LOTE}</span></div>
-
           <div class="cell"><strong>Quantidade Recebida</strong><span>${saldo.QUANT_RECEBIMENTO}</span></div>
           <div class="cell"><strong>Quantidade Saída</strong><span>${saldo.QUANT_SAIDA}</span></div>
           <div class="cell"><strong>Saldo</strong><span>${saldo.SALDO}</span></div>

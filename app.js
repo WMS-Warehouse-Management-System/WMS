@@ -617,7 +617,7 @@ app.get("/Saldos", async (req, res) => {
           FactSaidas.FORNECEDOR,
           FactRecebimento.PRECO_DE_AQUISICAO,
           DimProduto.IMAGEM,
-          DISTINCT FactRecebimento.LOTE,
+          FactRecebimento.LOTE,
           FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
           DimProduto.PRECO_DE_VENDA,
           DimProduto.FRAGILIDADE,
