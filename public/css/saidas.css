@@ -437,8 +437,8 @@ select:hover option:hover {
 
 #registrationForm input:focus+label,
 #registrationForm input:not(:placeholder-shown)+label {
-    top: -1vh;
-    left: 3.3vw;
+    top: -2vh;
+    left: 1.5vw;
     font-size: 15px;
     color: #FFCC00;
     font-weight: 430;
@@ -480,13 +480,13 @@ select:hover option:hover {
     z-index: 9911119;
 }
 
-select #numb_lote{
+select #numb_lote option{
     display: flex;
     justify-self: center;
     align-content: center;
     margin-left: 1vw;
     width: 80%;
-    padding: 12px;
+    padding: 11px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;

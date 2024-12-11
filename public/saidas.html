@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <!-- /* TUDO CERTO */ -->
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saídas</title>
-    <link rel="stylesheet" href="css/saidas.css" />
-    <link rel="stylesheet" href="css/navbar.css">
-     <!-- GOOGLE FONTS -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link
-         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-         rel="stylesheet">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGA - Financeiro</title>
+  <link rel="stylesheet" href="css/saidas.css" />
+  <link rel="stylesheet" href="css/navbar.css">
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
 
 
 <body>
@@ -95,98 +96,99 @@
   <div class="conteudo_pag">
     <button id="caixa-recebimento" onclick="toggleForm()">+</button>
 
- 
 
-      <div id="formContainer">
-        <h2>Nova Saída</h2>
-        <button id="close-btn" class="close-btn" onclick="toggleForm()">&times;</button>
-        <form id="registrationForm">
-          <div class="input-container">
-            <input type="number" id="product_code" placeholder=" " required />
-            <label for="product_code">Código do Produto</label>
-          </div>
-          <div class="input-container">
-            <select id="product_font" required>
-              <option value="" disabled selected>Selecione o fornecedor</option>
-              <!-- Opções dinâmicas adicionadas via JS -->
-            </select>
-            <label for="product_font">Fornecedor</label>
-          </div>
-    
-          <div class="input-container">
-            <select id="numb_lote" required>
-              <option value="" disabled selected>Selecione o lote</option>
-              <!-- Opções dinâmicas adicionadas via JS -->
-            </select>
-            <label for="numb_lote">N° do Lote</label>
-            <p id="quantity_hint" class="hint">Estoque disponível: </p>
-          </div>
-    
-          <div class="input-container">
-            <input
-              type="number"
-              id="quantity_received"
-              min="1"
-              placeholder=" "
-              required
-            />
-            <label for="quantity_received">Quantidade saída</label>
-          </div>
-    
-         
-    
-          <div class="input-container">
-            <input type="date" id="receiving_date" placeholder=" " required />
-            <label for="receiving_date">Data de saída</label>
-          </div>
-    
-          <button type="submit" id="submitButton"><h3>Cadastrar</h3></button>
-        </form>
-      </div>
+
+    <div id="formContainer">
+      <h2>Nova Saída</h2>
+      <button id="close-btn" class="close-btn" onclick="toggleForm()">&times;</button>
+      <form id="registrationForm">
+
+        <div class="input-container">
+          <input type="number" id="product_code" placeholder=" " required />
+          <label for="product_code">Código do Produto</label>
+        </div>
+
+        <div class="input-container">
+          <select id="product_font" required>
+            <option value="" disabled selected>Selecione o fornecedor</option>
+            <!-- Opções dinâmicas adicionadas via JS -->
+          </select>
+          <label for="product_font">Fornecedor</label>
+        </div>
+
+        <div class="input-container">
+          <select id="numb_lote" required>
+            <option value="" disabled selected>Selecione o lote</option>
+          </select>
+
+
+          <label for="numb_lote">N° do Lote</label>
+          <p id="quantity_hint" class="hint">Estoque disponível: </p>
+
+        </div>
+
+        <div class="input-container">
+          <input type="number" id="quantity_received" min="1" placeholder=" " required />
+          <label for="quantity_received">Quantidade saída</label>
+        </div>
+
+
+
+        <div class="input-container">
+          <input type="date" id="receiving_date" placeholder=" " required />
+          <label for="receiving_date">Data de saída</label>
+        </div>
+
+        <button type="submit" id="submitButton">
+          <h3>Cadastrar</h3>
+        </button>
+      </form>
     </div>
+  </div>
 
-<!--  SCRIPT QUE LIGA OS INPUT AO BACK-END  -->
+  <!--  SCRIPT QUE LIGA OS INPUT AO BACK-END  -->
 
-<script>
-  
-document.getElementById('registrationForm').addEventListener('submit', async function (event) {
-  event.preventDefault();
-
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-
-  const formContainer = document.getElementById("formContainer");
-
-  const recebimento = {
-      fornecedor: document.getElementById('productFont').value,
-      codigo: document.getElementById('codigo').value,
-      quantidade: document.getElementById('quantityReceived').value,
-      numbLote: document.getElementById('numbLote').value,
-      dataRecebimento: document.getElementById('dataRecebimento').value,
-      inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
-  };
+  <script>
 
 
+    document.getElementById('registrationForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
 
-  try {
-      const response = await fetch('http://localhost:3000/adicionar-saida', {
+      const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
+
+      const formContainer = document.getElementById("formContainer");
+
+      const recebimento = {
+        fornecedor: document.getElementById('productFont').value,
+        codigo: document.getElementById('codigo').value,
+        quantidade: document.getElementById('quantityReceived').value,
+        numbLote: document.getElementById('numbLote').value,
+        dataRecebimento: document.getElementById('dataRecebimento').value,
+        inseridoPor: usuarioLogado.tipo === 'professor' ? SNProfessor : usuarioLogado.email,
+      };
+
+
+
+      try {
+        const response = await fetch('http://localhost:3000/adicionar-saida', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(recebimento),
-      });
+        });
 
-      if (response.ok) {
+        if (response.ok) {
           alert('Saída adicionada com sucesso!');
           formContainer.style.display = "block";
-      } else {
+        } else {
           const errorMessage = await response.text();
           alert('Erro: ' + errorMessage);
+        }
+      } catch (error) {
+        alert('Erro ao adicionar saída ' + error.message);
       }
-  } catch (error) {
-      alert('Erro ao adicionar saída ' + error.message);
-  }
-});
+    });
 
-</script>
+  </script>
 
 
 
