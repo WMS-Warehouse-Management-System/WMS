@@ -544,7 +544,7 @@ select:hover option:hover {
     right: 20px;
     font-size: 25px;
     background: none;
-    color: white;
+    color: black;
     border: none;
     cursor: pointer;
 }
@@ -595,6 +595,7 @@ select:hover option:hover {
     margin-top: 60vh;
     margin-right:16vh ;
     justify-self: right;
+    padding-bottom: 0.5%;
 }
 
 #caixa-recebimento:hover{
@@ -605,11 +606,11 @@ select:hover option:hover {
 
 /* Estilos do formulário (inicialmente oculto) */
 #formContainer {
+    position: absolute;
     display: none;
     justify-self: center;
     align-self: center;
     z-index: 999;
-    position: relative;
     padding-bottom: 20px;
     font-family: 'poppins', sans-serif;
     border: 1px solid #ccc;
@@ -621,6 +622,7 @@ select:hover option:hover {
     width: 100%;
     margin-top: -70vh;
     z-index: 99999;
+    margin-left: 38%;
 }
 
 
@@ -644,17 +646,18 @@ select:hover option:hover {
 .input-container input[type="date"] {
     display: flex;
     justify-self: center;
-    width: 70%; /* Garante largura igual para todos os campos */
-    padding: 1.5vh 2vw;  /* Usando vh e vw para tamanho proporcional */
+    width: 80%; /* Garante largura igual para todos os campos */
+    padding: 1.5vh 2vw; /* Usando vh e vw para tamanho proporcional */
     border: 1px solid #FFCC00;
     border-radius: 5px;
     outline: none;
     background-color: #fafafa;
     transition: border-color 0.3s ease;
+    margin-top: 2rem;
 }
 .input-container select{
     width: 81%; /* Garante largura igual para todos os campos */
-    padding: 1.5vh 2vw;  /* Usando vh e vw para tamanho proporcional */
+    padding: 1.5vh 2vw; /* Usando vh e vw para tamanho proporcional */
     border: 1px solid #FFCC00;
     border-radius: 5px;
     font-size: 1.5vw;
@@ -695,7 +698,6 @@ select:hover option:hover {
     top: -1.5vh;
     left: 2vw;
     font-size: 1.2vw;
-    font-weight: bold;
     color: #FFCC00;
     transition: 0.3s ease;
 }
@@ -747,7 +749,7 @@ select:hover option:hover {
     border-width: 0.2493vh;
     color: #FFCC00;
     background-color: white;
-    transition: 0.2s  ease;
+    transition: 0.2s ease;
     z-index: 999;
 }
 
@@ -828,7 +830,7 @@ select:hover option:hover {
 
 
   #toggle-filter {
-    
+
     display: flex;
     width: 100%;
     justify-self: center;

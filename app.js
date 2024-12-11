@@ -599,6 +599,88 @@ app.get("/Recebimento", async (req, res) => {
     }
   });
 
+
+
+
+
+//---------------------------------------------------------------------------------------------
+app.get("/Saldos", async (req, res) => {
+    try {
+      // Estabelecendo a conexão com o banco de dados
+      let pool = await sql.connect(dbConfig);
+  
+      // Consulta SQL ajustada para somar as quantidades por lote
+      const query = `
+        SELECT 
+          DimProduto.CODIGO,
+          DimProduto.NOME_BASICO,
+          FactSaidas.FORNECEDOR,
+          FactRecebimento.PRECO_DE_AQUISICAO,
+          DimProduto.IMAGEM,
+          DISTINCT FactRecebimento.LOTE,
+          FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
+          DimProduto.PRECO_DE_VENDA,
+          DimProduto.FRAGILIDADE,
+          SUM(FactSaidas.QUANT) AS QUANT_SAIDA,
+          SUM(FactRecebimento.QUANT) AS QUANT_RECEBIMENTO,
+          (SUM(FactRecebimento.QUANT) - SUM(FactSaidas.QUANT)) AS SALDO
+        FROM FactSaidas 
+        INNER JOIN DimProduto ON FactSaidas.CODIGO = DimProduto.CODIGO
+        INNER JOIN FactRecebimento ON FactSaidas.CODIGO = FactRecebimento.CODIGO
+        GROUP BY 
+          DimProduto.CODIGO,
+          DimProduto.NOME_BASICO,
+          FactSaidas.FORNECEDOR,
+          FactRecebimento.PRECO_DE_AQUISICAO,
+          DimProduto.IMAGEM,
+          FactRecebimento.LOTE,
+          FactRecebimento.VALIDADE,
+          DimProduto.PRECO_DE_VENDA,
+          DimProduto.FRAGILIDADE
+        HAVING (SUM(FactRecebimento.QUANT) - SUM(FactSaidas.QUANT)) > 0
+      `;
+  
+      // Executando a query
+      const result = await pool.request().query(query);
+  
+      // Retorna os dados como JSON
+      res.json(result.recordset);
+    } catch (err) {
+      console.error("Erro ao buscar dados:", err);
+      res.status(500).send("Erro ao buscar dados.");
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //------------------------------------------------SAIDAS
   //------------------------------------------- vizualizar as saidas
 
