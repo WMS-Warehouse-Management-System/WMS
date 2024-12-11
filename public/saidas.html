@@ -201,7 +201,7 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
     <div id="filtrarcontainer">
       <!-- mudanças filtro -->
       <div id="filtrarcontainer">
-        <div id="filtrar"><i class="fa fa-filter"></i>Filtrar</div>
+        <button id="filtrar"><img src="imagens/filtro.svg" alt="" id="fil">Filtrar</button>
         <div id="caixote">
           <div id="ajeitar">
             <div id="subajeitada">
@@ -259,8 +259,8 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
         <!-- acabou as mudanças -->
         <form id="formPesquisa">
-          <input type="text" id="entrada" placeholder="Digite o código do produto...">
-          <div><button type="submit" id="pesquisar">Pesquisar</button></div>
+          <input type="text" id="pesquisa" placeholder="Digite o código do produto...">
+          <button id="pesquisar">Pesquisar <img src="imagens/lupa.svg" alt="" id="pes"></button>
         </form>
       </div>
     </div>
@@ -406,6 +406,10 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
   <div class="tabela-recebimentos">
     <div class="table-container" id="table-container"></div>
+  </div>
+
+  <div class="footer">
+    <img src="imgCADASTRO/gatinhoRodapé.svg" alt="">
   </div>
 
   <script src="js/saidas.js"></script>
