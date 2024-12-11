@@ -258,7 +258,7 @@ select {
     margin-left: 10%;
     padding: 0.9vh 0.9vw;
     font-size: 14px;
-    color: #fff;
+    color: #FFCC00;
     background-color: #FFCC00;
     border-color: transparent;
     border-radius: 0.5vh;
@@ -277,7 +277,7 @@ select:focus {
 option {
     font-size: 14px;
     padding: 1vh;
-    color: #ffffff;
+    color: #FFCC00;
 }
 
 /* Estilo quando o select é hovered */
@@ -285,9 +285,6 @@ select:hover {
     border-color: #FFCC00;
 }
 
-select:hover option:hover {
-    background-color: #eaeaea;
-}
 
 #inputdata{
     margin-top: 5%;
@@ -734,7 +731,7 @@ select #numb_lote option{
     margin-top: auto;
     overflow-y: auto; /* ativa o scroll vertical */
     overflow-x: hidden; /* desativa o scroll horizontal */
-    height: 60vh;
+    height: 55.5vh;
     padding-right: 1vw;
 }
 

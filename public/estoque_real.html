@@ -342,3 +342,186 @@ document.getElementById('formFiltrar').addEventListener('submit', async (event) 
 </body>
 
 </html>
+<script>
+ 
+    document.getElementById('formFiltrar').addEventListener('submit', async (event) => {
+       event.preventDefault(); // Impede o recarregamento da página
+   
+       const fabricante = document.getElementById('fabricanteFiltro').value;
+       const codigo = document.getElementById('codigo').value;
+       const ordenacao = document.getElementById('ordenacao').value; // Captura a ordenação
+   
+       try {
+           const response = await fetch('/filtro-catalogo', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({ fabricante, codigo, ordenacao }) // Envia os dados ao backend
+           });
+   
+           if (response.ok) {
+               const produtosFiltrados = await response.json();
+   
+               const tbody = document.querySelector('#tabela-estoque tbody');
+               tbody.innerHTML = ''; // Limpa os dados antigos
+   
+               if (produtosFiltrados.length === 0) {
+                   tbody.innerHTML = '<tr><td colspan="7">Nenhum produto encontrado</td></tr>';
+                   return;
+               }
+   
+               produtosFiltrados.forEach(filtrado => {     
+                   const row = `
+                       <tr id="produto-${filtrado.CODIGO}">
+                           <td>${filtrado.CODIGO}</td>
+                           <td>${filtrado.NOME_BASICO}</td>
+                           <td>${filtrado.DESCRICAO_TECNICA}</td>
+                           <td>${filtrado.QUANT}</td>
+                           <td>${filtrado.CATEGORIA || 'Indefinido'}</td>
+                           <td>${filtrado.FABRICANTE}</td>
+                           <td class="lixeira">
+                               <img src="imagens/Lixeira(Normal).svg" alt="Lixeira" class="imagemlixeira" onmouseover="this.src='imagens/Lixeira(Modificado).svg';" onmouseout="this.src='imagens/Lixeira(Normal).svg';" onclick="excluirProduto(${filtrado.CODIGO})">
+                           </td>
+                           <td class="lapis">
+                               <img src="imagens/Lapis(Normal).svg" alt="Lápis" class="imagemlapis" onmouseover="this.src='imagens/Lapis(Modificado).svg';" onmouseout="this.src='imagens/Lapis(Normal).svg';">
+                           </td>
+                       </tr>
+                   `;
+                   tbody.innerHTML += row;
+               });
+           } else {
+               console.error('Erro ao obter produtos:', await response.text());
+           }
+       } catch (error) {
+           console.error('Erro na requisição:', error);
+       }
+   });
+   
+   </script>
+   
+   <!---->
+   
+   <script>
+       
+    document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
+       event.preventDefault(); // Evita o comportamento padrão do formulário
+   
+       const pesquisa = {
+           codigo: document.getElementById('codigo').value,  // Obtendo o valor do campo 'codigo'
+       };
+   
+       try {
+           const response = await fetch('http://localhost:3000/ver-catalogo', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify(pesquisa), // Envia os dados para o backend
+           });
+   
+           if (response.ok) {
+               const produtos = await response.json();  // Resposta em formato JSON
+   
+               if (produtos.length === 0) {
+                   alert('Nenhum produto encontrado!');
+                   return;
+               }
+   
+               const tbody = document.querySelector('#tabela-estoque tbody');
+               tbody.innerHTML = '';  // Limpa a tabela antes de adicionar novos dados
+   
+               produtos.forEach((produto) => {
+                   const row = `
+                   <tr>
+                       <td>${produto.CODIGO}</td>
+                       <td>${produto.NOME_BASICO}</td>
+                       <td>${produto.DESCRICAO_TECNICA}</td>
+                       <td>${produto.QUANT}</td>
+                       <td>${produto.CATEGORIA}</td>
+                       <td>${produto.FABRICANTE}</td>
+                       <td class="colunaAbrirDetalhes" id="${produto.CODIGO}">
+                           <button onclick="abrirLinha()" class="btnAbrirLinha" id="${produto.CODIGO}">+</button>
+                       </td>
+                   </tr>
+                   <tr id="linhaDetalhe" style="display: none;">
+                       <td colspan="6">
+                           <div class="containerLinhaOculta">
+                               <div class="containerLinhaDetalhes">
+                                   <div class="imagemProduto">
+                                       <img src="https://img.kalunga.com.br/fotosdeprodutos/124209d.jpg" alt="" id="imagemLinhaDetalhe">
+                                   </div>
+                                   <div class="endereco-obs">
+                                       <table>
+                                           <thead>
+                                               <th colspan="2">Endereçamento</th>
+                                           </thead>
+                                           <tbody id="tableEnderecamento">
+                                               <tr>
+                                                   <td id="colunaTopico" class="celulaDetalhe">Rua</td>
+                                                   <td class="celulaDetalhe">${produto.RUA}</td>
+                                               </tr>
+                                               <tr>
+                                                   <td id="colunaTopico" class="celulaDetalhe">Coluna</td>
+                                                   <td class="celulaDetalhe">${produto.COLUNA}</td>
+                                               </tr>
+                                               <tr>
+                                                   <td id="colunaTopico" class="celulaDetalhe">Andar</td>
+                                                   <td class="celulaDetalhe">${produto.ANDAR}</td>
+                                               </tr>
+                                           </tbody>
+                                       </table>
+                                       <table>
+                                            <thead>
+                                               <th id="tableObservacoes">Observações</th>
+                                           </thead>
+                                           <tbody>
+                                               <tr>
+                                                   <td id="celulaObservacoes">${produto.OBSERVACOES_ADICIONAL}</td>
+                                               </tr>
+                                           </tbody>
+                                       </table>
+                                   </div>
+                                   <div class="caractProd">
+                                       <table>
+                                       <thead>
+                                           <th colspan="2">Características</th>
+                                       </thead>
+                                       <tbody id="tableCaracter">
+                                           <tr>
+                                               <td id="colunaTopico">Largura</td>
+                                               <td class="celulaDetalhe">${produto.LARGURA} cm</td>
+                                           </tr>
+                                           <tr>
+                                               <td id="colunaTopico">Altura</td>
+                                               <td class="celulaDetalhe">${produto.ALTURA} cm</td>
+                                           </tr>
+                                           <tr>
+                                               <td id="colunaTopico">Profundidade</td>
+                                               <td class="celulaDetalhe">${produto.PROFUNDIDADE} cm</td>
+                                           </tr>
+                                           <tr>
+                                               <td id="colunaTopico">Peso</td>
+                                               <td class="celulaDetalhe">${produto.PESO} Kg</td>
+                                           </tr>
+                                           <tr>
+                                               <td id="colunaTopico">Frágil</td>
+                                               <td class="celulaDetalhe">${produto.FRAGILIDADE}</td>
+                                           </tr>
+                                       </tbody>
+                                       </table>
+                                   </div>
+                               </div>
+                           </div>
+                       </td>
+                   </tr>
+                   `;
+                   tbody.innerHTML += row;  // Adiciona a linha à tabela
+               });
+           } else {
+               const errorMessage = await response.text();
+               alert('Erro: ' + errorMessage);
+           }
+       } catch (error) {
+           alert('Erro ao buscar produtos: ' + error.message);
+       }
+   });
+   
+   
+   </script>

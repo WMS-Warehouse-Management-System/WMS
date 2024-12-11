@@ -93,24 +93,32 @@ select:focus {
 }
 
 
-#pesquisa {
+#codigo {
     /* ----------------------------------------- */
-        height: 5.4vh;
-        width: 55.10vw;
+    height: 5.4vh;
+    width: 55.10vw;
     /* ----------------------------------------- */
-    
-        padding-left: 0.5%;
+
+    padding-left: 0.5%;
     /* ----------------------------------------- */
-        font-family: "Inter", sans-serif;
-        font-size: clamp(2.25vh,1.5vw,3.25vh); 
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2.25vh, 1.5vw, 3.25vh);
     /* ----------------------------------------- */
-        background-color: white;
-        border-radius: 1.3vh;
-        cursor: pointer;
-        border: transparent;
-        box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
-    
-    }
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+#filtrarBtn{
+    background-color: #4E97D1;
+    color: white;
+    border: none;
+    padding: 2.4%;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-left: 65px;
+}
 
 #pesquisar {
   /* ----------------------------------------- */
@@ -194,6 +202,7 @@ select:focus {
     border-radius: 0.5vh;
     all: unset;
     z-index: 1;
+    margin-left: 10%;
 }
 
 #caixote.active #dropdown {
