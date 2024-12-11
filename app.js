@@ -204,6 +204,10 @@ app.get('/listar-usuarios-view', async (req, res) => {
 });
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
 // ------------------------------------------------ver produtos
 app.get('/ver-catalogo', async (req, res) => {
     try {

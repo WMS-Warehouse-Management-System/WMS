@@ -11,6 +11,53 @@ body {
     height: 100vh;
 }
 
+<<<<<<< HEAD
+=======
+/*PARTE DO FILTRO*/
+
+
+/* --------------------Mecanismo_Pesquisa--------------------- */
+
+.div_pesquisa {
+    /* ----------------------------------------- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* --------------------Filtro--------------------- */
+
+#filtrar {
+    /* ----------------------------------------- */
+    margin-top: 21px;
+    height: 5.5vh;
+    width: 8.2vw;
+    /* ----------------------------------------- */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* ----------------------------------------- */
+    padding-left: 0.5%;
+    margin-right: 1%;
+    /* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2vh, 1.25vw, 3vh);
+    /* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#fil {
+    /* ----------------------------------------- */
+    height: 70%;
+    /* ----------------------------------------- */
+    background-color: white;
+}
+>>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
 
 #filtrarBtn{
     background-color: #DA0000;
@@ -22,6 +69,231 @@ body {
     margin-left: 65px;
 }
 
+<<<<<<< HEAD
+=======
+#filtrar:hover {
+    transform: scale(1.03);
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    outline: 0;
+}
+
+#barradebusca {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+    gap: 1.5vh;
+}
+
+
+#codigo {
+    /* ----------------------------------------- */
+    height: 5.4vh;
+    width: 55.10vw;
+    /* ----------------------------------------- */
+
+    padding-left: 0.5%;
+    /* ----------------------------------------- */
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2.25vh, 1.5vw, 3.25vh);
+    /* ----------------------------------------- */
+    background-color: white;
+    border-radius: 1.3vh;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+}
+
+#pesquisar {
+    /* ----------------------------------------- */
+        height: 5.5vh;
+        width: 10.7vw;
+    /* ----------------------------------------- */
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    /* ----------------------------------------- */
+        padding-left: 0.5%; 
+        margin-left: 1%;
+    /* ----------------------------------------- */
+        font-family: "Inter", sans-serif;
+        font-size: clamp(2vh,1.25vw,3vh); 
+    /* ----------------------------------------- */
+        background-color: white;
+        border-radius: 1.3vh;
+        cursor: pointer;
+        border: transparent;
+        box-shadow: 0.1vw 0.3vh 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+    }
+    
+    #pes {
+    /* ----------------------------------------- */
+        height: 50%;
+    /* ----------------------------------------- */
+        background-color: white;
+    }
+    
+    #pesquisar:hover {
+        transform: scale(1.03); 
+    }
+    
+    textarea:focus, input:focus, select:focus {
+        outline: 0;
+    }
+
+#filtrarcontainer {
+    position: relative;
+    display: inline-block;
+}
+
+#caixote {
+    display: none;
+    position: absolute;
+    width: 20vw;
+    height: 39vh;
+    margin-top: 10%;
+    background-color: hsl(0, 0%, 100%);
+    z-index: 1;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+#caixote.active {
+    display: block;
+}
+
+#ajeitar {
+    display: flex;
+    flex-direction: column;
+}
+
+#subajeitada {
+    display: flex;
+    justify-items: center;
+    justify-content: space-around;
+    margin-top: 5%;
+}
+
+#textinho {
+    color: #DA0000;
+}
+
+#dropdown {
+    display: none;
+    position: relative;
+    margin-top: 5%;
+    width: 5vw;
+    background-color: transparent;
+    border-radius: 0.5vh;
+    all: unset;
+    z-index: 1;
+}
+
+#caixote.active #dropdown {
+    display: block;
+}
+
+/* estilizando os selects */
+select {
+    width: 10vw;
+    margin-top: 4%;
+    margin-left: 10%;
+    padding: 0.9vh 0.9vw;
+    font-size: 14px;
+    color: #fff;
+    background-color: #DA0000;
+    border-color: transparent;
+    border-radius: 0.5vh;
+    appearance: none;
+    /* remove a seta padrao do select */
+    cursor: pointer;
+}
+
+/* estilo quando o select e focado */
+select:focus {
+    outline: none;
+    border-color: #DA0000;
+}
+
+/* estilizando as opçoes do select */
+option {
+    font-size: 14px;
+    padding: 1vh;
+    color: #ffffff;
+}
+
+/* Estilo quando o select é hovered */
+select:hover {
+    border-color: #DA0000;
+}
+
+select:hover option:hover {
+    background-color: #eaeaea;
+}
+
+#inputdata {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.datasize {
+    width: 6vw;
+    height: 4vh;
+    margin-right: 2%;
+    appearance: none;
+    border-color: transparent;
+    background-color: #f4f4f4;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 1vh;
+}
+
+#ordernaritem {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+#ordernaritem {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.botoes {
+    background-color: #f4f4f4;
+    appearance: none;
+    height: 4vh;
+    width: 3vw;
+    border-radius: 1vh;
+    border: 0.1vh solid rgb(173, 173, 173);
+    cursor: pointer;
+    ;
+}
+
+.botoes.clicked {
+    background-color: rgb(173, 173, 173);
+}
+
+/* acabou mudanças */
+#entrada {
+    width: 50vw;
+    height: 4vh;
+    border-radius: 1vh;
+    border-color: transparent;
+    box-shadow: 0.1em 0.1em;
+    font-size: larger;
+
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    outline: 0;
+}
+
+
+>>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
 /* CABEÇALHO */
 .texto-nav {
     color: #DA0000;
@@ -727,5 +999,9 @@ td {
 }
 
 .salvar_edicao:hover {
+<<<<<<< HEAD
     transform: scale(1.1);
+=======
+    transform: scale(1.1); 
+>>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
 }
