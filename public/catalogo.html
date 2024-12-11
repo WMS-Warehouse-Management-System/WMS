@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <title>SGA - Estoque</title>
+    <title>Catálogo</title>
     <link rel="stylesheet" href="css/catalogo.css">
     <link rel="stylesheet" href="css/navbar.css">
 </head>
@@ -113,19 +113,24 @@
                                 <!-- Adicione os fabricantes dinamicamente via JavaScript -->
                             </select>
                         </div>
-                        <div id="inputdata">
+                        <!-- <div id="inputdata">
                             <label>Data:</label>
                             <div id="ajeitardata">
                                 <input type="date" id="dedata" name="dedata" class="datasize">
                                 à
                                 <input type="date" id="atedata" name="atedata" class="datasize">
                             </div>
-                        </div>
+                        </div> -->
                         <div id="ordernaritem">
                             <label>Ordenar Item:</label>
-                            <div id="botoesaz">
-                                <button type="button" class="botoes" onclick="activateButton(this)" >A-Z</button>
-                                <button type="button" class="botoes" onclick="activateButton(this)" >Z-A</button>
+                            <div id="ordenar">  
+                                <select id="ordenacao">
+                                    <option value="">Order Por:</option>
+                                    <option value="az">A - Z</option>
+                                    <option value="za">Z - A</option>
+                                    <option value="maisRecente">Mais Recente</option>
+                                    <option value="maisAntigo">Mais Antigo</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -138,11 +143,12 @@
         <!-- acabou as mudanças -->
         <form id="formPesquisa">
             <div class="div_pesquisa">
-                <input type="text" id="pesquisa">
+                <input type="text" id="codigo">
                 <button id="pesquisar">Pesquisar <img src="imagens/lupa.svg" alt="" id="pes"></button>
             </div>
         </form>
     </div>
+
 
     <div class="container">
         <div class="content-table">
@@ -219,7 +225,7 @@
         });
         </script>
           
-    
+<!--     
         <script>
          //SCRIPT QUE LIGA OS INPUT AO BACK-END   
         document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
@@ -230,7 +236,7 @@
             };
 
             try {
-                const response = await fetch('http://localhost:3000/filtrar-catalogo', {
+                const response = await fetch('http://localhost:3000/ver-catalogo', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(pesquisa),
@@ -332,7 +338,7 @@
                   </td>
               </tr>
               `;
-                        tbody.innerHTML += row;  // Adiciona a linha gerada na tabela
+                        tbody.innerHTML += row;  
                     });
 
 
@@ -347,34 +353,30 @@
 
 
 
-    </script>
+</script> -->
+
 <script>
 document.getElementById('formFiltrar').addEventListener('submit', async (event) => {
-    event.preventDefault(); 
+    event.preventDefault(); // Impede o recarregamento da página
 
-
-
-    const fabricante = document.getElementById('fabricante').value;  
-
-    
+    const fabricante = document.getElementById('fabricante').value;
+    const codigo = document.getElementById('codigo').value;
+    const ordenacao = document.getElementById('ordenacao').value; // Captura a ordenação
 
     try {
-        // Envia a requisição para o backend
         const response = await fetch('/filtro-catalogo', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify({ fabricante })  
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fabricante, codigo, ordenacao }) // Envia ordenação
         });
 
         if (response.ok) {
             const produtosFiltrados = await response.json();
-            console.log('Produtos filtrados:', produtosFiltrados);  
 
-            // Exemplo de preenchimento de uma tabela
             const tbody = document.querySelector('#tabela-estoque tbody');
-            tbody.innerHTML = '';
+            tbody.innerHTML = ''; // Limpa os dados antigos
 
-            produtosFiltrados.forEach(filtrado => {
+            produtosFiltrados.forEach(filtrado => {     
                 const row = `
                 <tr>
                   <td>${filtrado.CODIGO}</td>
@@ -474,8 +476,133 @@ document.getElementById('formFiltrar').addEventListener('submit', async (event) 
 
 </script>
 
-
+<!--------------BARRA DE PÉSQUISA -=---------------->
  
+<script>
+  //SCRIPT QUE LIGA OS INPUT AO BACK-END   
+  document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Evita o comportamento padrão do formulário
+
+    const pesquisa = {
+        codigo: document.getElementById('codigo').value,  // Obtendo o valor do campo 'codigo'
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/ver-catalogo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pesquisa), // Envia os dados para o backend
+        });
+
+        if (response.ok) {
+            const produtos = await response.json();  // Resposta em formato JSON
+
+            if (produtos.length === 0) {
+                alert('Nenhum produto encontrado!');
+                return;
+            }
+
+            const tbody = document.querySelector('#tabela-estoque tbody');
+            tbody.innerHTML = '';  // Limpa a tabela antes de adicionar novos dados
+
+            produtos.forEach((produto) => {
+                const row = `
+                <tr>
+                    <td>${produto.CODIGO}</td>
+                    <td>${produto.NOME_BASICO}</td>
+                    <td>${produto.DESCRICAO_TECNICA}</td>
+                    <td>${produto.QUANT}</td>
+                    <td>${produto.CATEGORIA}</td>
+                    <td>${produto.FABRICANTE}</td>
+                    <td class="colunaAbrirDetalhes" id="${produto.CODIGO}">
+                        <button onclick="abrirLinha()" class="btnAbrirLinha" id="${produto.CODIGO}">+</button>
+                    </td>
+                </tr>
+                <tr id="linhaDetalhe" style="display: none;">
+                    <td colspan="6">
+                        <div class="containerLinhaOculta">
+                            <div class="containerLinhaDetalhes">
+                                <div class="imagemProduto">
+                                    <img src="https://img.kalunga.com.br/fotosdeprodutos/124209d.jpg" alt="" id="imagemLinhaDetalhe">
+                                </div>
+                                <div class="endereco-obs">
+                                    <table>
+                                        <thead>
+                                            <th colspan="2">Endereçamento</th>
+                                        </thead>
+                                        <tbody id="tableEnderecamento">
+                                            <tr>
+                                                <td id="colunaTopico" class="celulaDetalhe">Rua</td>
+                                                <td class="celulaDetalhe">${produto.RUA}</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="colunaTopico" class="celulaDetalhe">Coluna</td>
+                                                <td class="celulaDetalhe">${produto.COLUNA}</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="colunaTopico" class="celulaDetalhe">Andar</td>
+                                                <td class="celulaDetalhe">${produto.ANDAR}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table>
+                                         <thead>
+                                            <th id="tableObservacoes">Observações</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="celulaObservacoes">${produto.OBSERVACOES_ADICIONAL}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="caractProd">
+                                    <table>
+                                    <thead>
+                                        <th colspan="2">Características</th>
+                                    </thead>
+                                    <tbody id="tableCaracter">
+                                        <tr>
+                                            <td id="colunaTopico">Largura</td>
+                                            <td class="celulaDetalhe">${produto.LARGURA} cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="colunaTopico">Altura</td>
+                                            <td class="celulaDetalhe">${produto.ALTURA} cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="colunaTopico">Profundidade</td>
+                                            <td class="celulaDetalhe">${produto.PROFUNDIDADE} cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="colunaTopico">Peso</td>
+                                            <td class="celulaDetalhe">${produto.PESO} Kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="colunaTopico">Frágil</td>
+                                            <td class="celulaDetalhe">${produto.FRAGILIDADE}</td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                `;
+                tbody.innerHTML += row;  // Adiciona a linha à tabela
+            });
+        } else {
+            const errorMessage = await response.text();
+            alert('Erro: ' + errorMessage);
+        }
+    } catch (error) {
+        alert('Erro ao buscar produtos: ' + error.message);
+    }
+});
+
+
+    </script>
 
 
     <script src="../app.js"></script>

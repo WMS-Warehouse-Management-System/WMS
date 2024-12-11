@@ -451,6 +451,410 @@ app.post('/filtro-catalogo', async (req, res) => {
 });
 
 
+
+// ------------------------------------------------ver produtos
+app.get('/ver-catalogo', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            FULL JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
+        `;
+        
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset);  // Retorna todos os produtos
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+
+// ----------------------------------FILTRO DE PESQUISA DO INPUT CATALOGO
+app.post('/ver-catalogo', async (req, res) => {
+    const { codigo } = req.body;  // Obtendo o código enviado pelo frontend
+
+    try {
+        await sql.connect(dbConfig);
+
+        // Query base
+        let query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            FULL JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
+        `;
+
+        if (codigo) {
+            query += ' WHERE a.CODIGO = @codigo';  // Filtra pelo código
+        }
+
+        const request = new sql.Request();
+        if (codigo) {
+            request.input('codigo', sql.BigInt, codigo);  // Passando o código como parâmetro
+        }
+
+        const result = await request.query(query);
+        res.json(result.recordset);  // Retorna os produtos filtrados
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos filtrados: ' + error.message);
+    }
+});
+
+
+
+// // ----------------------------------------------------ESTOQUE REAL
+app.get('/estoque-real', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+
+        let query = `
+	        SELECT 
+                CODIGO,
+                NOME_BASICO,
+                QUANTIDADE,
+                QUANT_RECENTE
+            FROM vw_EstoqueReal
+        `;
+        
+
+
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset);  
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+// ----------------------------------------------------ESTOQUE REAL COM BARRA DE PESQUISA
+app.post('/estoque-real', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const { codigo } = req.body;  
+
+        let query = `
+	        SELECT 
+                CODIGO,
+                NOME_BASICO,
+                QUANTIDADE,
+                QUANT_RECENTE
+            FROM vw_EstoqueReal
+        `;
+        
+        if (codigo) {
+            query += ' WHERE CODIGO = @codigo';
+        }
+
+        const request = new sql.Request();
+
+        if (codigo) {
+            request.input('codigo', sql.BigInt, codigo);
+        }
+
+        const result = await request.query(query);
+
+        res.json(result.recordset);  
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+//------------------FILTRO 
+
+app.get('/filtro-fabricante', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+
+        const query = `
+            SELECT DISTINCT 
+                FABRICANTE  
+            FROM DimProduto
+        `;
+        
+        const result = await new sql.Request().query(query);
+
+        res.json(result.recordset);  // Retorna todos os produtos
+    } catch (error) {
+        res.status(500).send('Erro ao obter os produtos: ' + error.message);
+    }
+});
+
+
+//----------------------------FILTRO
+
+app.post('/filtro-catalogo', async (req, res) => {
+    const { fabricante, codigo, ordenacao } = req.body;
+
+    try {
+        await sql.connect(dbConfig);  // Conectando ao banco de dados SQL Server
+        
+        // Iniciando a query base
+        let query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            FULL JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
+                WHERE 1=1
+        `;
+
+
+        // Aplicar filtros
+        if (fabricante) query += ` AND a.FABRICANTE = @fabricante`;
+        if (codigo) query += ` AND a.CODIGO = @codigo`;
+
+        // Aplicar ordenação
+        switch (ordenacao) {
+            case 'az':
+                query += ' ORDER BY a.NOME_BASICO ASC';
+                break;
+            case 'za':
+                query += ' ORDER BY a.NOME_BASICO DESC';
+                break;
+            default:
+                query += ' ORDER BY a.NOME_BASICO ASC';  // Adiciona uma ordenação padrão
+                break;
+        }
+
+        // Criar a requisição para enviar os parâmetros
+        const request = new sql.Request();
+        if (fabricante) request.input('fabricante', sql.NVarChar, fabricante);
+        if (codigo) request.input('codigo', sql.BigInt, codigo);  // Certifique-se de que o tipo seja correto (BigInt, NVarChar, etc.)
+
+        // Executar a consulta
+        const result = await request.query(query);
+
+        // Enviar os resultados
+        res.json(result.recordset);
+    } catch (error) {
+        console.error('Erro ao filtrar produtos:', error);
+        res.status(500).send('Erro ao processar a requisição');
+    }
+});
+
+//----------------------------FILTRO
+
+// app.post('/filtro-edicao', async (req, res) => {
+//     const { fabricante, codigo, ordenacao } = req.body;
+
+//     try {
+//         await sql.connect(dbConfig);  // Conectando ao banco de dados SQL Server
+        
+//         // Iniciando a query base
+//         let query = `
+//             SELECT DISTINCT
+//                 a.CODIGO,
+//                 a.NOME_BASICO,
+//                 a.NOME_MODIFICADOR,
+//                 a.DESCRICAO_TECNICA,
+//                 a.FABRICANTE,
+//                 a.OBSERVACOES_ADICIONAL,
+//                 a.IMAGEM,
+//                 a.UNIDADE,
+//                 a.PRECO_DE_VENDA,
+//                 CASE
+//                     WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+//                     WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+//                 END AS FRAGILIDADE,
+//                 a.inserido_por,
+//                 a.RUA,
+//                 a.COLUNA,
+//                 a.ANDAR,
+//                 a.ALTURA,
+//                 a.LARGURA,
+//                 a.PROFUNDIDADE,
+//                 a.PESO,
+//                 SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+//             FROM DimProduto AS a
+//             FULL JOIN FactRecebimento AS b
+//                 ON a.CODIGO = b.CODIGO
+//                 WHERE 1=1
+//         `;
+
+//         // Aplicar filtros
+//         if (fabricante) query += ` AND FABRICANTE = @fabricante`;
+//         if (codigo) query += ` AND CODIGO = @codigo`;
+
+//         // Aplicar ordenação
+//         switch (ordenacao) {
+//             case 'az':
+//                 query += ' ORDER BY NOME_BASICO ASC';
+//                 break;
+//             case 'za':
+//                 query += ' ORDER BY NOME_BASICO DESC';
+//                 break;
+//             default:
+//                 break;
+//         }
+
+//          // Criar a requisição para enviar os parâmetros
+//          const request = new sql.Request();
+//          if (fabricante) request.input('fabricante', sql.NVarChar, fabricante);
+//          if (codigo) request.input('codigo', sql.NVarChar, codigo);
+ 
+//          // Executar a consulta
+//          const result = await request.query(query);
+ 
+//          // Enviar os resultados
+//          res.json(result.recordset);
+//      } catch (error) {
+//          console.error('Erro ao filtrar produtos:', error);
+//          res.status(500).send('Erro ao processar a requisição');
+//      }
+//  });
+
+//----------------------------FILTRO FORM
+
+app.post('/filtro-catalogo', async (req, res) => {
+    const { fabricante, codigo, ordenacao } = req.body;
+
+    try {
+        await sql.connect(dbConfig);  // Conectando ao banco de dados SQL Server
+        
+        // Iniciando a query base
+        let query = `
+            SELECT DISTINCT
+                a.CODIGO,
+                a.NOME_BASICO,
+                a.NOME_MODIFICADOR,
+                a.DESCRICAO_TECNICA,
+                a.FABRICANTE,
+                a.OBSERVACOES_ADICIONAL,
+                a.IMAGEM,
+                a.UNIDADE,
+                a.PRECO_DE_VENDA,
+                CASE
+                    WHEN a.FRAGILIDADE = 0 THEN 'NÃO'
+                    WHEN a.FRAGILIDADE = 1 THEN 'SIM'
+                END AS FRAGILIDADE,
+                a.inserido_por,
+                a.RUA,
+                a.COLUNA,
+                a.ANDAR,
+                a.ALTURA,
+                a.LARGURA,
+                a.PROFUNDIDADE,
+                a.PESO,
+                SUM(b.QUANT) OVER (PARTITION BY a.CODIGO) AS QUANT
+            FROM DimProduto AS a
+            FULL JOIN FactRecebimento AS b
+                ON a.CODIGO = b.CODIGO
+                WHERE 1=1
+        `;
+
+        // Aplicar filtros
+        if (fabricante) query += ` AND FABRICANTE = @fabricante`;
+        if (codigo) query += ` AND CODIGO = @codigo`;
+
+        // Aplicar ordenação
+        switch (ordenacao) {
+            case 'az':
+                query += ' ORDER BY NOME_BASICO ASC';
+                break;
+            case 'za':
+                query += ' ORDER BY NOME_BASICO DESC';
+                break;
+            default:
+                break;
+        }
+
+        // Criar a requisição para enviar os parâmetros
+        const request = new sql.Request();
+        if (fabricante) request.input('fabricante', sql.NVarChar, fabricante);
+        if (codigo) request.input('codigo', sql.NVarChar, codigo);
+
+        // Executar a consulta
+        const result = await request.query(query);
+
+        // Enviar os resultados
+        res.json(result.recordset);
+    } catch (error) {
+        console.error('Erro ao filtrar produtos:', error);
+        res.status(500).send('Erro ao processar a requisição');
+    }
+});
+
+
+
+
+
+
+
+
 // -----------------------------------------------------adicionar-usuario
 app.post('/adicionar-usuario', async (req, res) => {
     const { email,nome,senha,dataNasc,dataEntrada } = req.body;

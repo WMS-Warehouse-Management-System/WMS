@@ -99,7 +99,7 @@
 
     <div id="formContainer">
       <h2>Novo Recebimento</h2>
-      <button id="close-btn" class="close-btn" onclick="toggleForm()">&times;</button>
+      <button id="close-btn" class="close-btn">&times;</button>
       <form id="registrationForm">
 
         <div class="input-container">
@@ -212,36 +212,25 @@
               </div>
             </div>
             <div id="dropdown" class="dentrodropdown">
-              <select id="categoria">
-                <option value="Categoria">Categoria</option>
-                <option value="papelaria">Papelaria</option>
-                <option value="escritorio">Escritório</option>
-                <option value="eletronicos">Eletrônicos</option>
-                <option value="armazenagem">Armazenagem</option>
+              <label for="categoria">Categoria:</label>
+              <select id="categoria" name="categoria">
+                  <option value="">Selecione Categoria</option>
+                  <!-- Adicione as opções dinamicamente via JavaScript -->
               </select>
-              <select id="fornecedor">
-                <option value="">Fornecedor</option>
-                <option value="papelDistrib">Papel Distrib.</option>
-                <option value="lapisCo">Lápis&Co</option>
-                <option value="bicDistrib">Bic Distrib</option>
-                <option value="escolarLTDA">Escolar LTDA</option>
-                <option value="kalunga">Kalunga</option>
-                <option value="embalagensBrasil">Embalagens Brasil</option>
+              <label for="fabricante">Fabricante:</label>
+              <select id="fabricante" name="fabricante">
+                  <option value="">Selecione Fabricante</option>
+                  <!-- Adicione os fabricantes dinamicamente via JavaScript -->
               </select>
-              <select id="fabricante">
-                <option value="">Fabricante</option>
-                <option value="tilibra">Tilibra</option>
-                <option value="faberCastell">Faber-Castell</option>
-                <option value="leoLeo">Leo&Leo</option>
-                <option value="bic">Bic</option>
-                <option value="sony">Sony</option>
-                <option value="duracell">Duracell</option>
-                <option value="hp">HP</option>
-                <option value="vacuPack">VacuPack</option>
-              </select>
-
-            </div>
-
+          </div>
+          <!-- <div id="inputdata">
+                            <label>Data:</label>
+                            <div id="ajeitardata">
+                                <input type="date" id="dedata" name="dedata" class="datasize">
+                                à
+                                <input type="date" id="atedata" name="atedata" class="datasize">
+                            </div>
+                        </div> -->
             <div id="inputdata">Data
               <div id="ajeitardata">
                 <input type="date" id="dedata" class="datasize"></input>
@@ -260,12 +249,16 @@
 
         <!-- acabou as mudanças -->
         <form id="formPesquisa">
-          <input type="text" id="pesquisa" placeholder="Digite o código do produto...">
-          <button id="pesquisar">Pesquisar <img src="imagens/lupa.svg" alt="" id="pes"></button>
+          <div class="div_pesquisa">
+            <input type="text" id="codigo" placeholder="Digite o código" required>
+            <button type="submit" id="pesquisar">
+              Pesquisar <img src="imagens/lupa.svg" alt="Ícone de pesquisa" id="pes">
+            </button>
+          </div>
         </form>
-      </div>
-    </div>
-
+  </div>
+ </div>
+ </div>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
 
@@ -312,84 +305,15 @@
 
       });
 
-      document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
-        event.preventDefault(); // Evita o comportamento padrão do formulário
-
-        const pesquisa = {
-          codigo: document.getElementById('entrada').value,
-        };
-
-        try {
-          const response = await fetch('http://localhost:3000/Recebimento', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(pesquisa),
-          });
-
-          if (response.ok) {
-            const pesquisa = await response.json();
-
-            if (pesquisa.length === 0) {
-              alert('Nenhum produto encontrado!');
-              return;
-            }
-
-            const tbody = document.querySelector('#table-container');
-            tbody.innerHTML = '';
-
-            recebimentos.forEach((recebimento) => {
-              // Cria uma linha principal
-              const mainRow = document.createElement('div');
-              mainRow.classList.add('row', 'main-row');
-              mainRow.innerHTML = `
-        <div class="cell"><strong>Data</strong><span>${recebimento.DATA_RECEB}</span></div>
-        <div class="cell"><strong>Código</strong><span>${recebimento.CODIGO}</span></div>
-        <div class="cell"><strong>Item</strong><span>${recebimento.NOME_BASICO}</span></div>
-        <div class="cell"><strong>Fornecedor</strong><span>${recebimento.FORNECEDOR}</span></div>
-        <div class="cell"><strong>Preço Aquisição</strong><span>${recebimento.PRECO_DE_AQUISICAO} R$</span></div>
-        <div class="cell"><strong>Quantidade</strong><span>${recebimento.QUANT}</span></div>
-      `;
-
-              // Cria a linha de detalhes
-              const detailsRow = document.createElement('div');
-              detailsRow.classList.add('row', 'details-row');
-              detailsRow.style.display = 'none'; // Esconde inicialmente
-              detailsRow.innerHTML = `
-        <div class="details-left">
-          <div class="image-placeholder">
-            <img src="${recebimento.IMAGEM}" alt="Ícone de imagem">
-          </div>
-        </div>
-        <div class="details-right">
-          <div class="detail-item"><strong>Fragilidade:</strong><span>${recebimento.FRAGILIDADE}</span></div>
-          <div class="detail-item"><strong>Fabricante:</strong><span>${recebimento.FABRICANTE}</span></div>
-          <div class="detail-item"><strong>Lote:</strong><span>${recebimento.LOTE}</span></div>
-          <div class="detail-item"><strong>Validade:</strong><span>${recebimento.VALIDADE}</span></div>
-          <div class="detail-item"><strong>Preço Venda:</strong><span>${recebimento.PRECO_DE_VENDA} RS</span></div>
-        </div>
-      `;
-
-              tbody.innerHTML += row;  // Adiciona a linha gerada na tabela
-            });
-
-
-          } else {
-            const errorMessage = await response.text();
-            alert('Erro: ' + errorMessage);
-          }
-        } catch (error) {
-          alert('Erro ao buscar produtos: ' + error.message);
-        }
-      });
-
-
 
     </script>
 
 
 
 
-  </div>
+
+
+ 
   <div class="header">
     <span class="title">Itens recebidos</span>
     <div class="divider"></div>
@@ -402,6 +326,90 @@
   <div class="footer">
     <img src="imgCADASTRO/gatinhoRodapé.svg" alt="">
   </div>
+
+
+
+<!-------------------BARRA DE PESQUISA-------------------->
+
+  <script>
+    
+    document.getElementById('formPesquisa').addEventListener('submit', async function (event) {
+  event.preventDefault(); // Impede o envio tradicional do formulário
+
+  const codigo = document.getElementById('codigo').value.trim(); // Obtém o valor do código
+
+  const pesquisa = {
+    codigo: codigo, // Envia o código digitado pelo usuário
+  };
+
+  try {
+    // Envia a requisição para o backend
+    const response = await fetch('http://localhost:3000/Recebimento', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(pesquisa)
+    });
+
+    if (response.ok) {
+      const produtos = await response.json(); // Recebe a resposta em formato JSON
+
+      // Se não houver resultados
+      if (produtos.length === 0) {
+        document.querySelector('#table-container').innerHTML = '<p>Nenhum produto encontrado!</p>';
+        return;
+      }
+
+      // Limpa a área onde os resultados serão exibidos
+      const tabelaRecebimentos = document.querySelector('#table-container');
+      tabelaRecebimentos.innerHTML = '';
+
+      // Variável para armazenar o HTML dos resultados
+      let linhasTabela = '';
+
+      // Processa os produtos retornados e cria o HTML para exibição
+      produtos.forEach((filtrado) => {
+        linhasTabela += `
+          <div class="row main-row" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'flex' : 'none'">
+            <div class="cell"><strong>Data</strong><span>${filtrado.DATA_RECEB}</span></div>
+            <div class="cell"><strong>Código</strong><span>${filtrado.CODIGO}</span></div>
+            <div class="cell"><strong>Item</strong><span>${filtrado.NOME_BASICO}</span></div>
+            <div class="cell"><strong>Fornecedor</strong><span>${filtrado.FORNECEDOR}</span></div>
+            <div class="cell"><strong>Preço Aquisição</strong><span>${filtrado.PRECO_DE_AQUISICAO} R$</span></div>
+            <div class="cell"><strong>Quantidade</strong><span>${filtrado.QUANT}</span></div>
+          </div>
+          <div class="row details-row" style="display: none;">
+            <div class="details-left">
+              <div class="image-placeholder">
+                <img src="${filtrado.IMAGEM}" alt="Ícone de imagem">
+              </div>
+            </div>
+            <div class="details-right">
+              <div class="detail-item"><strong>Fragilidade:</strong><span>${filtrado.FRAGILIDADE}</span></div>
+              <div class="detail-item"><strong>Fabricante:</strong><span>${filtrado.FABRICANTE}</span></div>
+              <div class="detail-item"><strong>Lote:</strong><span>${filtrado.LOTE}</span></div>
+              <div class="detail-item"><strong>Validade:</strong><span>${filtrado.VALIDADE}</span></div>
+              <div class="detail-item"><strong>Preço Venda:</strong><span>${filtrado.PRECO_DE_VENDA} R$</span></div>
+            </div>
+          </div>
+        `;
+      });
+
+      // Insere os resultados na área de resultados
+      tabelaRecebimentos.innerHTML = linhasTabela;
+
+    } else {
+      const errorMessage = await response.text();
+      alert('Erro ao buscar produtos: ' + errorMessage);
+    }
+
+  } catch (error) {
+    alert('Erro ao buscar produtos: ' + error.message);
+  }
+});
+
+   
+   </script>
+
 
   <script src="js/financeiro.js"></script>
   <script src="js/navbar.js"></script>

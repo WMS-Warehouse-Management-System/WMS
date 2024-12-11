@@ -1,16 +1,16 @@
-document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('click', (event) => {
-        if (event.target && event.target.classList.contains('btnAbrirLinha')) {
-            const linhaDetalhe = event.target.closest('tr').nextElementSibling;
+   
+//FILTRO TA INTERNO PQ NÃO ACHEI O edicao.js ACHEI MELHOR POR AQUI
+//SE FUNCIOANAR DEIXO AI E DEPOIS NOIS ARRUMO
 
-            if (linhaDetalhe) {
-                const isHidden = linhaDetalhe.style.display === 'none';
-                linhaDetalhe.style.display = isHidden ? 'table-row' : 'none';
-                event.target.textContent = isHidden ? '-' : '+';
-            }
-        }
-    });
+
+document.getElementById('filtrarBtn').addEventListener('click', function () {
+    const caixote = document.getElementById('caixote');
+    
+    // Alterna a classe 'active' para mostrar ou esconder o formulário de filtro
+    caixote.classList.toggle('active');
 });
+
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,69 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+//   muda o botao
+function activateButton(clickedButton) {
+const buttons = document.querySelectorAll('.botoes'); 
+buttons.forEach(button => button.classList.remove('clicked')); 
+clickedButton.classList.add('clicked');}
 
-//----------SCRIPT PRINCIPAL
-
-    async function fetchEstoqueReal() {
-        try {
-            const response = await fetch('/estoque-real');
-            
-            if (!response.ok) {
-                throw new Error('Erro ao buscar produtos: ' + response.statusText);
-            }
-
-            const produtos = await response.json();
-
-            const tbody = document.querySelector('#tabela-estoque tbody');
-            tbody.innerHTML = '';
-
-            if (produtos.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8">Nenhum produtos encontrado</td></tr>';
-                return;
-            }
-
-            produtos.forEach(produtos => {
-
-const row = `
-<tr>
-    <td>${produtos.CODIGO}</td>
-    <td>${produtos.NOME_BASICO}</td>
-    <td>50</td>
-    <td>${produtos.QUANT_RECENTE}</td>
-    <td>${produtos.QUANTIDADE}</td>
-    <td>${produtos.QUANTIDADE}</td>
-    <td>100%</td>
-    <td>OK</td>
-</tr>
-
-    `;
-tbody.innerHTML += row;
-});
-            } catch (error) {
-                alert('Erro ao buscar usuários: ' + error.message);
-            }
-    }
-
-    window.onload = fetchEstoqueReal;
 
 //---------------------LIMPAR FILTRO
 
 function limparFiltros() {
-    document.getElementById('categoria').value = '';
+    document.getElementById('ordenacao').value = '';
     document.getElementById('fabricante').value = '';
     document.getElementById('codigo').value = '';
 }
 function tirarFiltro(){
-    document.getElementById('categoria').value = '';
+    document.getElementById('ordenacao').value = '';
     document.getElementById('fabricante').value = '';
     
 }
-
-//---------------------------FILTRO BACK END
-
-
-
-//-----------------------FILTRO CATEGORIA
 
 
 
@@ -100,7 +56,7 @@ function tirarFiltro(){
 //-----------------------FILTRO FABRICANTE
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const filtroFabricante = document.getElementById('fabricante');
+    const filtroFabricante = document.getElementById('fabricanteFiltro');
 
     try {
         const response = await fetch('http://localhost:3000/filtro-fabricante');
@@ -167,6 +123,3 @@ function atualizarTabela(dados) {
         tbody.innerHTML += row;
     });
 }
-
-
-     
