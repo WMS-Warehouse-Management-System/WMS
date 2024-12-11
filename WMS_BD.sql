@@ -189,11 +189,11 @@
     PESO
 )
 VALUES
-(1, 'Produto A', 'Modificador X', 'DescriÃ§Ã£o TÃ©cnica 1', 'Fabricante 1', 'ObservaÃ§Ã£o 1', NULL, 'Unidade A', 10.50, 1, 'Usuario1', 1, 1, 1, 10, 20, 15, 10.5),
-(2, 'Produto B', 'Modificador Y', 'DescriÃ§Ã£o TÃ©cnica 2', 'Fabricante 2', 'ObservaÃ§Ã£o 2', NULL, 'Unidade B', 20.99, 0, 'Usuario2', 2, 2, 2, 15, 25, 10, 2.4),
-(3, 'Produto C', 'Modificador Z', 'DescriÃ§Ã£o TÃ©cnica 3', 'Fabricante 3', 'ObservaÃ§Ã£o 3', NULL, 'Unidade C', 30.00, 1, 'Usuario3', 3, 3, 3, 20, 30, 20, 0.3),
-(4, 'Produto D', 'Modificador W', 'DescriÃ§Ã£o TÃ©cnica 4', 'Fabricante 4', 'ObservaÃ§Ã£o 4', NULL, 'Unidade D', 40.50, 1, 'Usuario4', 4, 4, 2, 25, 35, 25, 0.8),
-(5, 'Produto E', 'Modificador V', 'DescriÃ§Ã£o TÃ©cnica 5', 'Fabricante 5', 'ObservaÃ§Ã£o 5', NULL, 'Unidade E', 50.99, 0, 'Usuario5', 1, 1, 5, 30, 40, 30, 20);
+(1, 'Produto A', 'Modificador X', 'Descrição Técnica 1', 'Fabricante 1', 'Observação 1', NULL, 'Unidade A', 10.50, 1, 'Usuario1', 1, 1, 1, 10, 20, 15, 10.5),
+(2, 'Produto B', 'Modificador Y', 'Descrição Técnica 2', 'Fabricante 2', 'Observação 2', NULL, 'Unidade B', 20.99, 0, 'Usuario2', 2, 2, 2, 15, 25, 10, 2.4),
+(3, 'Produto C', 'Modificador Z', 'Descrição Técnica 3', 'Fabricante 3', 'Observação 3', NULL, 'Unidade C', 30.00, 1, 'Usuario3', 3, 3, 3, 20, 30, 20, 0.3),
+(4, 'Produto D', 'Modificador W', 'Descrição Técnica 4', 'Fabricante 4', 'Observação 4', NULL, 'Unidade D', 40.50, 1, 'Usuario4', 4, 4, 2, 25, 35, 25, 0.8),
+(5, 'Produto E', 'Modificador V', 'Descrição Técnica 5', 'Fabricante 5', 'Observação 5', NULL, 'Unidade E', 50.99, 0, 'Usuario5', 1, 1, 5, 30, 40, 30, 20);
 
 GO
 
@@ -213,3 +213,53 @@ FROM DimProduto dp
 JOIN FactRecebimento fr ON dp.CODIGO = fr.CODIGO
 GROUP BY dp.NOME_BASICO
 ORDER BY dp.NOME_BASICO;
+GO
+
+-- VIEW ESTOQUE REAL E INVENTARIO
+
+CREATE VIEW vw_EstoqueReal AS
+WITH CTE_RecebimentosAgrupados AS (
+    SELECT 
+        CODIGO,
+        DATA_RECEB,
+        SUM(QUANT) AS TOTAL_QUANT -- Soma as quantidades recebidas no mesmo dia
+    FROM 
+        FactRecebimento
+    GROUP BY 
+        CODIGO, DATA_RECEB
+),
+CTE_QuantidadesMaisRecentes AS (
+    SELECT 
+        CODIGO,
+        DATA_RECEB,
+        TOTAL_QUANT,
+        ROW_NUMBER() OVER (PARTITION BY CODIGO ORDER BY DATA_RECEB DESC) AS RowNum
+    FROM 
+        CTE_RecebimentosAgrupados
+)
+SELECT 
+    dp.CODIGO,
+    dp.NOME_BASICO AS NOME_BASICO,
+    ISNULL(SUM(fr.QUANT), 0) AS QUANTIDADE, -- Soma total das quantidades do produto
+    ISNULL(qmr.TOTAL_QUANT, 0) AS QUANT_RECENTE -- Quantidade mais recente recebida
+FROM 
+    DimProduto dp
+LEFT JOIN 
+    FactRecebimento fr ON dp.CODIGO = fr.CODIGO -- Soma total de produtos recebidos
+LEFT JOIN 
+    CTE_QuantidadesMaisRecentes qmr ON dp.CODIGO = qmr.CODIGO AND qmr.RowNum = 1 -- Quantidade mais recente
+GROUP BY 
+    dp.CODIGO, dp.NOME_BASICO, qmr.TOTAL_QUANT;
+
+GO
+
+-- TABELA SAIDAS RECEBIMENTO
+
+CREATE TABLE FactSaidas (
+        IDRecebimento BIGINT PRIMARY KEY IDENTITY(1,1),
+        DATA_SAIDA DATE NOT NULL,
+        QUANT BIGINT NOT NULL,
+        LOTE Nvarchar(30) not null,
+        CODIGO BIGINT NOT NULL,
+        FORNECEDOR VARCHAR(255)
+    );
