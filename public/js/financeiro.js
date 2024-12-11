@@ -66,8 +66,6 @@ document
     }
   });
 
-
-
 //--------------------------------------------------------------Aparecer os recebimentos na tela
 async function fetchVerRecebimentos() {
   try {
@@ -135,6 +133,12 @@ async function fetchVerRecebimentos() {
   } catch (error) {
     alert('Erro ao buscar recebimentos: ' + error.message);
   }
+}
+
+function toggleForm() {
+  const formContainer = document.getElementById("formContainer");
+  formContainer.style.display =
+    formContainer.style.display === "block" ? "none" : "block";
 }
 
 // Chama a função ao carregar a página

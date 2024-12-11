@@ -611,35 +611,37 @@ app.get("/Saldos", async (req, res) => {
       // Estabelecendo a conexão com o banco de dados
       let pool = await sql.connect(dbConfig);
   
-      // Consulta SQL ajustada para somar as quantidades por lote
+      // Consulta SQL ajustada para somar as quantidades por lote e manter o saldo atualizado
       const query = `
-        SELECT 
-          DimProduto.CODIGO,
-          DimProduto.NOME_BASICO,
-          FactSaidas.FORNECEDOR,
-          FactRecebimento.PRECO_DE_AQUISICAO,
-          DimProduto.IMAGEM,
-          FactRecebimento.LOTE,
-          FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
-          DimProduto.PRECO_DE_VENDA,
-          DimProduto.FRAGILIDADE,
-          SUM(FactSaidas.QUANT) AS QUANT_SAIDA,
-          SUM(FactRecebimento.QUANT) AS QUANT_RECEBIMENTO,
-          (SUM(FactRecebimento.QUANT) - SUM(FactSaidas.QUANT)) AS SALDO
-        FROM FactSaidas 
-        INNER JOIN DimProduto ON FactSaidas.CODIGO = DimProduto.CODIGO
-        INNER JOIN FactRecebimento ON FactSaidas.CODIGO = FactRecebimento.CODIGO
-        GROUP BY 
-          DimProduto.CODIGO,
-          DimProduto.NOME_BASICO,
-          FactSaidas.FORNECEDOR,
-          FactRecebimento.PRECO_DE_AQUISICAO,
-          DimProduto.IMAGEM,
-          FactRecebimento.LOTE,
-          FactRecebimento.VALIDADE,
-          DimProduto.PRECO_DE_VENDA,
-          DimProduto.FRAGILIDADE
-        HAVING (SUM(FactRecebimento.QUANT) - SUM(FactSaidas.QUANT)) > 0
+        WITH SaldoAcumulado AS (
+          SELECT 
+            DimProduto.CODIGO,
+            DimProduto.NOME_BASICO,
+            FactRecebimento.LOTE,
+            DimProduto.IMAGEM,
+            FORMAT(FactRecebimento.VALIDADE, 'dd/MM/yyyy') AS VALIDADE,
+            SUM(ISNULL(FactRecebimento.QUANT, 0)) AS QUANT_RECEBIMENTO,
+            SUM(ISNULL(FactSaidas.QUANT, 0)) AS QUANT_SAIDA
+          FROM FactRecebimento
+          LEFT JOIN DimProduto ON FactRecebimento.CODIGO = DimProduto.CODIGO
+          LEFT JOIN FactSaidas ON FactRecebimento.CODIGO = FactSaidas.CODIGO
+          GROUP BY 
+            DimProduto.CODIGO,
+            DimProduto.NOME_BASICO,
+            FactRecebimento.LOTE,
+            DimProduto.IMAGEM,
+            FactRecebimento.VALIDADE
+        )
+        SELECT
+          CODIGO,
+          NOME_BASICO,
+          LOTE,
+          IMAGEM,
+          VALIDADE,
+          QUANT_RECEBIMENTO,
+          QUANT_SAIDA,
+          (QUANT_RECEBIMENTO - QUANT_SAIDA) AS SALDO
+        FROM SaldoAcumulado
       `;
   
       // Executando a query
@@ -652,9 +654,6 @@ app.get("/Saldos", async (req, res) => {
       res.status(500).send("Erro ao buscar dados.");
     }
   });
-
-
-
 
 
 
@@ -725,7 +724,6 @@ app.get("/Saldos", async (req, res) => {
   });
 //---------------------------------------------------------
 //--------------------------------------- Adicionar saida
-
 app.post('/adicionar-saida', async (req, res) => {
     const { fornecedor, codigo, quantidade, numbLote, dataRecebimento } = req.body;
 
@@ -844,6 +842,7 @@ app.get('/lotes', async (req, res) => {
         res.status(500).json({ success: false, message: 'Erro ao buscar lotes: ' + error.message });
     }
 });
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 

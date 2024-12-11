@@ -23,8 +23,33 @@
         return;
       }
   
+      const saldosAcumulados = {}; // Armazenará os saldos por produto e lote
+  
       saldos.forEach((saldo) => {
-        // Cria uma linha principal
+        const key = `${saldo.CODIGO}-${saldo.LOTE}`; // Chave para identificar produto e lote
+        if (!saldosAcumulados[key]) {
+          saldosAcumulados[key] = {
+            NOME_BASICO: saldo.NOME_BASICO,
+            CODIGO: saldo.CODIGO,
+            LOTE: saldo.LOTE,
+            QUANT_RECEBIMENTO: 0,
+            QUANT_SAIDA: 0,
+            saldo: 0
+          };
+        }
+  
+        // Converte as quantidades para números antes de somar
+        const quantRecebida = Number(saldo.QUANT_RECEBIMENTO);
+        const quantSaida = Number(saldo.QUANT_SAIDA);
+  
+        // Atualiza o saldo acumulado (Recebimento - Saída)
+        saldosAcumulados[key].QUANT_RECEBIMENTO += quantRecebida;
+        saldosAcumulados[key].QUANT_SAIDA += quantSaida;
+        saldosAcumulados[key].saldo += quantRecebida - quantSaida;
+      });
+  
+      // Criação da tabela com os saldos acumulados
+      Object.values(saldosAcumulados).forEach((saldo) => {
         const mainRow = document.createElement('div');
         mainRow.classList.add('row', 'main-row');
         mainRow.innerHTML = `
@@ -33,10 +58,10 @@
           <div class="cell"><strong>Lote</strong><span>${saldo.LOTE}</span></div>
           <div class="cell"><strong>Quantidade Recebida</strong><span>${saldo.QUANT_RECEBIMENTO}</span></div>
           <div class="cell"><strong>Quantidade Saída</strong><span>${saldo.QUANT_SAIDA}</span></div>
-          <div class="cell"><strong>Saldo</strong><span>${saldo.SALDO}</span></div>
+          <div class="cell"><strong>Saldo</strong><span>${saldo.saldo}</span></div>
         `;
   
-        // Adiciona as linhas à tabela
+        // Adiciona a linha à tabela
         tabelaRecebimentos.appendChild(mainRow);
       });
     } catch (error) {
@@ -46,9 +71,6 @@
   
   // Chama a função ao carregar a página
   window.onload = fetchVerSaldos;
- 
-  
-  
   
   
   document.addEventListener("DOMContentLoaded", () => {
