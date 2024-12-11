@@ -84,6 +84,7 @@
                         // Armazenar informações no localStorage
                         localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
 
+
                         // Verifica o tipo de usuário e redireciona após o alerta
                         if (data.usuario.tipo === 'professor') {
                             localStorage.setItem('SNProfessor', data.usuario.SN);

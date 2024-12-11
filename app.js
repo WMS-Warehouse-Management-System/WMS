@@ -2,33 +2,31 @@
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const path = require('path');
+
 const app = express();
 const port = 3000;
+const cadastroRoutes = require('./routes/cadastro'); // Importando as rotas de cadastro
 
 const dbConfig = {
-    user:'carlosBD',
+    user: 'carlosBD',
     password: '1234',
     server: '127.0.0.1',
     database: 'WMS',
     options: {
         encrypt: true,
-        trustServerCertificate: true
-    }
+        trustServerCertificate: true,
+    },
 };
 
+// Middlewares globais
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Serve arquivos estáticos da pasta 'public'
-
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const path = require('path');
-const cadastroRoutes = require('./routes/cadastro'); // Importando as rotas de cadastro
-
-
-// Configuração do middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuração da sessão
 app.use(session({
@@ -37,14 +35,68 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-// Configuração da engine de views
-app.set('view engine', 'ejs'); // Alterar para HTML se necessário
-app.set('views', './views'); // Certifique-se de que as telas estão na pasta 'views'
-// Servindo arquivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware para associar o usuário logado às requisições
+app.use((req, res, next) => {
+    if (req.session && req.session.usuario) {
+        req.usuario = req.session.usuario; // Disponibiliza o usuário logado em todas as rotas
+    }
+    next();
+});
 
-// Usando as rotas de cadastro
+// Configuração da engine de views
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+// Rotas
 app.use('/cadastro', cadastroRoutes);
+
+// Rota de login
+app.post('/login', async (req, res) => {
+    const { email, senha } = req.body;
+
+    try {
+        await sql.connect(dbConfig);
+
+        let query;
+        if (email.includes('@professor.com')) {
+            query = `
+                SELECT email, nome, senha, SN 
+                FROM DimProfessor 
+                WHERE email = @Email AND senha = @Senha
+            `;
+        } else {
+            query = `
+                SELECT email, nome, senha 
+                FROM DimUsuario 
+                WHERE email = @Email AND senha = @Senha
+            `;
+        }
+
+        const request = new sql.Request();
+        request.input('Email', sql.NVarChar, email);
+        request.input('Senha', sql.NVarChar, senha);
+
+        const result = await request.query(query);
+
+        if (!result.recordset || result.recordset.length === 0) {
+            return res.status(401).send('Email ou senha inválidos.');
+        }
+
+        const usuario = result.recordset[0];
+        req.session.usuario = {
+            email: usuario.email,
+            nome: usuario.nome,
+            tipo: email.includes('@professor.com') ? 'professor' : 'usuario',
+            SN: usuario.SN || null,
+        };
+
+        res.send({ mensagem: 'Login realizado com sucesso!', usuario: req.session.usuario });
+    } catch (error) {
+        console.error("Erro ao fazer login:", error);
+        res.status(500).send('Erro ao fazer login: ' + error.message);
+    }
+});
+
 
 
 
@@ -425,56 +477,6 @@ app.post('/adicionar-usuario', async (req, res) => {
         res.send('Usuario adicionado com sucesso!');
     } catch (error) {
         res.status(500).send('Erro ao adicionar Usuario: ' + 'ta duplicano ai meu bom');
-    }
-});
-
-// ----------------------------------------------------login
-
-app.post('/login', async (req, res) => {
-    const { email, senha } = req.body;
-
-    try {
-        await sql.connect(dbConfig);
-
-        let query;
-        if (email.includes('@professor.com')) {
-            // Consulta para professores
-            query = `
-                SELECT email, nome, senha, SN 
-                FROM DimProfessor 
-                WHERE email = @Email AND senha = @Senha
-            `;
-        } else {
-            // Consulta para usuários comuns
-            query = `
-                SELECT email, nome, senha 
-                FROM DimUsuario 
-                WHERE email = @Email AND senha = @Senha
-            `;
-        }
-
-        const request = new sql.Request();
-        request.input('Email', sql.NVarChar, email);
-        request.input('Senha', sql.NVarChar, senha);
-
-        const result = await request.query(query);
-
-        if (result.recordset.length === 0) {
-            return res.status(401).send('Email ou senha inválidos.');
-        }
-
-        const usuario = result.recordset[0];
-        res.send({
-            mensagem: 'Login realizado com sucesso!',
-            usuario: {
-                email: usuario.email,
-                nome: usuario.nome,
-                tipo: email.includes('@professor.com') ? 'professor' : 'usuario',
-                SN: usuario.SN || null,
-            },
-        });
-    } catch (error) {
-        res.status(500).send('Erro ao fazer login: ' + error.message);
     }
 });
 

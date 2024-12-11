@@ -9,6 +9,7 @@
 body {
     background-color: #F0F0F0;
     height: 100vh;
+    overflow: hidden;
 }
 
 /* CABEÇALHO */
@@ -321,5 +322,5 @@ textarea {
 .footer img {
     height: auto;
     width: 35vh;
-    margin-top: -3vh;
+    margin-top: -6vh;
 }

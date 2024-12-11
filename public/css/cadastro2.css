@@ -3,9 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 
-        {
+        
         font-family: "Inter", serif;
-    }
+    
 }
 
 body {
@@ -58,6 +58,7 @@ section.cadastro .flex .parte-bolinhas .container {
 .parte-bolinhas .container {
     width: 50vh;
     height: 48vh;
+
     background-color: white;
     padding: 1.5vh 0;
     box-shadow: 0.4vh 0.4vh 0.5vh #c4c4c4;
@@ -252,7 +253,7 @@ section.cadastro .flex .parte-bolinhas .container {
 .setas{
     display: flex;
     justify-content: center;
-    margin-top: -14vh;
+    margin-top: 0vh;
 }
 
 .inserir-info .container button img{

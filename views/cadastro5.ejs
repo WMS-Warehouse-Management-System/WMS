@@ -42,7 +42,7 @@
 
 
                 <li class="cadastrar">
-                    <a href="/cadastro1.html" id="cadas">
+                    <a href="cadastro1" id="cadas">
                         <div class="box-of-good-good"></div>
                         <span>Cadastrar</span>
                     </a>
@@ -141,7 +141,7 @@
                         </div>
 
                         <div class="setas">
-                            <button type="button" id="esquerda" onclick="location.href='cadastro4.html';">
+                            <button type="button" id="esquerda" onclick="location.href='cadastro4';">
                                 <img src="/imgCADASTRO/setaESQUERDA.svg" alt="">
                             </button>
                         </div>
@@ -204,10 +204,59 @@
 
         });
 
-    </script>
+
+     
+    
+          document.querySelector('form').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Impede o envio padrão do formulário
+        
+            const formData = new FormData(event.target);
+        
+            try {
+              const response = await fetch(event.target.action, {
+                method: 'POST',
+                body: formData
+              });
+        
+              const result = await response.json();
+        
+              if (result.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: result.message,
+                    timer: 1000, // Fecha automaticamente após 1 segundo
+                    showConfirmButton: false // Remove o botão de confirmação
+                  }).then(() => {
+                    if (result.usuario && result.usuario.tipo === 'professor') {
+                      localStorage.setItem('SNProfessor', result.usuario.SN);
+                      location.href = "/telaInicial-Professor.html";
+                    } else {
+                      location.href = "/telaInicial.html";
+                    }
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Erro!',
+                  text: result.error || 'Ocorreu um erro desconhecido.',
+                });
+              }
+            } catch (error) {
+              console.error('Erro:', error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Erro ao enviar o formulário.',
+              });
+            }
+          });
+        </script>
+        
 
     <script src="/js/cadastro5.js"></script>
     <script src="/js/navbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
