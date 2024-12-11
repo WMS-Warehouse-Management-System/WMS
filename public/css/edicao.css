@@ -11,8 +11,7 @@ body {
     height: 100vh;
 }
 
-<<<<<<< HEAD
-=======
+
 /*PARTE DO FILTRO*/
 
 
@@ -57,7 +56,7 @@ body {
     /* ----------------------------------------- */
     background-color: white;
 }
->>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
+
 
 #filtrarBtn{
     background-color: #DA0000;
@@ -69,8 +68,7 @@ body {
     margin-left: 65px;
 }
 
-<<<<<<< HEAD
-=======
+
 #filtrar:hover {
     transform: scale(1.03);
 }
@@ -293,7 +291,7 @@ select:focus {
 }
 
 
->>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
+
 /* CABEÇALHO */
 .texto-nav {
     color: #DA0000;
@@ -999,9 +997,9 @@ td {
 }
 
 .salvar_edicao:hover {
-<<<<<<< HEAD
+
     transform: scale(1.1);
-=======
+
     transform: scale(1.1); 
->>>>>>> 7b8af63b6376eb1122295e2d23e0d56b2c999143
+
 }
