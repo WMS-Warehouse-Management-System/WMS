@@ -1,7 +1,7 @@
 # WMS
 Um sistema de WMS (Warehouse Management System)
 
-<img src="imagem.png" alt="Exemplo imagem">
+<img src="WMS-1.png" alt="Exemplo imagem">
 
 > Um software que controla todas as operações de um armazém, desde a entrada até a saída de produtos. Ele otimiza processos, reduz erros e proporciona uma visão completa do estoque, auxiliando na tomada de decisões e na eficiência da logística.
 
