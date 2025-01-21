@@ -9,11 +9,8 @@ Um sistema de WMS (Warehouse Management System)
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas para as seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [ ] Resposividade para tamanhos de telas diferentes
+- [ ] Implementação do código em Pyton
 
 ## 💻 Pré-requisitos
 
@@ -53,11 +50,18 @@ Para usar WMS:
    - Possibilita a alteração das informações de produtos já cadastrados, mantendo seu estoque sempre atualizado.
    - Oferece a opção de excluir produtos, com uma camada de segurança extra: a necessidade da senha do professor para realizar essa ação.
 
-ESTOQUE
-visualizar informações especificas dos produtos cadastrados.
+ <br>
 
-FINANCEIRO
-Cadastrar entradas e saidas dos produtos nela tambem é possivel visualizar os saldos 
+   **📊 ESTOQUE:**
+   - Permite visualizar informações específicas dos produtos cadastrados, facilitando o acompanhamento do estoque.
+
+  <br>
+   
+   **💰 FINANCEIRO:**
+   <br>
+    - Permite cadastrar entradas e saídas de produtos.
+    <br>
+    - Possibilita a visualização dos saldos, proporcionando controle financeiro do estoque.
 
 </details>
 
@@ -68,26 +72,65 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
-      <a href="#" title="defina o título do link">
-        <img src="https://avatars3.githubusercontent.com/u/31936044" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+      <a href="https://github.com/bruxa61">
         <sub>
-          <b>Iuri Silva</b>
+          <b>Rafaela Botelho</b>
         </sub>
       </a>
     </td>
     <td align="center">
-      <a href="#" title="defina o título do link">
-        <img src="https://s2.glbimg.com/FUcw2usZfSTL6yCCGj3L3v3SpJ8=/smart/e.glbimg.com/og/ed/f/original/2019/04/25/zuckerberg_podcast.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
+      <a href="https://github.com/cDorth">
         <sub>
-          <b>Mark Zuckerberg</b>
+          <b>Carlos Eduardo</b>
         </sub>
       </a>
     </td>
     <td align="center">
-      <a href="#" title="defina o título do link">
-        <img src="https://miro.medium.com/max/360/0*1SkS3mSorArvY9kS.jpg" width="100px;" alt="Foto do Steve Jobs"/><br>
+      <a href="https://github.com/pe-odake">
         <sub>
-          <b>Steve Jobs</b>
+          <b>Pedro Odake</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/gprsilva">
+        <sub>
+          <b>Guilherme Pereira</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/brubsb">
+        <sub>
+          <b>Bruna Barboza</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/DaviTorralvo">
+        <sub>
+          <b>Davi Torralvo</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Rai123100">
+        <sub>
+          <b>Raí Carvalho</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/intentdoor">
+        <sub>
+          <b>Arthur Américo</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/vicenteruedamatheus">
+        <sub>
+          <b>Matheus Vicente</b>
         </sub>
       </a>
     </td>
